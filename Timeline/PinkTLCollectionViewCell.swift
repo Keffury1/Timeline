@@ -10,4 +10,7 @@ import UIKit
 
 class PinkTLCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var colorView: UIView!
+    @IBOutlet weak var stripeView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
 }

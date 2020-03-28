@@ -93,6 +93,11 @@
                                                                     <constraint firstItem="SPm-xS-YVh" firstAttribute="top" secondItem="NhP-8h-uEr" secondAttribute="top" id="zmx-IX-g9B"/>
                                                                 </constraints>
                                                             </collectionViewCellContentView>
+                                                            <connections>
+                                                                <outlet property="colorView" destination="JHH-ED-VwQ" id="Oc0-tR-FrA"/>
+                                                                <outlet property="stripeView" destination="v79-Pg-hOi" id="NkH-Rv-vYq"/>
+                                                                <outlet property="titleLabel" destination="Z9u-zt-VLC" id="1PE-GA-eP4"/>
+                                                            </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
@@ -175,6 +180,11 @@
                                                                     <constraint firstItem="mMT-5q-box" firstAttribute="top" secondItem="PIb-LS-AhV" secondAttribute="top" id="zKq-mP-kzZ"/>
                                                                 </constraints>
                                                             </collectionViewCellContentView>
+                                                            <connections>
+                                                                <outlet property="colorView" destination="gxi-Tu-3ht" id="EfD-Uu-CMq"/>
+                                                                <outlet property="stripeView" destination="4di-sN-czQ" id="atk-gF-NYD"/>
+                                                                <outlet property="titleLabel" destination="afb-Sd-OWH" id="Oxf-7m-qbl"/>
+                                                            </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
@@ -257,6 +267,11 @@
                                                                     <constraint firstItem="U4j-78-htC" firstAttribute="leading" secondItem="kjx-vq-vYf" secondAttribute="leading" id="Wi1-Nv-kGq"/>
                                                                 </constraints>
                                                             </collectionViewCellContentView>
+                                                            <connections>
+                                                                <outlet property="colorView" destination="5OJ-85-K7d" id="CDl-QS-q7q"/>
+                                                                <outlet property="stripeView" destination="7bl-xq-UrD" id="3R3-Zp-HcD"/>
+                                                                <outlet property="titleLabel" destination="MwT-yx-QXj" id="Uve-GG-hjz"/>
+                                                            </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
@@ -339,6 +354,11 @@
                                                                     <constraint firstItem="bsf-FA-UlT" firstAttribute="leading" secondItem="Sg2-uh-kEC" secondAttribute="leading" id="im8-4n-zDy"/>
                                                                 </constraints>
                                                             </collectionViewCellContentView>
+                                                            <connections>
+                                                                <outlet property="colorView" destination="uIM-Z7-UD8" id="tP7-RF-GSE"/>
+                                                                <outlet property="stripeView" destination="Q51-mJ-Mjm" id="47V-qf-xcd"/>
+                                                                <outlet property="titleLabel" destination="g9C-EJ-rUL" id="qD1-E3-hb7"/>
+                                                            </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
@@ -421,6 +441,11 @@
                                                                     <constraint firstItem="v4R-RE-ZYc" firstAttribute="top" secondItem="WhZ-Xv-SFS" secondAttribute="top" id="bpH-Bx-cMS"/>
                                                                 </constraints>
                                                             </collectionViewCellContentView>
+                                                            <connections>
+                                                                <outlet property="colorView" destination="wcA-er-H4E" id="XDv-7D-lGb"/>
+                                                                <outlet property="stripeView" destination="CBG-XO-8Sz" id="9ta-zb-lPF"/>
+                                                                <outlet property="titleLabel" destination="yxN-LW-N77" id="HU6-UR-PKw"/>
+                                                            </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
@@ -504,6 +529,11 @@
                                                                     <constraint firstAttribute="bottom" secondItem="Sy9-wy-HjE" secondAttribute="bottom" id="y3K-f8-JxJ"/>
                                                                 </constraints>
                                                             </collectionViewCellContentView>
+                                                            <connections>
+                                                                <outlet property="colorView" destination="3fk-cL-is8" id="bbS-no-o9I"/>
+                                                                <outlet property="stripeView" destination="HCY-1R-nKk" id="GrA-pc-iep"/>
+                                                                <outlet property="titleLabel" destination="fCD-Vy-crC" id="9sW-oS-3mt"/>
+                                                            </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
@@ -587,6 +617,11 @@
                                                                     <constraint firstAttribute="bottom" secondItem="vly-l1-q5M" secondAttribute="bottom" id="ksi-J9-AW9"/>
                                                                 </constraints>
                                                             </collectionViewCellContentView>
+                                                            <connections>
+                                                                <outlet property="colorView" destination="gwC-x2-AeG" id="NSh-dV-9np"/>
+                                                                <outlet property="stripeView" destination="VyH-Dv-SVV" id="mJD-Aa-Acl"/>
+                                                                <outlet property="titleLabel" destination="iqY-pg-rmd" id="ioc-wW-YKz"/>
+                                                            </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
@@ -670,6 +705,11 @@
                                                                     <constraint firstAttribute="bottom" secondItem="WMx-hn-ohx" secondAttribute="bottom" id="sWT-eV-soq"/>
                                                                 </constraints>
                                                             </collectionViewCellContentView>
+                                                            <connections>
+                                                                <outlet property="colorView" destination="F8J-qy-TaO" id="W1l-u5-oG6"/>
+                                                                <outlet property="stripeView" destination="jyn-oh-4IX" id="Ngy-l9-uiP"/>
+                                                                <outlet property="titleLabel" destination="Q1o-d8-fhw" id="mo2-02-O8a"/>
+                                                            </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
@@ -753,6 +793,11 @@
                                                                     <constraint firstItem="JLU-sf-B4R" firstAttribute="top" secondItem="A9t-EU-sMO" secondAttribute="top" id="pJK-p9-zQc"/>
                                                                 </constraints>
                                                             </collectionViewCellContentView>
+                                                            <connections>
+                                                                <outlet property="colorView" destination="eDN-8l-Qj9" id="N9F-Dj-JxX"/>
+                                                                <outlet property="stripeView" destination="mdB-xe-o44" id="Mss-G6-AF4"/>
+                                                                <outlet property="titleLabel" destination="jW5-cR-qRh" id="CVO-cP-mhi"/>
+                                                            </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
@@ -836,6 +881,11 @@
                                                                     <constraint firstAttribute="trailing" secondItem="Vnt-aG-rji" secondAttribute="trailing" id="pSQ-lH-6TS"/>
                                                                 </constraints>
                                                             </collectionViewCellContentView>
+                                                            <connections>
+                                                                <outlet property="colorView" destination="iTy-6z-aUe" id="vaz-Mp-ddo"/>
+                                                                <outlet property="stripeView" destination="7Pl-PJ-OfX" id="qCL-qz-RUm"/>
+                                                                <outlet property="titleLabel" destination="Tmh-tS-fBg" id="2vb-un-AZj"/>
+                                                            </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
