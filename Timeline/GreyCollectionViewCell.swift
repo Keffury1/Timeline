@@ -8,8 +8,18 @@
 
 import UIKit
 
-class GreyCollectionViewCell: UICollectionViewCell {
+class GreyCollectionViewCell: UICollectionViewCell, UICollectionViewDataSource {
     
     @IBOutlet weak var greyCollectionView: UICollectionView!
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "", for: indexPath) as? GreyTLCollectionViewCell else {
+            return UICollectionViewCell() }
+        
+        return cell
+    }
 }

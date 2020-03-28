@@ -8,8 +8,18 @@
 
 import UIKit
 
-class OliveCollectionViewCell: UICollectionViewCell {
+class OliveCollectionViewCell: UICollectionViewCell, UICollectionViewDataSource {
     
     @IBOutlet weak var oliveCollectionView: UICollectionView!
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "", for: indexPath) as? OliveCollectionViewCell else {
+            return UICollectionViewCell() }
+        
+        return cell
+    }
 }

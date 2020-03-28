@@ -8,7 +8,18 @@
 
 import UIKit
 
-class PurpleCollectionViewCell: UICollectionViewCell {
+class PurpleCollectionViewCell: UICollectionViewCell, UICollectionViewDataSource {
     
     @IBOutlet weak var purpleCollectionView: UICollectionView!
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "", for: indexPath) as? WhiteTLCollectionViewCell else {
+            return UICollectionViewCell() }
+        
+        return cell
+    }
 }

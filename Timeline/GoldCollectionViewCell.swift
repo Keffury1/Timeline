@@ -8,8 +8,18 @@
 
 import UIKit
 
-class GoldCollectionViewCell: UICollectionViewCell {
+class GoldCollectionViewCell: UICollectionViewCell, UICollectionViewDataSource {
     
     @IBOutlet weak var goldCollectionView: UICollectionView!
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "", for: indexPath) as? GoldTLCollectionViewCell else {
+            return UICollectionViewCell() }
+        
+        return cell
+    }
 }

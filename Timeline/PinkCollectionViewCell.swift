@@ -8,8 +8,18 @@
 
 import UIKit
 
-class PinkCollectionViewCell: UICollectionViewCell {
+class PinkCollectionViewCell: UICollectionViewCell, UICollectionViewDataSource {
     
     @IBOutlet weak var pinkCollectionView: UICollectionView!
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "", for: indexPath) as? PinkCollectionViewCell else {
+            return UICollectionViewCell() }
+        
+        return cell
+    }
 }

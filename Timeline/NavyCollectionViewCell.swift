@@ -8,8 +8,18 @@
 
 import UIKit
 
-class NavyCollectionViewCell: UICollectionViewCell {
+class NavyCollectionViewCell: UICollectionViewCell, UICollectionViewDataSource {
     
     @IBOutlet weak var navyCollectionView: UICollectionView!
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "", for: indexPath) as? NavyTLCollectionViewCell else {
+            return UICollectionViewCell() }
+        
+        return cell
+    }
 }
