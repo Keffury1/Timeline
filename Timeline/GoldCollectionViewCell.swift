@@ -10,4 +10,6 @@ import UIKit
 
 class GoldCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var goldCollectionView: UICollectionView!
+    
 }

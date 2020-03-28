@@ -10,4 +10,6 @@ import UIKit
 
 class OliveCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var oliveCollectionView: UICollectionView!
+    
 }

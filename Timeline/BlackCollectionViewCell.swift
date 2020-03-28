@@ -10,4 +10,6 @@ import UIKit
 
 class BlackCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var blackCollectionView: UICollectionView!
+    
 }

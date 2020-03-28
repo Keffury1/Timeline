@@ -10,4 +10,6 @@ import UIKit
 
 class NavyCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var navyCollectionView: UICollectionView!
+    
 }

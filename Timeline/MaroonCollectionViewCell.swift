@@ -10,4 +10,6 @@ import UIKit
 
 class MaroonCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var maroonCollectionView: UICollectionView!
+    
 }

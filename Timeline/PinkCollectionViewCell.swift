@@ -10,4 +10,6 @@ import UIKit
 
 class PinkCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var pinkCollectionView: UICollectionView!
+    
 }

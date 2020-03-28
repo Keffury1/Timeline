@@ -10,4 +10,5 @@ import UIKit
 
 class PurpleCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var purpleCollectionView: UICollectionView!
 }

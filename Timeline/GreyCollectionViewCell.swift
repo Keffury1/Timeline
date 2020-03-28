@@ -10,4 +10,6 @@ import UIKit
 
 class GreyCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var greyCollectionView: UICollectionView!
+    
 }

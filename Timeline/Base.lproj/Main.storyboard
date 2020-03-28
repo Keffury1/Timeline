@@ -104,6 +104,9 @@
                                                 <constraint firstItem="h7M-pg-lUX" firstAttribute="top" secondItem="6Le-As-ZEO" secondAttribute="top" constant="36" id="yfV-Mz-epH"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="blackCollectionView" destination="h7M-pg-lUX" id="A5z-bc-jS3"/>
+                                        </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="goldCell" id="ERP-Nq-Mzf" customClass="GoldCollectionViewCell" customModule="Timeline" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="222" width="1040" height="202"/>
@@ -183,6 +186,9 @@
                                                 <constraint firstAttribute="bottom" secondItem="Jth-Xm-0yh" secondAttribute="bottom" constant="36" id="sBt-Ks-p1x"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="goldCollectionView" destination="Jth-Xm-0yh" id="gnc-EZ-srO"/>
+                                        </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="mintCell" id="gFA-kD-3iA" customClass="MintCollectionViewCell" customModule="Timeline" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="434" width="1040" height="202"/>
@@ -262,6 +268,9 @@
                                                 <constraint firstItem="Owk-tb-B4g" firstAttribute="leading" secondItem="oiR-J3-cxZ" secondAttribute="leading" constant="20" id="zVT-2V-DpF"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="mintCollectionView" destination="Owk-tb-B4g" id="6pt-XQ-V0I"/>
+                                        </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="navyCell" id="ber-Nm-utD" customClass="NavyCollectionViewCell" customModule="Timeline" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="646" width="1040" height="200"/>
@@ -341,6 +350,9 @@
                                                 <constraint firstItem="P3G-lF-ZQL" firstAttribute="leading" secondItem="MLk-rk-b8I" secondAttribute="leading" constant="20" id="orq-qI-PLh"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="navyCollectionView" destination="P3G-lF-ZQL" id="FEl-2j-jr3"/>
+                                        </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="maroonCell" id="cID-3k-gZH" customClass="MaroonCollectionViewCell" customModule="Timeline" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="856" width="1024" height="200"/>
@@ -421,6 +433,9 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="1024" height="200"/>
+                                        <connections>
+                                            <outlet property="maroonCollectionView" destination="kUv-Lr-cPT" id="zOX-v9-8Xz"/>
+                                        </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="oliveCell" id="anA-Z6-TUn" customClass="OliveCollectionViewCell" customModule="Timeline" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1066" width="1013" height="200"/>
@@ -501,6 +516,9 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="1013" height="200"/>
+                                        <connections>
+                                            <outlet property="oliveCollectionView" destination="BoC-Zw-NWy" id="3Qy-vs-UYo"/>
+                                        </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="pinkCell" id="VQS-6f-1V4" customClass="PinkCollectionViewCell" customModule="Timeline" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1276" width="1017" height="200"/>
@@ -581,6 +599,9 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="1017" height="200"/>
+                                        <connections>
+                                            <outlet property="pinkCollectionView" destination="2BJ-Zb-buz" id="rIR-AZ-4gI"/>
+                                        </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="purpleCell" id="vfw-jB-jBt" customClass="PurpleCollectionViewCell" customModule="Timeline" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1486" width="1022" height="200"/>
@@ -661,6 +682,9 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="1022" height="200"/>
+                                        <connections>
+                                            <outlet property="purpleCollectionView" destination="ZpQ-qE-1NM" id="lul-QC-cqx"/>
+                                        </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="greyCell" id="nev-Ic-YOO" customClass="GreyCollectionViewCell" customModule="Timeline" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1696" width="1024" height="200"/>
@@ -741,6 +765,9 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="1024" height="200"/>
+                                        <connections>
+                                            <outlet property="greyCollectionView" destination="YwI-cJ-3mi" id="TMi-ya-0ue"/>
+                                        </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="whiteCell" id="V0T-DE-0xj" customClass="WhiteCollectionViewCell" customModule="Timeline" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1906" width="1020" height="200"/>
@@ -821,6 +848,9 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="1020" height="200"/>
+                                        <connections>
+                                            <outlet property="whiteCollectionView" destination="qKa-v6-RWo" id="8On-nq-lnd"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>

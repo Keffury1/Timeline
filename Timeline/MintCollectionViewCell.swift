@@ -10,4 +10,6 @@ import UIKit
 
 class MintCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var mintCollectionView: UICollectionView!
+    
 }
