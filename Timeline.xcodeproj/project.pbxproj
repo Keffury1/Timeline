@@ -21,6 +21,7 @@
 		3755ED6F242E94050056EA4F /* UpdateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3755ED6E242E94050056EA4F /* UpdateCollectionViewCell.swift */; };
 		3755ED76242EB5870056EA4F /* AddUpdate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3755ED75242EB5870056EA4F /* AddUpdate.storyboard */; };
 		3755ED78242EB6300056EA4F /* AddUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3755ED77242EB6300056EA4F /* AddUpdateViewController.swift */; };
+		378F45F1243108EC00183DAB /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F45F0243108EC00183DAB /* CustomTabBar.swift */; };
 		37CD683D242ED6D00018A16A /* Update.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 37CD683B242ED6D00018A16A /* Update.xcdatamodeld */; };
 		37CD683F242ED7DA0018A16A /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CD683E242ED7DA0018A16A /* CoreDataStack.swift */; };
 		37CD6841242ED8020018A16A /* Update+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CD6840242ED8020018A16A /* Update+Convenience.swift */; };
@@ -43,6 +44,7 @@
 		3755ED6E242E94050056EA4F /* UpdateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCollectionViewCell.swift; sourceTree = "<group>"; };
 		3755ED75242EB5870056EA4F /* AddUpdate.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddUpdate.storyboard; sourceTree = "<group>"; };
 		3755ED77242EB6300056EA4F /* AddUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUpdateViewController.swift; sourceTree = "<group>"; };
+		378F45F0243108EC00183DAB /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		37CD683C242ED6D00018A16A /* Update.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Update.xcdatamodel; sourceTree = "<group>"; };
 		37CD683E242ED7DA0018A16A /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		37CD6840242ED8020018A16A /* Update+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Update+Convenience.swift"; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				3755ED6E242E94050056EA4F /* UpdateCollectionViewCell.swift */,
 				3746518824302441003AFE63 /* ColorTableViewCell.swift */,
 				3746518A2430274A003AFE63 /* TimelineCollectionViewCell.swift */,
+				378F45F0243108EC00183DAB /* CustomTabBar.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 			files = (
 				373AFA57242FE18D0068B4A4 /* ArchivesViewController.swift in Sources */,
 				3755ED6C242E93970056EA4F /* MainViewController.swift in Sources */,
+				378F45F1243108EC00183DAB /* CustomTabBar.swift in Sources */,
 				3746518B2430274A003AFE63 /* TimelineCollectionViewCell.swift in Sources */,
 				3755ED78242EB6300056EA4F /* AddUpdateViewController.swift in Sources */,
 				3755ED53242E8E310056EA4F /* AppDelegate.swift in Sources */,
