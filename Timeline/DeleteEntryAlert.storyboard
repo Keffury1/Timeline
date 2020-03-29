@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jSh-qm-OkP">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Delete Entry Alert View Controller-->
+        <scene sceneID="Aiz-69-Y1f">
+            <objects>
+                <viewController id="jSh-qm-OkP" customClass="DeleteEntryAlertViewController" customModule="Timeline" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uaR-j5-5hD">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dL6-Uh-uI5">
+                                <rect key="frame" x="97" y="343" width="220" height="220"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete Entry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ql-jP-s6V">
+                                        <rect key="frame" x="30" y="25" width="160" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="FLw-Nh-rSM"/>
+                                            <constraint firstAttribute="width" constant="160" id="QfN-DC-W2z"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you sure?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aUU-AX-UEd">
+                                        <rect key="frame" x="58" y="97.5" width="104.5" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="YrF-1Y-Crg"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="UKh-hg-6Im">
+                                        <rect key="frame" x="0.0" y="164" width="220" height="36"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gB7-5a-QrB">
+                                                <rect key="frame" x="0.0" y="3" width="100" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="QbV-QN-p2w"/>
+                                                </constraints>
+                                                <state key="normal" title="Delete">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="deleteButtonTapped:" destination="jSh-qm-OkP" eventType="touchUpInside" id="X9C-0h-S9h"/>
+                                                </connections>
+                                            </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I6o-AT-kfa">
+                                                <rect key="frame" x="109" y="0.0" width="2" height="36"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="2" id="5LB-1O-raQ"/>
+                                                </constraints>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xBh-up-lOO">
+                                                <rect key="frame" x="120" y="3" width="100" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="xUV-0X-t1G"/>
+                                                </constraints>
+                                                <state key="normal" title="Cancel">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="cancelButtonTapped:" destination="jSh-qm-OkP" eventType="touchUpInside" id="hOa-vn-KtK"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="0TE-Bk-HZ8"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="6Ql-jP-s6V" firstAttribute="centerX" secondItem="dL6-Uh-uI5" secondAttribute="centerX" id="5ox-og-k7H"/>
+                                    <constraint firstAttribute="trailing" secondItem="UKh-hg-6Im" secondAttribute="trailing" id="8C4-Mc-sWC"/>
+                                    <constraint firstAttribute="bottom" secondItem="UKh-hg-6Im" secondAttribute="bottom" constant="20" id="A0I-ki-gP2"/>
+                                    <constraint firstItem="aUU-AX-UEd" firstAttribute="centerX" secondItem="dL6-Uh-uI5" secondAttribute="centerX" id="BIX-m9-PUd"/>
+                                    <constraint firstItem="UKh-hg-6Im" firstAttribute="leading" secondItem="dL6-Uh-uI5" secondAttribute="leading" id="CLK-Cm-KGn"/>
+                                    <constraint firstItem="aUU-AX-UEd" firstAttribute="centerY" secondItem="dL6-Uh-uI5" secondAttribute="centerY" id="Iok-Qp-19l"/>
+                                    <constraint firstAttribute="width" constant="220" id="OsK-KY-4JY"/>
+                                    <constraint firstAttribute="height" constant="220" id="RC5-WX-X05"/>
+                                    <constraint firstItem="6Ql-jP-s6V" firstAttribute="top" secondItem="dL6-Uh-uI5" secondAttribute="top" constant="25" id="grF-WG-Vcb"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="dL6-Uh-uI5" firstAttribute="centerY" secondItem="nvN-EH-GVe" secondAttribute="centerY" id="9H6-mH-LFw"/>
+                            <constraint firstItem="dL6-Uh-uI5" firstAttribute="centerX" secondItem="nvN-EH-GVe" secondAttribute="centerX" id="Qpt-mb-Cyy"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="nvN-EH-GVe"/>
+                    </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="xBh-up-lOO" id="aTw-9L-4BX"/>
+                        <outlet property="confirmationLabel" destination="aUU-AX-UEd" id="9sg-nj-Ki7"/>
+                        <outlet property="deleteButton" destination="gB7-5a-QrB" id="rYB-Lc-LXZ"/>
+                        <outlet property="deleteEntryLabel" destination="6Ql-jP-s6V" id="2eF-wS-oix"/>
+                        <outlet property="deleteEntryView" destination="dL6-Uh-uI5" id="g3h-dT-IFE"/>
+                        <outlet property="stripeView" destination="I6o-AT-kfa" id="lYe-IA-nIt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P0p-fV-TFH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="519" y="-171"/>
+        </scene>
+    </scenes>
+</document>
