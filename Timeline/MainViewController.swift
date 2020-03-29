@@ -226,6 +226,24 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
+        
+        if let timeline = timeline {
+
+        } else {
+            
+        }
+        
+        do {
+            let moc = CoreDataStack.shared.mainContext
+            try moc.save()
+            
+        } catch {
+            print("Error saving managed object context: \(error)")
+        }
+        
+        self.performSegue(withIdentifier: "", sender: self)
+        
+        //Do Stuff
     }
     
     @IBAction func trashButtonTapped(_ sender: Any) {
@@ -289,6 +307,10 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     internal func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 175, height: 100)
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return fetchUpdatesController.sections?.count ?? 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

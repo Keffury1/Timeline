@@ -12,6 +12,8 @@ class ColorTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var timelineCollectionView: UICollectionView!
     
+    var timelines: [Timeline]?
+    
     var collectionViewOffset: CGFloat {
         get {
             return timelineCollectionView.contentOffset.x

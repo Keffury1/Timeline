@@ -14,6 +14,6 @@ extension Timeline {
         self.init(context: context)
         self.color = color
         self.title = title
-        self.updates = updates as NSObject
+        self.updates = updates
     }
 }

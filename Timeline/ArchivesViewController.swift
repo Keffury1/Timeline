@@ -77,7 +77,7 @@ class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelega
 extension ArchivesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return colors.count
+        return fetchTimelinesController.sections?.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
