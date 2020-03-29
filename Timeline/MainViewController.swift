@@ -34,6 +34,8 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         return fetchResultsController
     }
     
+    var timeline: Timeline?
+    
     //MARK: - Outlets
     
     @IBOutlet weak var updatesCollectionView: UICollectionView!
@@ -224,26 +226,25 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        
     }
     
     @IBAction func trashButtonTapped(_ sender: Any) {
         let alertController = UIAlertController(title: "Delete This Timeline?", message: "", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Yes, Delete", style: .destructive, handler: { (_) in
-//            guard let update = self.update else { return }
-//
-//            DispatchQueue.main.async {
-//                let moc = CoreDataStack.shared.mainContext
-//                moc.delete(update)
-//
-//                do {
-//                    try moc.save()
-//                    self.updatesCollectionView.reloadData()
-//                } catch {
-//                    moc.reset()
-//                    print("Error saving managed object context: \(error)")
-//                }
-//            }
+            guard let timeline = self.timeline else { return }
+
+            DispatchQueue.main.async {
+                let moc = CoreDataStack.shared.mainContext
+                moc.delete(timeline)
+
+                do {
+                    try moc.save()
+                    self.updatesCollectionView.reloadData()
+                } catch {
+                    moc.reset()
+                    print("Error saving managed object context: \(error)")
+                }
+            }
             
             self.dismiss(animated: true, completion: nil)
         }))

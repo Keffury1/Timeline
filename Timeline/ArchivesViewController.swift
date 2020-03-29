@@ -13,7 +13,19 @@ class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelega
 
     //MARK: - Properties
     
-    let colors: [[Timeline]] = []
+    var colors: [[Timeline]] = []
+    
+    var black: [Timeline] = []
+    var gold: [Timeline] = []
+    var mint: [Timeline] = []
+    var navy: [Timeline] = []
+    var maroon: [Timeline] = []
+    var olive: [Timeline] = []
+    var pink: [Timeline] = []
+    var purple: [Timeline] = []
+    var grey: [Timeline] = []
+    var white: [Timeline] = []
+    
     var storedOffsets = [Int: CGFloat]()
     
     private var fetchTimelinesController: NSFetchedResultsController<Timeline> {
@@ -46,7 +58,6 @@ class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelega
         
         setupSubviews()
     }
-    
     
     //MARK: - Methods
     
@@ -101,7 +112,6 @@ extension ArchivesViewController: UICollectionViewDelegate, UICollectionViewData
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "timelineCell", for: indexPath) as? TimelineCollectionViewCell else { return UICollectionViewCell() }
 
         let timeline = fetchTimelinesController.object(at: indexPath)
-        
         let color = UIColor(named: timeline.color!)
         cell.colorView.backgroundColor = color
         cell.titleLabel.text = timeline.title!
@@ -114,4 +124,5 @@ extension ArchivesViewController: UICollectionViewDelegate, UICollectionViewData
 
         return cell
     }
+    
 }

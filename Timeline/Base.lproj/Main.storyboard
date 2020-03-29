@@ -132,7 +132,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pfn-9Z-sqr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="346.37681159420293" y="-405.13392857142856"/>
+            <point key="canvasLocation" x="348" y="-275"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="LQN-Sq-sTJ">
@@ -427,6 +427,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Timeline" image="timelapse" catalog="system" id="tWI-PM-eCm"/>
+                    <navigationItem key="navigationItem" id="EiT-kl-9Qt"/>
                     <connections>
                         <outlet property="addUpdateButton" destination="QeW-ta-i7t" id="1E6-ZN-d4D"/>
                         <outlet property="blackButton" destination="hmI-6Q-m72" id="P1H-WK-zFY"/>

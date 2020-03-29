@@ -11,6 +11,7 @@
 		373AFA5A242FEA900068B4A4 /* Timeline.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 373AFA58242FEA900068B4A4 /* Timeline.xcdatamodeld */; };
 		3746518924302441003AFE63 /* ColorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3746518824302441003AFE63 /* ColorTableViewCell.swift */; };
 		3746518B2430274A003AFE63 /* TimelineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3746518A2430274A003AFE63 /* TimelineCollectionViewCell.swift */; };
+		3746519224304077003AFE63 /* Timeline+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3746519124304077003AFE63 /* Timeline+Convenience.swift */; };
 		3755ED53242E8E310056EA4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3755ED52242E8E310056EA4F /* AppDelegate.swift */; };
 		3755ED55242E8E310056EA4F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3755ED54242E8E310056EA4F /* SceneDelegate.swift */; };
 		3755ED5A242E8E310056EA4F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3755ED58242E8E310056EA4F /* Main.storyboard */; };
@@ -22,7 +23,7 @@
 		3755ED78242EB6300056EA4F /* AddUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3755ED77242EB6300056EA4F /* AddUpdateViewController.swift */; };
 		37CD683D242ED6D00018A16A /* Update.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 37CD683B242ED6D00018A16A /* Update.xcdatamodeld */; };
 		37CD683F242ED7DA0018A16A /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CD683E242ED7DA0018A16A /* CoreDataStack.swift */; };
-		37CD6841242ED8020018A16A /* Update+Convenienve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CD6840242ED8020018A16A /* Update+Convenienve.swift */; };
+		37CD6841242ED8020018A16A /* Update+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CD6840242ED8020018A16A /* Update+Convenience.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		373AFA59242FEA900068B4A4 /* Timeline.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Timeline.xcdatamodel; sourceTree = "<group>"; };
 		3746518824302441003AFE63 /* ColorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTableViewCell.swift; sourceTree = "<group>"; };
 		3746518A2430274A003AFE63 /* TimelineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineCollectionViewCell.swift; sourceTree = "<group>"; };
+		3746519124304077003AFE63 /* Timeline+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timeline+Convenience.swift"; sourceTree = "<group>"; };
 		3755ED4F242E8E310056EA4F /* Timeline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timeline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3755ED52242E8E310056EA4F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3755ED54242E8E310056EA4F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,7 +45,7 @@
 		3755ED77242EB6300056EA4F /* AddUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUpdateViewController.swift; sourceTree = "<group>"; };
 		37CD683C242ED6D00018A16A /* Update.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Update.xcdatamodel; sourceTree = "<group>"; };
 		37CD683E242ED7DA0018A16A /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
-		37CD6840242ED8020018A16A /* Update+Convenienve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Update+Convenienve.swift"; sourceTree = "<group>"; };
+		37CD6840242ED8020018A16A /* Update+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Update+Convenience.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,7 +132,8 @@
 				37CD683B242ED6D00018A16A /* Update.xcdatamodeld */,
 				373AFA58242FEA900068B4A4 /* Timeline.xcdatamodeld */,
 				37CD683E242ED7DA0018A16A /* CoreDataStack.swift */,
-				37CD6840242ED8020018A16A /* Update+Convenienve.swift */,
+				37CD6840242ED8020018A16A /* Update+Convenience.swift */,
+				3746519124304077003AFE63 /* Timeline+Convenience.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -222,11 +225,12 @@
 				3746518B2430274A003AFE63 /* TimelineCollectionViewCell.swift in Sources */,
 				3755ED78242EB6300056EA4F /* AddUpdateViewController.swift in Sources */,
 				3755ED53242E8E310056EA4F /* AppDelegate.swift in Sources */,
-				37CD6841242ED8020018A16A /* Update+Convenienve.swift in Sources */,
+				37CD6841242ED8020018A16A /* Update+Convenience.swift in Sources */,
 				37CD683F242ED7DA0018A16A /* CoreDataStack.swift in Sources */,
 				3755ED55242E8E310056EA4F /* SceneDelegate.swift in Sources */,
 				3746518924302441003AFE63 /* ColorTableViewCell.swift in Sources */,
 				37CD683D242ED6D00018A16A /* Update.xcdatamodeld in Sources */,
+				3746519224304077003AFE63 /* Timeline+Convenience.swift in Sources */,
 				373AFA5A242FEA900068B4A4 /* Timeline.xcdatamodeld in Sources */,
 				3755ED6F242E94050056EA4F /* UpdateCollectionViewCell.swift in Sources */,
 			);
