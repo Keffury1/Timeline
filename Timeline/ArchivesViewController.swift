@@ -28,24 +28,24 @@ class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelega
     
     var storedOffsets = [Int: CGFloat]()
     
-    private var fetchTimelinesController: NSFetchedResultsController<Timeline> {
-        
-        let fetchRequest: NSFetchRequest<Timeline> = Timeline.fetchRequest()
-        
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "color", ascending: false)]
-        let moc = CoreDataStack.shared.mainContext
-        
-        let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
-        
-        fetchResultsController.delegate = self
-        
-        do {
-            try fetchResultsController.performFetch()
-        } catch {
-            fatalError("Failed to fetch timelines: \(error)")
-        }
-        return fetchResultsController
-    }
+//    private var fetchTimelinesController: NSFetchedResultsController<Timeline> {
+//
+//        let fetchRequest: NSFetchRequest<Timeline> = Timeline.fetchRequest()
+//
+//        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "color", ascending: false)]
+//        let moc = CoreDataStack.shared.mainContext
+//
+//        let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
+//
+//        fetchResultsController.delegate = self
+//
+//        do {
+//            try fetchResultsController.performFetch()
+//        } catch {
+//            fatalError("Failed to fetch timelines: \(error)")
+//        }
+//        return fetchResultsController
+//    }
     
     //MARK: - Outlets
     
@@ -77,7 +77,8 @@ class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelega
 extension ArchivesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchTimelinesController.sections?.count ?? 1
+        return 1
+//            fetchTimelinesController.sections?.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -111,16 +112,16 @@ extension ArchivesViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "timelineCell", for: indexPath) as? TimelineCollectionViewCell else { return UICollectionViewCell() }
 
-        let timeline = fetchTimelinesController.object(at: indexPath)
-        let color = UIColor(named: timeline.color!)
-        cell.colorView.backgroundColor = color
-        cell.titleLabel.text = timeline.title!
+//        let timeline = fetchTimelinesController.object(at: indexPath)
+//        let color = UIColor(named: timeline.color!)
+//        cell.colorView.backgroundColor = color
+//        cell.titleLabel.text = timeline.title!
         
-        if color == .white {
-            cell.stripeView.backgroundColor = .black
-        } else {
-            cell.stripeView.backgroundColor = .white
-        }
+//        if color == .white {
+//            cell.stripeView.backgroundColor = .black
+//        } else {
+//            cell.stripeView.backgroundColor = .white
+//        }
 
         return cell
     }

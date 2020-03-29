@@ -106,7 +106,7 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Archives" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="40" translatesAutoresizingMaskIntoConstraints="NO" id="CBq-NO-7cs">
-                                <rect key="frame" x="65" y="44" width="284" height="114"/>
+                                <rect key="frame" x="65" y="164" width="284" height="114"/>
                                 <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="100"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -120,7 +120,7 @@
                             <constraint firstItem="pLs-Fh-dlD" firstAttribute="top" secondItem="muL-Cy-vRk" secondAttribute="centerY" constant="-150" id="Mh5-1e-m92"/>
                             <constraint firstItem="9EA-OY-SzB" firstAttribute="trailing" secondItem="pLs-Fh-dlD" secondAttribute="trailing" id="SEy-wz-hkx"/>
                             <constraint firstItem="9EA-OY-SzB" firstAttribute="trailing" secondItem="CBq-NO-7cs" secondAttribute="trailing" constant="65" id="Ytw-9K-yYa"/>
-                            <constraint firstItem="CBq-NO-7cs" firstAttribute="top" secondItem="9EA-OY-SzB" secondAttribute="top" id="k6W-NN-FbZ"/>
+                            <constraint firstItem="pLs-Fh-dlD" firstAttribute="top" secondItem="CBq-NO-7cs" secondAttribute="bottom" constant="20" id="j10-mw-NyO"/>
                             <constraint firstItem="CBq-NO-7cs" firstAttribute="centerX" secondItem="9EA-OY-SzB" secondAttribute="centerX" id="q5c-UW-Ob6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9EA-OY-SzB"/>
@@ -142,8 +142,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="yKx-Hv-K74"/>
@@ -365,7 +365,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ugz-Dt-j1m">
                                                 <rect key="frame" x="0.0" y="275.5" width="30" height="20"/>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="backgroundColor" red="0.54971713069731809" green="0.54971713069731809" blue="0.54971713069731809" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="ahf-3Y-fgN"/>
                                                 </constraints>

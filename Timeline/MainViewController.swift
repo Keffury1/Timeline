@@ -228,9 +228,67 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     @IBAction func saveButtonTapped(_ sender: Any) {
         
         if let timeline = timeline {
-
-        } else {
+            let color = self.view.backgroundColor
             
+            if color == UIColor(named: "black") {
+                timeline.color = "black"
+            } else if color == UIColor(named: "gold") {
+                timeline.color = "gold"
+            } else if color == UIColor(named: "mint") {
+                timeline.color = "mint"
+            } else if color == UIColor(named: "navy") {
+                timeline.color = "navy"
+            } else if color == UIColor(named: "maroon") {
+                timeline.color = "maroon"
+            } else if color == UIColor(named: "olive") {
+                timeline.color = "olive"
+            } else if color == UIColor(named: "pink") {
+                timeline.color = "pink"
+            } else if color == UIColor(named: "purple") {
+                timeline.color = "purple"
+            } else if color == UIColor(named: "grey") {
+                timeline.color = "grey"
+            } else if color == UIColor(named: "white") {
+                timeline.color = "white"
+            }
+        } else {
+            let color = self.view.backgroundColor
+            var colorString = ""
+            
+            if color == UIColor(named: "black") {
+                colorString = "black"
+            } else if color == UIColor(named: "gold") {
+                colorString = "gold"
+            } else if color == UIColor(named: "mint") {
+                colorString = "mint"
+            } else if color == UIColor(named: "navy") {
+                colorString = "navy"
+            } else if color == UIColor(named: "maroon") {
+                colorString = "maroon"
+            } else if color == UIColor(named: "olive") {
+                colorString = "olive"
+            } else if color == UIColor(named: "pink") {
+                colorString = "pink"
+            } else if color == UIColor(named: "purple") {
+                colorString = "purple"
+            } else if color == UIColor(named: "grey") {
+                colorString = "grey"
+            } else if color == UIColor(named: "white") {
+                colorString = "white"
+            }
+            
+            let alertController = UIAlertController(title: "Name of Timeline", message: "", preferredStyle: .alert)
+            alertController.addTextField()
+            alertController.textFields![0].textAlignment = .center
+            alertController.addAction(UIAlertAction(title: "Save Timeline", style: .destructive) { [unowned alertController] _ in
+                let answer = alertController.textFields![0]
+                guard let title = answer.text, let updates = self.fetchUpdatesController.fetchedObjects else { return }
+                
+                _ = Timeline(color: colorString, title: title, updates: updates)
+            })
+            alertController.addAction(UIAlertAction(title: "Return", style: .cancel, handler: nil))
+            
+            self.present(alertController, animated: true, completion: nil)
         }
         
         do {
@@ -241,9 +299,6 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
             print("Error saving managed object context: \(error)")
         }
         
-        self.performSegue(withIdentifier: "", sender: self)
-        
-        //Do Stuff
     }
     
     @IBAction func trashButtonTapped(_ sender: Any) {
@@ -268,8 +323,6 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         }))
         
         alertController.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-        
-        alertController.view.tintColor = .white
         
         self.present(alertController, animated: true, completion: nil)
     }

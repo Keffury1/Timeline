@@ -168,8 +168,6 @@ class AddUpdateViewController: UIViewController {
         }))
         alertController.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
         
-        alertController.view.tintColor = .white
-        
         self.present(alertController, animated: true, completion: nil)
     }
     
