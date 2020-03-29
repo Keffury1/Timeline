@@ -215,8 +215,7 @@ class AddUpdateViewController: UIViewController {
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = DateFormatter.Style.medium
             if let date = dateFormatter.date(from: date) {
-                let update = Update(date: date, update: updateText)
-                mainVC?.updates.append(update)
+                _ = Update(date: date, update: updateText)
             }
         }
         

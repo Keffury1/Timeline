@@ -13,11 +13,9 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
 
     //MARK: - Properties
     
-    var updates: [Update] = []
-    
     private let spacing: CGFloat = 100.0
     
-    var fetchResultsController: NSFetchedResultsController<Update> {
+    var fetchUpdatesController: NSFetchedResultsController<Update> {
         
         let fetchRequest: NSFetchRequest<Update> = Update.fetchRequest()
         
@@ -270,7 +268,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
             if let addUpdateVC = segue.destination as? AddUpdateViewController, let indexPath = updatesCollectionView.indexPathsForSelectedItems, let first = indexPath.first {
                 addUpdateVC.color = self.view.backgroundColor
                 addUpdateVC.mainVC = self
-                addUpdateVC.update = fetchResultsController.object(at: first)
+                addUpdateVC.update = fetchUpdatesController.object(at: first)
                 changeColorView.alpha = 0
             }
         }
@@ -293,13 +291,13 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fetchResultsController.fetchedObjects?.count ?? 0
+        return fetchUpdatesController.fetchedObjects?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "updateCell", for: indexPath) as? UpdateCollectionViewCell else { return UICollectionViewCell() }
         
-        let update = fetchResultsController.object(at: indexPath)
+        let update = fetchUpdatesController.object(at: indexPath)
         
         cell.updateLabel.text = update.update
         
