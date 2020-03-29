@@ -9,16 +9,8 @@
 /* Begin PBXBuildFile section */
 		373AFA57242FE18D0068B4A4 /* ArchivesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373AFA56242FE18D0068B4A4 /* ArchivesViewController.swift */; };
 		373AFA5A242FEA900068B4A4 /* Timeline.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 373AFA58242FEA900068B4A4 /* Timeline.xcdatamodeld */; };
-		3746517524301318003AFE63 /* BlackTLCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3746517424301318003AFE63 /* BlackTLCollectionViewCell.swift */; };
-		3746517724301320003AFE63 /* GoldTLCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3746517624301320003AFE63 /* GoldTLCollectionViewCell.swift */; };
-		374651792430132C003AFE63 /* MintTLCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374651782430132C003AFE63 /* MintTLCollectionViewCell.swift */; };
-		3746517B24301337003AFE63 /* NavyTLCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3746517A24301337003AFE63 /* NavyTLCollectionViewCell.swift */; };
-		3746517D24301341003AFE63 /* MaroonTLCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3746517C24301341003AFE63 /* MaroonTLCollectionViewCell.swift */; };
-		3746517F2430135C003AFE63 /* OliveTLCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3746517E2430135C003AFE63 /* OliveTLCollectionViewCell.swift */; };
-		3746518124301369003AFE63 /* PinkTLCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3746518024301369003AFE63 /* PinkTLCollectionViewCell.swift */; };
-		3746518324301372003AFE63 /* PurpleTLCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3746518224301372003AFE63 /* PurpleTLCollectionViewCell.swift */; };
-		374651852430137A003AFE63 /* GreyTLCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374651842430137A003AFE63 /* GreyTLCollectionViewCell.swift */; };
-		3746518724301382003AFE63 /* WhiteTLCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3746518624301382003AFE63 /* WhiteTLCollectionViewCell.swift */; };
+		3746518924302441003AFE63 /* ColorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3746518824302441003AFE63 /* ColorTableViewCell.swift */; };
+		3746518B2430274A003AFE63 /* TimelineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3746518A2430274A003AFE63 /* TimelineCollectionViewCell.swift */; };
 		3755ED53242E8E310056EA4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3755ED52242E8E310056EA4F /* AppDelegate.swift */; };
 		3755ED55242E8E310056EA4F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3755ED54242E8E310056EA4F /* SceneDelegate.swift */; };
 		3755ED5A242E8E310056EA4F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3755ED58242E8E310056EA4F /* Main.storyboard */; };
@@ -36,16 +28,8 @@
 /* Begin PBXFileReference section */
 		373AFA56242FE18D0068B4A4 /* ArchivesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivesViewController.swift; sourceTree = "<group>"; };
 		373AFA59242FEA900068B4A4 /* Timeline.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Timeline.xcdatamodel; sourceTree = "<group>"; };
-		3746517424301318003AFE63 /* BlackTLCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackTLCollectionViewCell.swift; sourceTree = "<group>"; };
-		3746517624301320003AFE63 /* GoldTLCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoldTLCollectionViewCell.swift; sourceTree = "<group>"; };
-		374651782430132C003AFE63 /* MintTLCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintTLCollectionViewCell.swift; sourceTree = "<group>"; };
-		3746517A24301337003AFE63 /* NavyTLCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavyTLCollectionViewCell.swift; sourceTree = "<group>"; };
-		3746517C24301341003AFE63 /* MaroonTLCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaroonTLCollectionViewCell.swift; sourceTree = "<group>"; };
-		3746517E2430135C003AFE63 /* OliveTLCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OliveTLCollectionViewCell.swift; sourceTree = "<group>"; };
-		3746518024301369003AFE63 /* PinkTLCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinkTLCollectionViewCell.swift; sourceTree = "<group>"; };
-		3746518224301372003AFE63 /* PurpleTLCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurpleTLCollectionViewCell.swift; sourceTree = "<group>"; };
-		374651842430137A003AFE63 /* GreyTLCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreyTLCollectionViewCell.swift; sourceTree = "<group>"; };
-		3746518624301382003AFE63 /* WhiteTLCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteTLCollectionViewCell.swift; sourceTree = "<group>"; };
+		3746518824302441003AFE63 /* ColorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTableViewCell.swift; sourceTree = "<group>"; };
+		3746518A2430274A003AFE63 /* TimelineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineCollectionViewCell.swift; sourceTree = "<group>"; };
 		3755ED4F242E8E310056EA4F /* Timeline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timeline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3755ED52242E8E310056EA4F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3755ED54242E8E310056EA4F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,23 +57,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		37465173243012FF003AFE63 /* Timeline Cells */ = {
-			isa = PBXGroup;
-			children = (
-				3746517424301318003AFE63 /* BlackTLCollectionViewCell.swift */,
-				3746517624301320003AFE63 /* GoldTLCollectionViewCell.swift */,
-				374651782430132C003AFE63 /* MintTLCollectionViewCell.swift */,
-				3746517A24301337003AFE63 /* NavyTLCollectionViewCell.swift */,
-				3746517C24301341003AFE63 /* MaroonTLCollectionViewCell.swift */,
-				3746517E2430135C003AFE63 /* OliveTLCollectionViewCell.swift */,
-				3746518024301369003AFE63 /* PinkTLCollectionViewCell.swift */,
-				3746518224301372003AFE63 /* PurpleTLCollectionViewCell.swift */,
-				374651842430137A003AFE63 /* GreyTLCollectionViewCell.swift */,
-				3746518624301382003AFE63 /* WhiteTLCollectionViewCell.swift */,
-			);
-			name = "Timeline Cells";
-			sourceTree = "<group>";
-		};
 		3755ED46242E8E310056EA4F = {
 			isa = PBXGroup;
 			children = (
@@ -172,7 +139,8 @@
 			isa = PBXGroup;
 			children = (
 				3755ED6E242E94050056EA4F /* UpdateCollectionViewCell.swift */,
-				37465173243012FF003AFE63 /* Timeline Cells */,
+				3746518824302441003AFE63 /* ColorTableViewCell.swift */,
+				3746518A2430274A003AFE63 /* TimelineCollectionViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -249,23 +217,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3746518324301372003AFE63 /* PurpleTLCollectionViewCell.swift in Sources */,
 				373AFA57242FE18D0068B4A4 /* ArchivesViewController.swift in Sources */,
-				374651852430137A003AFE63 /* GreyTLCollectionViewCell.swift in Sources */,
 				3755ED6C242E93970056EA4F /* MainViewController.swift in Sources */,
+				3746518B2430274A003AFE63 /* TimelineCollectionViewCell.swift in Sources */,
 				3755ED78242EB6300056EA4F /* AddUpdateViewController.swift in Sources */,
-				3746517F2430135C003AFE63 /* OliveTLCollectionViewCell.swift in Sources */,
 				3755ED53242E8E310056EA4F /* AppDelegate.swift in Sources */,
 				37CD6841242ED8020018A16A /* Update+Convenienve.swift in Sources */,
 				37CD683F242ED7DA0018A16A /* CoreDataStack.swift in Sources */,
-				3746518124301369003AFE63 /* PinkTLCollectionViewCell.swift in Sources */,
 				3755ED55242E8E310056EA4F /* SceneDelegate.swift in Sources */,
-				3746518724301382003AFE63 /* WhiteTLCollectionViewCell.swift in Sources */,
-				3746517B24301337003AFE63 /* NavyTLCollectionViewCell.swift in Sources */,
-				3746517524301318003AFE63 /* BlackTLCollectionViewCell.swift in Sources */,
-				374651792430132C003AFE63 /* MintTLCollectionViewCell.swift in Sources */,
-				3746517724301320003AFE63 /* GoldTLCollectionViewCell.swift in Sources */,
-				3746517D24301341003AFE63 /* MaroonTLCollectionViewCell.swift in Sources */,
+				3746518924302441003AFE63 /* ColorTableViewCell.swift in Sources */,
 				37CD683D242ED6D00018A16A /* Update.xcdatamodeld in Sources */,
 				373AFA5A242FEA900068B4A4 /* Timeline.xcdatamodeld in Sources */,
 				3755ED6F242E94050056EA4F /* UpdateCollectionViewCell.swift in Sources */,

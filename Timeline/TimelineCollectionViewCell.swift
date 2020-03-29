@@ -1,5 +1,5 @@
 //
-//  MaroonTLCollectionViewCell.swift
+//  TimelineCollectionViewCell.swift
 //  Timeline
 //
 //  Created by Bobby Keffury on 3/28/20.
@@ -8,10 +8,9 @@
 
 import UIKit
 
-class MaroonTLCollectionViewCell: UICollectionViewCell {
+class TimelineCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var colorView: UIView!
     @IBOutlet weak var stripeView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
-    
 }

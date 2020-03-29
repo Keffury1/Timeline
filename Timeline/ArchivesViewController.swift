@@ -13,6 +13,9 @@ class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelega
 
     //MARK: - Properties
     
+    let colors: [[Timeline]] = []
+    var storedOffsets = [Int: CGFloat]()
+    
     private var fetchTimelinesController: NSFetchedResultsController<Timeline> {
         
         let fetchRequest: NSFetchRequest<Timeline> = Timeline.fetchRequest()
@@ -34,7 +37,7 @@ class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelega
     
     //MARK: - Outlets
     
-    @IBOutlet weak var archivesCollectionView: UICollectionView!
+    @IBOutlet weak var timelinesTableView: UITableView!
     
     //MARK: - Views
     
@@ -48,7 +51,7 @@ class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelega
     //MARK: - Methods
     
     func setupSubviews() {
-        
+        timelinesTableView.dataSource = self
     }
     
     //MARK: - Actions
@@ -60,14 +63,55 @@ class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelega
     }
 }
 
-extension ArchivesViewController: UICollectionViewDataSource {
+extension ArchivesViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return colors.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "colorCell", for: indexPath)
+        
+        return cell
+    }
+    
+    private func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        guard let tableViewCell = cell as? ColorTableViewCell else { return }
+        
+        tableViewCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
+        tableViewCell.collectionViewOffset = storedOffsets[indexPath.row] ?? 0
+    }
+    
+    private func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+
+        guard let tableViewCell = cell as? ColorTableViewCell else { return }
+
+        storedOffsets[indexPath.row] = tableViewCell.collectionViewOffset
+    }
+}
+
+extension ArchivesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return colors[collectionView.tag].count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? BlackCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "timelineCell", for: indexPath) as? TimelineCollectionViewCell else { return UICollectionViewCell() }
+
+        let timeline = fetchTimelinesController.object(at: indexPath)
         
+        let color = UIColor(named: timeline.color!)
+        cell.colorView.backgroundColor = color
+        cell.titleLabel.text = timeline.title!
+        
+        if color == .white {
+            cell.stripeView.backgroundColor = .black
+        } else {
+            cell.stripeView.backgroundColor = .white
+        }
+
         return cell
     }
 }
