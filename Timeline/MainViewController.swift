@@ -148,6 +148,104 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         self.view.backgroundColor = button.backgroundColor
     }
     
+    func saveTimelineAlert() {
+        let saveTimelineAlert = UIAlertController(title: "Timeline", message: "", preferredStyle: .alert)
+        saveTimelineAlert.addTextField { (textField) in
+            textField.textAlignment = .center
+            textField.textColor = self.view.backgroundColor
+            textField.placeholder = "Enter Name"
+        }
+        
+        saveTimelineAlert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (_) in
+            guard let title = saveTimelineAlert.textFields?.first?.text, let timeline = self.timeline,  let color = self.view.backgroundColor else { return }
+            timeline.title = title
+            
+            if color == UIColor(named: "black") {
+                timeline.color = "black"
+            } else if color == UIColor(named: "gold") {
+                timeline.color = "gold"
+            } else if color == UIColor(named: "mint") {
+                timeline.color = "mint"
+            } else if color == UIColor(named: "navy") {
+                timeline.color = "navy"
+            } else if color == UIColor(named: "maroon") {
+                timeline.color = "maroon"
+            } else if color == UIColor(named: "olive") {
+                timeline.color = "olive"
+            } else if color == UIColor(named: "pink") {
+                timeline.color = "pink"
+            } else if color == UIColor(named: "purple") {
+                timeline.color = "purple"
+            } else if color == UIColor(named: "grey") {
+                timeline.color = "grey"
+            } else if color == UIColor(named: "white") {
+                timeline.color = "white"
+            }
+            
+            DispatchQueue.main.async {
+                do {
+                    let moc = CoreDataStack.shared.mainContext
+                    try moc.save()
+                    
+                    let alertController = UIAlertController(title: "Timeline Saved", message: "✓", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
+                        self.timeline = Timeline(color: "", title: "", updates: [])
+                        self.view.backgroundColor = .black
+                        self.updatesCollectionView.reloadData()
+                    }))
+                    self.present(alertController, animated: true, completion: nil)
+                    
+                } catch {
+                    print("Error saving Timeline: \(error)")
+                    return
+                }
+            }
+        }))
+        
+        saveTimelineAlert.view.backgroundColor = self.view.backgroundColor
+        if view.backgroundColor == .white {
+            saveTimelineAlert.view.tintColor = .black
+        } else {
+            saveTimelineAlert.view.tintColor = .white
+        }
+        
+        saveTimelineAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+    }
+    
+    func deleteTimelineAlert() {
+        let deleteTimelineAlert = UIAlertController(title: "Delete Timeline", message: "Are you sure?", preferredStyle: .alert)
+        deleteTimelineAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
+            guard let timeline = self.timeline else { return }
+            DispatchQueue.main.async {
+                let moc = CoreDataStack.shared.mainContext
+                moc.delete(timeline)
+                
+                do {
+                    try moc.save()
+                    let alertController = UIAlertController(title: "Timeline Deleted", message: "✓", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
+                        self.timeline = Timeline(color: "", title: "", updates: [])
+                        self.view.backgroundColor = .black
+                        self.updatesCollectionView.reloadData()
+                    }))
+                    self.present(alertController, animated: true, completion: nil)
+                } catch {
+                    print("Error Deleting Timeline: \(error)")
+                    return
+                }
+            }
+        }))
+        deleteTimelineAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        deleteTimelineAlert.view.backgroundColor = self.view.backgroundColor
+        if self.view.backgroundColor == .white {
+            deleteTimelineAlert.view.tintColor = .black
+        } else {
+            deleteTimelineAlert.view.tintColor = .white
+        }
+    }
+    
     //MARK: - Actions
     
     @IBAction func changeColorButtonTapped(_ sender: Any) {
@@ -223,61 +321,11 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        
-        if let timeline = timeline {
-            let color = self.view.backgroundColor
-            
-            if color == UIColor(named: "black") {
-                timeline.color = "black"
-            } else if color == UIColor(named: "gold") {
-                timeline.color = "gold"
-            } else if color == UIColor(named: "mint") {
-                timeline.color = "mint"
-            } else if color == UIColor(named: "navy") {
-                timeline.color = "navy"
-            } else if color == UIColor(named: "maroon") {
-                timeline.color = "maroon"
-            } else if color == UIColor(named: "olive") {
-                timeline.color = "olive"
-            } else if color == UIColor(named: "pink") {
-                timeline.color = "pink"
-            } else if color == UIColor(named: "purple") {
-                timeline.color = "purple"
-            } else if color == UIColor(named: "grey") {
-                timeline.color = "grey"
-            } else if color == UIColor(named: "white") {
-                timeline.color = "white"
-            }
-        }
-        
-        //Present Save Alert
-        //Save Timeline
-        //Show Saved Alert
-        //Reset Timeline
+        saveTimelineAlert()
     }
     
     @IBAction func trashButtonTapped(_ sender: Any) {
-        guard let timeline = timeline else { return }
-        
-        
-        //Show Delete Timeline Alert
-        //Delete Timeline
-        //Notify Deletion
-        //Update UI
-        
-        DispatchQueue.main.async {
-            let moc = CoreDataStack.shared.mainContext
-            moc.delete(timeline)
-            self.timeline = nil
-            
-            do {
-                try moc.save()
-                
-            } catch {
-                print("Error saving managed object context: \(error)")
-            }
-        }
-        
+        deleteTimelineAlert()
     }
     
     //MARK: - Navigation
