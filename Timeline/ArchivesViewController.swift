@@ -44,12 +44,18 @@ class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelega
         super.viewDidLoad()
         
         setupSubviews()
+        sortTimelines()
     }
     
     //MARK: - Methods
     
     func setupSubviews() {
         timelinesTableView.dataSource = self
+    }
+    
+    func sortTimelines() {
+        fetchTimelinesController.fetchedObjects?.sorted { $0.color! > $1.color! }
+        timelinesTableView.reloadData()
     }
     
     //MARK: - Actions
