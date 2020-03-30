@@ -13,8 +13,6 @@ class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelega
 
     //MARK: - Properties
     
-    var storedOffsets = [Int: CGFloat]()
-    
     private var fetchTimelinesController: NSFetchedResultsController<Timeline> {
 
         let fetchRequest: NSFetchRequest<Timeline> = Timeline.fetchRequest()
@@ -36,60 +34,23 @@ class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelega
     
     //MARK: - Outlets
     
-    @IBOutlet weak var timelinesTableView: UITableView!
+    @IBOutlet weak var archivesCollectionView: UICollectionView!
     
     //MARK: - Views
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupSubviews()
-    }
-    
-    //MARK: - Methods
-    
-    func setupSubviews() {
-        timelinesTableView.dataSource = self
-    }
-    
-    //MARK: - Actions
-    
-    //MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-    }
-}
-
-extension ArchivesViewController: UITableViewDataSource, UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return  fetchTimelinesController.sections?.count ?? 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "colorCell", for: indexPath)
-        
-        return cell
-    }
-    
-    private func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        
-        guard let tableViewCell = cell as? ColorTableViewCell else { return }
-        
-        tableViewCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
-        tableViewCell.collectionViewOffset = storedOffsets[indexPath.row] ?? 0
-    }
-    
-    private func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-
-        guard let tableViewCell = cell as? ColorTableViewCell else { return }
-
-        storedOffsets[indexPath.row] = tableViewCell.collectionViewOffset
+        archivesCollectionView.delegate = self
+        archivesCollectionView.dataSource = self
     }
 }
 
 extension ArchivesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return fetchTimelinesController.fetchedObjects?.count ?? 0
