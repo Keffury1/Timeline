@@ -49,11 +49,11 @@ class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelega
 extension ArchivesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return fetchTimelinesController.sections?.count ?? 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fetchTimelinesController.fetchedObjects?.count ?? 0
+        return fetchTimelinesController.sections?[section].numberOfObjects ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
