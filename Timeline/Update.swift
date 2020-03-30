@@ -9,7 +9,9 @@
 import Foundation
 import CoreData
 
-public class Update: NSObject, NSCoding {
+@objc public class Update: NSObject, NSSecureCoding {
+    
+    public static var supportsSecureCoding: Bool = true
     
     var date: Date
     var update: String

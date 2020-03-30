@@ -344,7 +344,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 400, right: 0)
+        return UIEdgeInsets(top: 0, left: 0, bottom: 300, right: 0)
     }
     
     internal func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -386,5 +386,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         return cell
     }
+    
 }
 
