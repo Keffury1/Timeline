@@ -21,14 +21,6 @@
 		3755ED76242EB5870056EA4F /* AddUpdate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3755ED75242EB5870056EA4F /* AddUpdate.storyboard */; };
 		3755ED78242EB6300056EA4F /* AddUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3755ED77242EB6300056EA4F /* AddUpdateViewController.swift */; };
 		378F45F1243108EC00183DAB /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F45F0243108EC00183DAB /* CustomTabBar.swift */; };
-		378F45F3243110D500183DAB /* SaveAlert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 378F45F2243110D500183DAB /* SaveAlert.storyboard */; };
-		378F45F5243110F200183DAB /* DeleteTimelineAlert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 378F45F4243110F200183DAB /* DeleteTimelineAlert.storyboard */; };
-		378F45F7243110FF00183DAB /* DeleteEntryAlert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 378F45F6243110FF00183DAB /* DeleteEntryAlert.storyboard */; };
-		378F45FB24313AFF00183DAB /* EnterInformationAlert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 378F45FA24313AFF00183DAB /* EnterInformationAlert.storyboard */; };
-		378F45FD24313C5400183DAB /* SaveAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F45FC24313C5400183DAB /* SaveAlertViewController.swift */; };
-		378F460124313C6C00183DAB /* DeleteEntryAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F460024313C6C00183DAB /* DeleteEntryAlertViewController.swift */; };
-		378F460324313C9A00183DAB /* EnterInformationAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F460224313C9A00183DAB /* EnterInformationAlertViewController.swift */; };
-		378F460724313F3400183DAB /* DeleteTimelineAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F460624313F3400183DAB /* DeleteTimelineAlertViewController.swift */; };
 		378F46082431C86F00183DAB /* Timeline.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 373AFA58242FEA900068B4A4 /* Timeline.xcdatamodeld */; };
 		378F460B2431C91B00183DAB /* Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F460A2431C91B00183DAB /* Update.swift */; };
 		37CD683F242ED7DA0018A16A /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CD683E242ED7DA0018A16A /* CoreDataStack.swift */; };
@@ -52,14 +44,6 @@
 		3755ED75242EB5870056EA4F /* AddUpdate.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddUpdate.storyboard; sourceTree = "<group>"; };
 		3755ED77242EB6300056EA4F /* AddUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUpdateViewController.swift; sourceTree = "<group>"; };
 		378F45F0243108EC00183DAB /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
-		378F45F2243110D500183DAB /* SaveAlert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SaveAlert.storyboard; sourceTree = "<group>"; };
-		378F45F4243110F200183DAB /* DeleteTimelineAlert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DeleteTimelineAlert.storyboard; sourceTree = "<group>"; };
-		378F45F6243110FF00183DAB /* DeleteEntryAlert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DeleteEntryAlert.storyboard; sourceTree = "<group>"; };
-		378F45FA24313AFF00183DAB /* EnterInformationAlert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EnterInformationAlert.storyboard; sourceTree = "<group>"; };
-		378F45FC24313C5400183DAB /* SaveAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveAlertViewController.swift; sourceTree = "<group>"; };
-		378F460024313C6C00183DAB /* DeleteEntryAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteEntryAlertViewController.swift; sourceTree = "<group>"; };
-		378F460224313C9A00183DAB /* EnterInformationAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterInformationAlertViewController.swift; sourceTree = "<group>"; };
-		378F460624313F3400183DAB /* DeleteTimelineAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTimelineAlertViewController.swift; sourceTree = "<group>"; };
 		378F460A2431C91B00183DAB /* Update.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Update.swift; sourceTree = "<group>"; };
 		37CD683E242ED7DA0018A16A /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -119,7 +103,6 @@
 				3755ED58242E8E310056EA4F /* Main.storyboard */,
 				3755ED75242EB5870056EA4F /* AddUpdate.storyboard */,
 				3755ED5D242E8E330056EA4F /* LaunchScreen.storyboard */,
-				378F460524313D5500183DAB /* AlertStoryboards */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -130,7 +113,6 @@
 				3755ED6B242E93970056EA4F /* MainViewController.swift */,
 				3755ED77242EB6300056EA4F /* AddUpdateViewController.swift */,
 				373AFA56242FE18D0068B4A4 /* ArchivesViewController.swift */,
-				378F460424313D3E00183DAB /* AlertViewControllers */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -164,28 +146,6 @@
 				378F45F0243108EC00183DAB /* CustomTabBar.swift */,
 			);
 			name = Views;
-			sourceTree = "<group>";
-		};
-		378F460424313D3E00183DAB /* AlertViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				378F45FC24313C5400183DAB /* SaveAlertViewController.swift */,
-				378F460624313F3400183DAB /* DeleteTimelineAlertViewController.swift */,
-				378F460024313C6C00183DAB /* DeleteEntryAlertViewController.swift */,
-				378F460224313C9A00183DAB /* EnterInformationAlertViewController.swift */,
-			);
-			name = AlertViewControllers;
-			sourceTree = "<group>";
-		};
-		378F460524313D5500183DAB /* AlertStoryboards */ = {
-			isa = PBXGroup;
-			children = (
-				378F45F2243110D500183DAB /* SaveAlert.storyboard */,
-				378F45F4243110F200183DAB /* DeleteTimelineAlert.storyboard */,
-				378F45F6243110FF00183DAB /* DeleteEntryAlert.storyboard */,
-				378F45FA24313AFF00183DAB /* EnterInformationAlert.storyboard */,
-			);
-			name = AlertStoryboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,13 +207,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3755ED5F242E8E330056EA4F /* LaunchScreen.storyboard in Resources */,
-				378F45F5243110F200183DAB /* DeleteTimelineAlert.storyboard in Resources */,
-				378F45F3243110D500183DAB /* SaveAlert.storyboard in Resources */,
 				3755ED5C242E8E330056EA4F /* Assets.xcassets in Resources */,
 				3755ED5A242E8E310056EA4F /* Main.storyboard in Resources */,
 				3755ED76242EB5870056EA4F /* AddUpdate.storyboard in Resources */,
-				378F45FB24313AFF00183DAB /* EnterInformationAlert.storyboard in Resources */,
-				378F45F7243110FF00183DAB /* DeleteEntryAlert.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,10 +222,7 @@
 			files = (
 				373AFA57242FE18D0068B4A4 /* ArchivesViewController.swift in Sources */,
 				3755ED6C242E93970056EA4F /* MainViewController.swift in Sources */,
-				378F460124313C6C00183DAB /* DeleteEntryAlertViewController.swift in Sources */,
-				378F460724313F3400183DAB /* DeleteTimelineAlertViewController.swift in Sources */,
 				378F46082431C86F00183DAB /* Timeline.xcdatamodeld in Sources */,
-				378F460324313C9A00183DAB /* EnterInformationAlertViewController.swift in Sources */,
 				378F45F1243108EC00183DAB /* CustomTabBar.swift in Sources */,
 				3746518B2430274A003AFE63 /* TimelineCollectionViewCell.swift in Sources */,
 				3755ED78242EB6300056EA4F /* AddUpdateViewController.swift in Sources */,
@@ -278,7 +231,6 @@
 				378F460B2431C91B00183DAB /* Update.swift in Sources */,
 				3755ED55242E8E310056EA4F /* SceneDelegate.swift in Sources */,
 				3746518924302441003AFE63 /* ColorTableViewCell.swift in Sources */,
-				378F45FD24313C5400183DAB /* SaveAlertViewController.swift in Sources */,
 				3746519224304077003AFE63 /* Timeline+Convenience.swift in Sources */,
 				3755ED6F242E94050056EA4F /* UpdateCollectionViewCell.swift in Sources */,
 			);

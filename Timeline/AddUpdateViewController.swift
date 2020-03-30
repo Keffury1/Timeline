@@ -234,6 +234,7 @@ class AddUpdateViewController: UIViewController {
         dateTextField.text = dateFormatter.string(from: date)
         removeDatePicker()
     }
+    
 }
 
 extension AddUpdateViewController: UITextFieldDelegate {
@@ -242,5 +243,4 @@ extension AddUpdateViewController: UITextFieldDelegate {
         self.view.endEditing(true)
         return false
     }
-    
 }

@@ -13,39 +13,26 @@ class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelega
 
     //MARK: - Properties
     
-    var colors: [[Timeline]] = []
-    
-    var black: [Timeline] = []
-    var gold: [Timeline] = []
-    var mint: [Timeline] = []
-    var navy: [Timeline] = []
-    var maroon: [Timeline] = []
-    var olive: [Timeline] = []
-    var pink: [Timeline] = []
-    var purple: [Timeline] = []
-    var grey: [Timeline] = []
-    var white: [Timeline] = []
-    
     var storedOffsets = [Int: CGFloat]()
     
-//    private var fetchTimelinesController: NSFetchedResultsController<Timeline> {
-//
-//        let fetchRequest: NSFetchRequest<Timeline> = Timeline.fetchRequest()
-//
-//        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "color", ascending: false)]
-//        let moc = CoreDataStack.shared.mainContext
-//
-//        let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
-//
-//        fetchResultsController.delegate = self
-//
-//        do {
-//            try fetchResultsController.performFetch()
-//        } catch {
-//            fatalError("Failed to fetch timelines: \(error)")
-//        }
-//        return fetchResultsController
-//    }
+    private var fetchTimelinesController: NSFetchedResultsController<Timeline> {
+
+        let fetchRequest: NSFetchRequest<Timeline> = Timeline.fetchRequest()
+
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "color", ascending: false)]
+        let moc = CoreDataStack.shared.mainContext
+
+        let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
+
+        fetchResultsController.delegate = self
+
+        do {
+            try fetchResultsController.performFetch()
+        } catch {
+            fatalError("Failed to fetch timelines: \(error)")
+        }
+        return fetchResultsController
+    }
     
     //MARK: - Outlets
     
@@ -77,8 +64,7 @@ class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelega
 extension ArchivesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-//            fetchTimelinesController.sections?.count ?? 1
+        return  fetchTimelinesController.sections?.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -106,24 +92,23 @@ extension ArchivesViewController: UITableViewDataSource, UITableViewDelegate {
 extension ArchivesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return colors[collectionView.tag].count
+        return fetchTimelinesController.fetchedObjects?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "timelineCell", for: indexPath) as? TimelineCollectionViewCell else { return UICollectionViewCell() }
 
-//        let timeline = fetchTimelinesController.object(at: indexPath)
-//        let color = UIColor(named: timeline.color!)
-//        cell.colorView.backgroundColor = color
-//        cell.titleLabel.text = timeline.title!
+        let timeline = fetchTimelinesController.object(at: indexPath)
+        let color = UIColor(named: timeline.color!)
+        cell.colorView.backgroundColor = color
+        cell.titleLabel.text = timeline.title
         
-//        if color == .white {
-//            cell.stripeView.backgroundColor = .black
-//        } else {
-//            cell.stripeView.backgroundColor = .white
-//        }
+        if color == .white {
+            cell.stripeView.backgroundColor = .black
+        } else {
+            cell.stripeView.backgroundColor = .white
+        }
 
         return cell
     }
-    
 }
