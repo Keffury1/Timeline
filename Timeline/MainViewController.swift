@@ -149,14 +149,18 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     }
     
     func saveTimelineAlert() {
-        let saveTimelineAlert = UIAlertController(title: "Timeline", message: "", preferredStyle: .alert)
+        
+        let saveTimelineAlert = UIAlertController(title: "", message: "", preferredStyle: .alert)
+        
         saveTimelineAlert.addTextField { (textField) in
             textField.textAlignment = .center
             textField.textColor = self.view.backgroundColor
-            textField.placeholder = "Enter Name"
+            textField.placeholder = "Title:"
         }
         
-        saveTimelineAlert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (_) in
+        saveTimelineAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+        
+        saveTimelineAlert.addAction(UIAlertAction(title: "Save", style: .cancel, handler: { (_) in
             guard let title = saveTimelineAlert.textFields?.first?.text, let timeline = self.timeline,  let color = self.view.backgroundColor else { return }
             timeline.title = title
             
@@ -187,35 +191,73 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
                     let moc = CoreDataStack.shared.mainContext
                     try moc.save()
                     
-                    let alertController = UIAlertController(title: "Timeline Saved", message: "✓", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
-                        self.timeline = Timeline(color: "", title: "", updates: [])
-                        self.view.backgroundColor = .black
-                        self.updatesCollectionView.reloadData()
-                    }))
-                    self.present(alertController, animated: true, completion: nil)
-                    
+                    self.timelineSavedAlert()
                 } catch {
                     print("Error saving Timeline: \(error)")
                     return
                 }
             }
+            
         }))
         
-       if view.backgroundColor == .white {
-            saveTimelineAlert.view.backgroundColor = .black
-            saveTimelineAlert.view.tintColor = .white
+        if view.backgroundColor == .white {
+            saveTimelineAlert.view.backgroundColor = .white
+            saveTimelineAlert.view.tintColor = .black
+            
+            let saveTimelineAlertString = NSAttributedString(string: "Timeline", attributes: [
+                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 30),
+                NSAttributedString.Key.foregroundColor : UIColor.black
+            ])
+            saveTimelineAlert.setValue(saveTimelineAlertString, forKey: "attributedTitle")
         } else {
             saveTimelineAlert.view.backgroundColor = .white
             saveTimelineAlert.view.tintColor = self.view.backgroundColor
+            
+            let saveTimelineAlertString = NSAttributedString(string: "Timeline", attributes: [
+                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 30),
+                NSAttributedString.Key.foregroundColor : self.view.backgroundColor!
+            ])
+            saveTimelineAlert.setValue(saveTimelineAlertString, forKey: "attributedTitle")
         }
         
-        saveTimelineAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        saveTimelineAlert.view.layer.cornerRadius = 10.0
         
+        self.present(saveTimelineAlert, animated: true, completion: nil)
+    }
+    
+    func timelineSavedAlert() {
+        let alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
+            self.cleanSlate()
+        }))
+        
+        if view.backgroundColor == .white {
+            alertController.view.backgroundColor = .white
+            alertController.view.tintColor = .black
+            
+            let saveTimelineAlertString = NSAttributedString(string: "Timeline Saved!", attributes: [
+                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25),
+                NSAttributedString.Key.foregroundColor : UIColor.black
+            ])
+            alertController.setValue(saveTimelineAlertString, forKey: "attributedTitle")
+        } else {
+            let saveTimeleineAlertString = NSAttributedString(string: "Timeline Saved!", attributes: [
+                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25),
+                NSAttributedString.Key.foregroundColor : self.view.backgroundColor!
+            ])
+            alertController.setValue(saveTimeleineAlertString, forKey: "attributedTitle")
+            
+            alertController.view.backgroundColor = .white
+            alertController.view.tintColor = self.view.backgroundColor
+        }
+        
+        alertController.view.layer.cornerRadius = 10.0
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func deleteTimelineAlert() {
-        let deleteTimelineAlert = UIAlertController(title: "Delete Timeline", message: "Are you sure?", preferredStyle: .alert)
+        let deleteTimelineAlert = UIAlertController(title: "", message: "", preferredStyle: .alert)
         deleteTimelineAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
             guard let timeline = self.timeline else { return }
             DispatchQueue.main.async {
@@ -224,13 +266,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
                 
                 do {
                     try moc.save()
-                    let alertController = UIAlertController(title: "Timeline Deleted", message: "✓", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
-                        self.timeline = Timeline(color: "", title: "", updates: [])
-                        self.view.backgroundColor = .black
-                        self.updatesCollectionView.reloadData()
-                    }))
-                    self.present(alertController, animated: true, completion: nil)
+                    self.timelineDeletedAlert()
                 } catch {
                     print("Error Deleting Timeline: \(error)")
                     return
@@ -240,12 +276,64 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         deleteTimelineAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         if view.backgroundColor == .white {
-            deleteTimelineAlert.view.backgroundColor = .black
-            deleteTimelineAlert.view.tintColor = .white
+            deleteTimelineAlert.view.backgroundColor = .white
+            deleteTimelineAlert.view.tintColor = .black
+            
+            let deleteTimelineAlertString = NSAttributedString(string: "Delete Timeline", attributes: [
+                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25),
+                NSAttributedString.Key.foregroundColor : UIColor.black
+            ])
+            deleteTimelineAlert.setValue(deleteTimelineAlertString, forKey: "attributedTitle")
         } else {
             deleteTimelineAlert.view.backgroundColor = .white
             deleteTimelineAlert.view.tintColor = self.view.backgroundColor
+            
+            let deleteTimelineAlertString = NSAttributedString(string: "Delete Timeline", attributes: [
+                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25),
+                NSAttributedString.Key.foregroundColor : self.view.backgroundColor!
+            ])
+            deleteTimelineAlert.setValue(deleteTimelineAlertString, forKey: "attributedTitle")
         }
+        
+        deleteTimelineAlert.view.layer.cornerRadius = 10.0
+        
+        self.present(deleteTimelineAlert, animated: true, completion: nil)
+    }
+    
+    func timelineDeletedAlert() {
+        let alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
+            self.cleanSlate()
+        }))
+        
+        if view.backgroundColor == .white {
+            alertController.view.backgroundColor = .white
+            alertController.view.tintColor = .black
+            
+            let deleteTimelineAlertString = NSAttributedString(string: "Timeline Deleted!", attributes: [
+                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25),
+                NSAttributedString.Key.foregroundColor : UIColor.black
+            ])
+            alertController.setValue(deleteTimelineAlertString, forKey: "attributedTitle")
+        } else {
+            let deleteTimelineAlertString = NSAttributedString(string: "Timeline Deleted!", attributes: [
+                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25),
+                NSAttributedString.Key.foregroundColor : self.view.backgroundColor!
+            ])
+            alertController.setValue(deleteTimelineAlertString, forKey: "attributedTitle")
+            
+            alertController.view.backgroundColor = .white
+            alertController.view.tintColor = self.view.backgroundColor
+        }
+        
+        alertController.view.layer.cornerRadius = 10.0
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func cleanSlate() {
+        //Update Views
+        //Reload Data?
     }
     
     //MARK: - Actions
