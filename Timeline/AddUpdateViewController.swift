@@ -16,6 +16,7 @@ class AddUpdateViewController: UIViewController {
     
     var mainVC: MainViewController?
     var color: UIColor?
+    var number: Int?
     
     var update: Update? {
         didSet {
@@ -146,31 +147,6 @@ class AddUpdateViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    func confirmAlert() {
-        let alertController = UIAlertController(title: "Delete This Event?", message: "", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Yes, Delete", style: .destructive, handler: { (_) in
-            guard let update = self.update else { return }
-            
-            DispatchQueue.main.async {
-                let moc = CoreDataStack.shared.mainContext
-                moc.delete(update)
-                
-                do {
-                    try moc.save()
-                    self.mainVC?.updatesCollectionView.reloadData()
-                } catch {
-                    moc.reset()
-                    print("Error saving managed object context: \(error)")
-                }
-            }
-            
-            self.dismiss(animated: true, completion: nil)
-        }))
-        alertController.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-        
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
     func presentDatePicker() {
         UIView.animate(withDuration: 0.5, animations: {
             self.datePickerView.alpha = 1
@@ -202,7 +178,7 @@ class AddUpdateViewController: UIViewController {
     //MARK: - Actions
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        guard let date = dateTextField.text, !date.isEmpty, let updateText = updateTextView.text, !updateText.isEmpty else {
+        guard let mainVC = mainVC, let date = dateTextField.text, !date.isEmpty, let updateText = updateTextView.text, !updateText.isEmpty else {
             infoAlert()
             return
         }
@@ -213,14 +189,15 @@ class AddUpdateViewController: UIViewController {
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = DateFormatter.Style.medium
             if let date = dateFormatter.date(from: date) {
-                _ = Update(date: date, update: updateText)
+                let update = Update(date: date, update: updateText)
+                mainVC.timeline?.updates?.append(update)
+                mainVC.updatesCollectionView.reloadData()
             }
         }
         
         do {
             let moc = CoreDataStack.shared.mainContext
             try moc.save()
-            self.mainVC?.updatesCollectionView.reloadData()
             
         } catch {
             print("Error saving managed object context: \(error)")
@@ -230,7 +207,12 @@ class AddUpdateViewController: UIViewController {
     }
     
     @IBAction func deleteButtonTapped(_ sender: Any) {
-        confirmAlert()
+        guard let number = number else { return }
+        mainVC?.timeline?.updates?.remove(at: number)
+        mainVC?.updatesCollectionView.reloadData()
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     @IBAction func calendarButtonTapped(_ sender: Any) {
@@ -260,4 +242,5 @@ extension AddUpdateViewController: UITextFieldDelegate {
         self.view.endEditing(true)
         return false
     }
+    
 }

@@ -15,25 +15,6 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     private let spacing: CGFloat = 100.0
     
-    var fetchUpdatesController: NSFetchedResultsController<Update> {
-        
-        let fetchRequest: NSFetchRequest<Update> = Update.fetchRequest()
-        
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
-        let moc = CoreDataStack.shared.mainContext
-        
-        let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
-        
-        fetchResultsController.delegate = self
-        
-        do {
-            try fetchResultsController.performFetch()
-        } catch {
-            fatalError("Failed to fetch updates: \(error)")
-        }
-        return fetchResultsController
-    }
-    
     var timeline: Timeline?
     
     //MARK: - Outlets
@@ -67,6 +48,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         
         setupCollectionVeiw()
         setupSubviews()
+        setupTimeline()
         updatesCollectionView.reloadData()
         
         let layout = UICollectionViewFlowLayout()
@@ -145,6 +127,12 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         trashButton.layer.borderWidth = 2.0
         
         changeColorView.backgroundColor = self.view.backgroundColor
+    }
+    
+    func setupTimeline() {
+        if timeline == nil {
+            timeline = Timeline(color: "", title: "", updates: [])
+        }
     }
     
     func changeColor(for button: UIButton) {
@@ -282,7 +270,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
             alertController.textFields![0].textAlignment = .center
             alertController.addAction(UIAlertAction(title: "Save Timeline", style: .destructive) { [unowned alertController] _ in
                 let answer = alertController.textFields![0]
-                guard let title = answer.text, let updates = self.fetchUpdatesController.fetchedObjects else { return }
+                guard let title = answer.text, let updates = self.timeline?.updates else { return }
                 
                 _ = Timeline(color: colorString, title: title, updates: updates)
             })
@@ -340,7 +328,8 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
             if let addUpdateVC = segue.destination as? AddUpdateViewController, let indexPath = updatesCollectionView.indexPathsForSelectedItems, let first = indexPath.first {
                 addUpdateVC.color = self.view.backgroundColor
                 addUpdateVC.mainVC = self
-                addUpdateVC.update = fetchUpdatesController.object(at: first)
+                addUpdateVC.update = timeline?.updates?[first.row]
+                addUpdateVC.number = first.row
                 changeColorView.alpha = 0
             }
         }
@@ -363,26 +352,26 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return fetchUpdatesController.sections?.count ?? 1
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fetchUpdatesController.fetchedObjects?.count ?? 0
+        return timeline?.updates?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "updateCell", for: indexPath) as? UpdateCollectionViewCell else { return UICollectionViewCell() }
         
-        let update = fetchUpdatesController.object(at: indexPath)
+        guard let update = timeline?.updates?[indexPath.row] else { return UICollectionViewCell() }
         
         cell.updateLabel.text = update.update
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.medium
-        if let date = update.date {
-            let dateString = dateFormatter.string(from: date)
-            cell.dateLabel.text = dateString
-        }
+        let date = update.date
+        let dateString = dateFormatter.string(from: date)
+        cell.dateLabel.text = dateString
+        
         cell.layer.cornerRadius = 10.0
         
         if view.backgroundColor == .white {
