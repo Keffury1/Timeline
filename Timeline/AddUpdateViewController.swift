@@ -161,6 +161,22 @@ class AddUpdateViewController: UIViewController {
         enterDateButton.isEnabled = false
     }
     
+    func enterInformationAlert() {
+        
+    }
+    
+    func deleteEntryAlert() {
+        
+    }
+    
+    func saveEntryAlert() {
+        let alertController = UIAlertController(title: "Entry Saved", message: "✓", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
@@ -198,7 +214,7 @@ class AddUpdateViewController: UIViewController {
         do {
             let moc = CoreDataStack.shared.mainContext
             try moc.save()
-            
+            saveEntryAlert()
         } catch {
             print("Error saving managed object context: \(error)")
         }
