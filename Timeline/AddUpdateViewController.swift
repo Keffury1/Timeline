@@ -162,11 +162,60 @@ class AddUpdateViewController: UIViewController {
     }
     
     func enterInformationAlert() {
+        let alertController = UIAlertController(title: "Please Enter Information", message: "", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
         
+        if view.backgroundColor == .white {
+            alertController.view.backgroundColor = .black
+            alertController.view.tintColor = .white
+        } else {
+            alertController.view.backgroundColor = .white
+            alertController.view.tintColor = self.view.backgroundColor
+        }
+    }
+    
+    func entryDeletedAlert() {
+        let alertController = UIAlertController(title: "Entry Deleted", message: "✓", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        
+        if view.backgroundColor == .white {
+            alertController.view.backgroundColor = .black
+            alertController.view.tintColor = .white
+        } else {
+            alertController.view.backgroundColor = .white
+            alertController.view.tintColor = self.view.backgroundColor
+        }
     }
     
     func deleteEntryAlert() {
+        let alertController = UIAlertController(title: "Delete Entry", message: "Are you sure?", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
+            guard let number = self.number else { return }
+            self.mainVC?.timeline?.updates?.remove(at: number)
+            DispatchQueue.main.async {
+                let moc = CoreDataStack.shared.mainContext
+                do {
+                    try moc.save()
+                    self.entryDeletedAlert()
+                } catch {
+                    print("Error Deleting Entry : \(error)")
+                    return
+                }
+            }
+            self.mainVC?.updatesCollectionView.reloadData()
+        }))
         
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        if view.backgroundColor == .white {
+            alertController.view.backgroundColor = .black
+            alertController.view.tintColor = .white
+        } else {
+            alertController.view.backgroundColor = .white
+            alertController.view.tintColor = self.view.backgroundColor
+        }
     }
     
     func saveEntryAlert() {
@@ -174,6 +223,15 @@ class AddUpdateViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
             self.dismiss(animated: true, completion: nil)
         }))
+        
+        if view.backgroundColor == .white {
+            alertController.view.backgroundColor = .black
+            alertController.view.tintColor = .white
+        } else {
+            alertController.view.backgroundColor = .white
+            alertController.view.tintColor = self.view.backgroundColor
+        }
+        
         self.present(alertController, animated: true, completion: nil)
     }
     
@@ -195,7 +253,7 @@ class AddUpdateViewController: UIViewController {
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         guard let mainVC = mainVC, let date = dateTextField.text, !date.isEmpty, let updateText = updateTextView.text, !updateText.isEmpty else {
-            infoAlert()
+            enterInformationAlert()
             return
         }
         
@@ -223,12 +281,7 @@ class AddUpdateViewController: UIViewController {
     }
     
     @IBAction func deleteButtonTapped(_ sender: Any) {
-        guard let number = number else { return }
-        mainVC?.timeline?.updates?.remove(at: number)
-        mainVC?.updatesCollectionView.reloadData()
-        DispatchQueue.main.async {
-            self.dismiss(animated: true, completion: nil)
-        }
+        deleteEntryAlert()
     }
     
     @IBAction func calendarButtonTapped(_ sender: Any) {

@@ -202,11 +202,12 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
             }
         }))
         
-        saveTimelineAlert.view.backgroundColor = self.view.backgroundColor
-        if view.backgroundColor == .white {
-            saveTimelineAlert.view.tintColor = .black
-        } else {
+       if view.backgroundColor == .white {
+            saveTimelineAlert.view.backgroundColor = .black
             saveTimelineAlert.view.tintColor = .white
+        } else {
+            saveTimelineAlert.view.backgroundColor = .white
+            saveTimelineAlert.view.tintColor = self.view.backgroundColor
         }
         
         saveTimelineAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -238,11 +239,12 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         }))
         deleteTimelineAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
-        deleteTimelineAlert.view.backgroundColor = self.view.backgroundColor
-        if self.view.backgroundColor == .white {
-            deleteTimelineAlert.view.tintColor = .black
-        } else {
+        if view.backgroundColor == .white {
+            deleteTimelineAlert.view.backgroundColor = .black
             deleteTimelineAlert.view.tintColor = .white
+        } else {
+            deleteTimelineAlert.view.backgroundColor = .white
+            deleteTimelineAlert.view.tintColor = self.view.backgroundColor
         }
     }
     
