@@ -114,7 +114,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="WvG-q7-Wde" firstAttribute="top" secondItem="muL-Cy-vRk" secondAttribute="centerY" constant="-150" id="3Sg-gF-SWj"/>
                             <constraint firstItem="CBq-NO-7cs" firstAttribute="leading" secondItem="9EA-OY-SzB" secondAttribute="leading" constant="65" id="7XZ-rT-GpT"/>
                             <constraint firstItem="7iD-dW-7jk" firstAttribute="top" secondItem="9EA-OY-SzB" secondAttribute="top" constant="25" id="9Dl-M2-yNh"/>
                             <constraint firstItem="CBq-NO-7cs" firstAttribute="top" secondItem="9EA-OY-SzB" secondAttribute="top" constant="80" id="Fnt-cI-waS"/>
@@ -123,6 +122,7 @@
                             <constraint firstItem="9EA-OY-SzB" firstAttribute="trailing" secondItem="CBq-NO-7cs" secondAttribute="trailing" constant="65" id="Ytw-9K-yYa"/>
                             <constraint firstItem="Y81-fb-PBI" firstAttribute="trailing" secondItem="7iD-dW-7jk" secondAttribute="trailing" id="Zvb-G3-Mam"/>
                             <constraint firstItem="WvG-q7-Wde" firstAttribute="leading" secondItem="CBq-NO-7cs" secondAttribute="leading" constant="-20" id="dlt-z4-DgS"/>
+                            <constraint firstItem="WvG-q7-Wde" firstAttribute="top" secondItem="CBq-NO-7cs" secondAttribute="bottom" constant="60" id="g3B-fc-Ygy"/>
                             <constraint firstItem="9EA-OY-SzB" firstAttribute="trailing" secondItem="7iD-dW-7jk" secondAttribute="trailing" constant="20" id="k8Z-yD-bLb"/>
                             <constraint firstItem="Y81-fb-PBI" firstAttribute="bottom" secondItem="9EA-OY-SzB" secondAttribute="bottom" constant="-25" id="lOh-ba-tTZ"/>
                             <constraint firstItem="CBq-NO-7cs" firstAttribute="centerX" secondItem="9EA-OY-SzB" secondAttribute="centerX" id="q5c-UW-Ob6"/>
