@@ -23,7 +23,6 @@ class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelega
         return frc
     }()
 
-    
     //MARK: - Outlets
     
     @IBOutlet weak var archivesCollectionView: UICollectionView!
@@ -52,9 +51,14 @@ class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelega
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addTimelineSegue" {
-            
+            if let mainVC = segue.destination as? MainViewController {
+                mainVC.archivesVC = self
+            }
         } else if segue.identifier == "timelineSegue" {
-            
+            if let mainVC = segue.destination as? MainViewController, let indexPath = archivesCollectionView.indexPathsForSelectedItems {
+                mainVC.archivesVC = self
+                mainVC.timeline = fetchedResultsController.fetchedObjects![indexPath.first!.row]
+            }
         }
     }
 }

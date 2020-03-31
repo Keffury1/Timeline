@@ -16,6 +16,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     private let spacing: CGFloat = 100.0
     
     var timeline: Timeline?
+    var archivesVC: ArchivesViewController?
     
     //MARK: - Outlets
     
@@ -46,8 +47,8 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupCollectionVeiw()
         setupSubviews()
+        setupCollectionVeiw()
         setupTimeline()
         updatesCollectionView.reloadData()
         
@@ -59,17 +60,6 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     }
     
     //MARK: - Methods
-    
-    func setupCollectionVeiw() {
-        updatesCollectionView.delegate = self
-        updatesCollectionView.dataSource = self
-        
-        updatesCollectionView.showsVerticalScrollIndicator = false
-    }
-    
-    func setupButton(button: UIButton) {
-        button.layer.cornerRadius = 3.0
-    }
     
     func setupSubviews() {
         
@@ -129,6 +119,13 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         changeColorView.backgroundColor = self.view.backgroundColor
     }
     
+    func setupCollectionVeiw() {
+        updatesCollectionView.delegate = self
+        updatesCollectionView.dataSource = self
+        
+        updatesCollectionView.showsVerticalScrollIndicator = false
+    }
+    
     func setupTimeline() {
         if timeline == nil {
             timeline = Timeline(color: "", title: "")
@@ -142,6 +139,10 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
                 print("Error saving managed object context: \(error)")
             }
         }
+    }
+    
+    func setupButton(button: UIButton) {
+        button.layer.cornerRadius = 3.0
     }
     
     func changeColor(for button: UIButton) {
@@ -228,7 +229,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     func timelineSavedAlert() {
         let alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
-            self.cleanSlate()
+            self.dismiss(animated: true, completion: nil)
         }))
         
         if view.backgroundColor == .white {
@@ -303,7 +304,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     func timelineDeletedAlert() {
         let alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
-            self.cleanSlate()
+            self.dismiss(animated: true, completion: nil)
         }))
         
         if view.backgroundColor == .white {
@@ -329,11 +330,6 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         alertController.view.layer.cornerRadius = 10.0
         
         self.present(alertController, animated: true, completion: nil)
-    }
-    
-    func cleanSlate() {
-        //Update Views
-        //Reload Data?
     }
     
     //MARK: - Actions
@@ -453,10 +449,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return CGSize(width: 175, height: 100)
     }
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return timeline?.updates?.count ?? 0
     }
@@ -486,6 +478,5 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         return cell
     }
-    
 }
 
