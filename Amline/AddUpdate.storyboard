@@ -10,7 +10,7 @@
         <!--Add Update View Controller-->
         <scene sceneID="rvP-xL-RS2">
             <objects>
-                <viewController id="LJP-OM-743" customClass="AddUpdateViewController" customModule="Timeline" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="LJP-OM-743" customClass="AddUpdateViewController" customModule="Amline" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AwK-mR-K4E">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -57,7 +57,7 @@
                                                         </constraints>
                                                         <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
                                                     </textView>
                                                 </subviews>
                                             </stackView>

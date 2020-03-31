@@ -24,19 +24,6 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     var archivesVC: ArchivesViewController?
     
-//    lazy var fetchedUpdatesController: NSFetchedResultsController<Update> = {
-//
-//        //Fetch the specific updates from the timeline.
-//
-//        let fetchRequest: NSFetchRequest<Update> = Update.fetchRequest()
-//        fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "date", ascending: true) ]
-//        let moc = CoreDataStack.shared.mainContext
-//        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: "date", cacheName: nil)
-//        frc.delegate = self
-//        try! frc.performFetch()
-//        return frc
-//    }()
-    
     //MARK: - Outlets
     
     @IBOutlet weak var updatesCollectionView: UICollectionView!
@@ -153,10 +140,63 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         if self.timeline == nil {
             self.timeline = Timeline(color: UIColor.black, title: "Timeline")
         }
+        
+        DispatchQueue.main.async {
+            let moc = CoreDataStack.shared.mainContext
+            do {
+                try moc.save()
+            } catch {
+                print("Error Saving Empty Timeline: \(error)")
+            }
+        }
     }
     
     func changeColor(for button: UIButton) {
         self.view.backgroundColor = button.backgroundColor
+    }
+    
+    func setupAlertColor(alertController: UIAlertController, string: String, size: CGFloat) {
+        if self.traitCollection.userInterfaceStyle == .light {
+            if self.view.backgroundColor == .white {
+                alertController.view.backgroundColor = .white
+                alertController.view.tintColor = .black
+                
+                let saveTimelineAlertString = NSAttributedString(string: string, attributes: [
+                    NSAttributedString.Key.font : UIFont.systemFont(ofSize: size),
+                    NSAttributedString.Key.foregroundColor : UIColor.black
+                ])
+                alertController.setValue(saveTimelineAlertString, forKey: "attributedTitle")
+            } else {
+                alertController.view.backgroundColor = .white
+                alertController.view.tintColor = self.view.backgroundColor
+                
+                let saveTimelineAlertString = NSAttributedString(string: string, attributes: [
+                    NSAttributedString.Key.font : UIFont.systemFont(ofSize: size),
+                    NSAttributedString.Key.foregroundColor : self.view.backgroundColor!
+                ])
+                alertController.setValue(saveTimelineAlertString, forKey: "attributedTitle")
+            }
+        } else {
+            alertController.view.backgroundColor = .black
+            
+            if self.view.backgroundColor == .black {
+                alertController.view.tintColor = .white
+                
+                let saveTimelineAlertString = NSAttributedString(string: string, attributes: [
+                    NSAttributedString.Key.font : UIFont.systemFont(ofSize: size),
+                    NSAttributedString.Key.foregroundColor : UIColor.white
+                ])
+                alertController.setValue(saveTimelineAlertString, forKey: "attributedTitle")
+            } else {
+                alertController.view.tintColor = self.view.backgroundColor
+                
+                let saveTimelineAlertString = NSAttributedString(string: string, attributes: [
+                    NSAttributedString.Key.font : UIFont.systemFont(ofSize: size),
+                    NSAttributedString.Key.foregroundColor : self.view.backgroundColor!
+                ])
+                alertController.setValue(saveTimelineAlertString, forKey: "attributedTitle")
+            }
+        }
     }
     
     func saveTimelineAlert() {
@@ -165,8 +205,12 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         
         saveTimelineAlert.addTextField { (textField) in
             textField.textAlignment = .center
-            if self.view.backgroundColor == .white {
-                textField.textColor = .black
+            if self.traitCollection.userInterfaceStyle == .dark {
+                if self.view.backgroundColor == .black {
+                    textField.textColor = .white
+                } else {
+                    textField.textColor = self.view.backgroundColor
+                }
             } else {
                 textField.textColor = self.view.backgroundColor
             }
@@ -204,25 +248,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
             
         }))
         
-        if view.backgroundColor == .white {
-            saveTimelineAlert.view.backgroundColor = .white
-            saveTimelineAlert.view.tintColor = .black
-            
-            let saveTimelineAlertString = NSAttributedString(string: "Timeline", attributes: [
-                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 30),
-                NSAttributedString.Key.foregroundColor : UIColor.black
-            ])
-            saveTimelineAlert.setValue(saveTimelineAlertString, forKey: "attributedTitle")
-        } else {
-            saveTimelineAlert.view.backgroundColor = .white
-            saveTimelineAlert.view.tintColor = self.view.backgroundColor
-            
-            let saveTimelineAlertString = NSAttributedString(string: "Timeline", attributes: [
-                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 30),
-                NSAttributedString.Key.foregroundColor : self.view.backgroundColor!
-            ])
-            saveTimelineAlert.setValue(saveTimelineAlertString, forKey: "attributedTitle")
-        }
+        self.setupAlertColor(alertController: saveTimelineAlert, string: "Timeline", size: CGFloat(integerLiteral: 30))
         
         saveTimelineAlert.view.layer.cornerRadius = 10.0
         
@@ -238,25 +264,8 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
             self.dismiss(animated: true, completion: nil)
         }))
         
-        if view.backgroundColor == .white {
-            alertController.view.backgroundColor = .white
-            alertController.view.tintColor = .black
-            
-            let saveTimelineAlertString = NSAttributedString(string: "Timeline Saved!", attributes: [
-                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25),
-                NSAttributedString.Key.foregroundColor : UIColor.black
-            ])
-            alertController.setValue(saveTimelineAlertString, forKey: "attributedTitle")
-        } else {
-            let saveTimeleineAlertString = NSAttributedString(string: "Timeline Saved!", attributes: [
-                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25),
-                NSAttributedString.Key.foregroundColor : self.view.backgroundColor!
-            ])
-            alertController.setValue(saveTimeleineAlertString, forKey: "attributedTitle")
-            
-            alertController.view.backgroundColor = .white
-            alertController.view.tintColor = self.view.backgroundColor
-        }
+        
+        self.setupAlertColor(alertController: alertController, string: "Timeline Saved!", size: CGFloat(integerLiteral: 22))
         
         alertController.view.layer.cornerRadius = 10.0
         
@@ -282,25 +291,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         }))
         deleteTimelineAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
-        if view.backgroundColor == .white {
-            deleteTimelineAlert.view.backgroundColor = .white
-            deleteTimelineAlert.view.tintColor = .black
-            
-            let deleteTimelineAlertString = NSAttributedString(string: "Delete Timeline", attributes: [
-                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25),
-                NSAttributedString.Key.foregroundColor : UIColor.black
-            ])
-            deleteTimelineAlert.setValue(deleteTimelineAlertString, forKey: "attributedTitle")
-        } else {
-            deleteTimelineAlert.view.backgroundColor = .white
-            deleteTimelineAlert.view.tintColor = self.view.backgroundColor
-            
-            let deleteTimelineAlertString = NSAttributedString(string: "Delete Timeline", attributes: [
-                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25),
-                NSAttributedString.Key.foregroundColor : self.view.backgroundColor!
-            ])
-            deleteTimelineAlert.setValue(deleteTimelineAlertString, forKey: "attributedTitle")
-        }
+        setupAlertColor(alertController: deleteTimelineAlert, string: "Delete Timeline", size: CGFloat(integerLiteral: 22))
         
         deleteTimelineAlert.view.layer.cornerRadius = 10.0
         
@@ -316,25 +307,8 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
             self.dismiss(animated: true, completion: nil)
         }))
         
-        if view.backgroundColor == .white {
-            alertController.view.backgroundColor = .white
-            alertController.view.tintColor = .black
-            
-            let deleteTimelineAlertString = NSAttributedString(string: "Timeline Deleted!", attributes: [
-                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25),
-                NSAttributedString.Key.foregroundColor : UIColor.black
-            ])
-            alertController.setValue(deleteTimelineAlertString, forKey: "attributedTitle")
-        } else {
-            let deleteTimelineAlertString = NSAttributedString(string: "Timeline Deleted!", attributes: [
-                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25),
-                NSAttributedString.Key.foregroundColor : self.view.backgroundColor!
-            ])
-            alertController.setValue(deleteTimelineAlertString, forKey: "attributedTitle")
-            
-            alertController.view.backgroundColor = .white
-            alertController.view.tintColor = self.view.backgroundColor
-        }
+        
+        self.setupAlertColor(alertController: alertController, string: "Timeline Deleted!", size: CGFloat(integerLiteral: 22))
         
         alertController.view.layer.cornerRadius = 10.0
         

@@ -46,6 +46,8 @@ class ArchivesViewController: UIViewController {
         addTimelineButton.layer.borderColor = UIColor.black.cgColor
         addTimelineButton.layer.borderWidth = 3.0
         addTimelineButton.layer.cornerRadius = 10.0
+        
+        archivesTableView.backgroundColor = .white
     }
     
     //MARK: - Navigation
@@ -89,15 +91,32 @@ extension ArchivesViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         cell.colorView.layer.borderColor = UIColor.black.cgColor
-        cell.colorView.layer.borderWidth = 2.0
+        cell.colorView.layer.borderWidth = 1.5
         
         cell.colorView.layer.cornerRadius = 10.0
 
+        cell.selectionStyle = .none
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let timeline = fetchedResultsController.object(at: indexPath)
+            let moc = CoreDataStack.shared.mainContext
+            moc.delete(timeline)
+            
+            do {
+                try moc.save()
+            } catch {
+                print("Error deleting timeline from tableView: \(error)")
+                return
+            }
+        }
     }
 }
 

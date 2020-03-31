@@ -53,6 +53,7 @@ class AddUpdateViewController: UIViewController {
         updateViews()
         setupSubviews()
         dateTextField.delegate = self
+        updateTextView.autocorrectionType = .no
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -161,31 +162,58 @@ class AddUpdateViewController: UIViewController {
         enterDateButton.isEnabled = false
     }
     
+    func setupAlertColor(alertController: UIAlertController, string: String, size: CGFloat) {
+        if self.traitCollection.userInterfaceStyle == .light {
+            if self.view.backgroundColor == .white {
+                alertController.view.backgroundColor = .white
+                alertController.view.tintColor = .black
+                
+                let saveTimelineAlertString = NSAttributedString(string: string, attributes: [
+                    NSAttributedString.Key.font : UIFont.systemFont(ofSize: size),
+                    NSAttributedString.Key.foregroundColor : UIColor.black
+                ])
+                alertController.setValue(saveTimelineAlertString, forKey: "attributedTitle")
+            } else {
+                alertController.view.backgroundColor = .white
+                alertController.view.tintColor = self.view.backgroundColor
+                
+                let saveTimelineAlertString = NSAttributedString(string: string, attributes: [
+                    NSAttributedString.Key.font : UIFont.systemFont(ofSize: size),
+                    NSAttributedString.Key.foregroundColor : self.view.backgroundColor!
+                ])
+                alertController.setValue(saveTimelineAlertString, forKey: "attributedTitle")
+            }
+        } else {
+            alertController.view.backgroundColor = .black
+            
+            if self.view.backgroundColor == .black {
+                alertController.view.tintColor = .white
+                
+                let saveTimelineAlertString = NSAttributedString(string: string, attributes: [
+                    NSAttributedString.Key.font : UIFont.systemFont(ofSize: size),
+                    NSAttributedString.Key.foregroundColor : UIColor.white
+                ])
+                alertController.setValue(saveTimelineAlertString, forKey: "attributedTitle")
+            } else {
+                alertController.view.tintColor = self.view.backgroundColor
+                
+                let saveTimelineAlertString = NSAttributedString(string: string, attributes: [
+                    NSAttributedString.Key.font : UIFont.systemFont(ofSize: size),
+                    NSAttributedString.Key.foregroundColor : self.view.backgroundColor!
+                ])
+                alertController.setValue(saveTimelineAlertString, forKey: "attributedTitle")
+            }
+        }
+    }
+    
     func saveEntryAlert() {
         let alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
             self.dismiss(animated: true, completion: nil)
         }))
         
-        if color == .white {
-            alertController.view.backgroundColor = .white
-            alertController.view.tintColor = .black
-            
-            let saveEntryAlertString = NSAttributedString(string: "Entry Saved!", attributes: [
-                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25),
-                NSAttributedString.Key.foregroundColor : UIColor.black
-            ])
-            alertController.setValue(saveEntryAlertString, forKey: "attributedTitle")
-        } else {
-            let saveEntryAlertString = NSAttributedString(string: "Entry Saved!", attributes: [
-                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25),
-                NSAttributedString.Key.foregroundColor : self.view.backgroundColor!
-            ])
-            alertController.setValue(saveEntryAlertString, forKey: "attributedTitle")
-            
-            alertController.view.backgroundColor = .white
-            alertController.view.tintColor = self.view.backgroundColor
-        }
+        
+        self.setupAlertColor(alertController: alertController, string: "Entry Saved!", size: CGFloat(integerLiteral: 22))
         
         alertController.view.layer.cornerRadius = 10.0
         
@@ -196,25 +224,8 @@ class AddUpdateViewController: UIViewController {
         let alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
         
-        if color == .white {
-            alertController.view.backgroundColor = .white
-            alertController.view.tintColor = .black
-            
-            let enterInformationString = NSAttributedString(string: "Please Enter Information", attributes: [
-                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25),
-                NSAttributedString.Key.foregroundColor : UIColor.black
-            ])
-            alertController.setValue(enterInformationString, forKey: "attributedTitle")
-        } else {
-            let enterInformationString = NSAttributedString(string: "Please Enter Information", attributes: [
-                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25),
-                NSAttributedString.Key.foregroundColor : self.view.backgroundColor!
-            ])
-            alertController.setValue(enterInformationString, forKey: "attributedTitle")
-            
-            alertController.view.backgroundColor = .white
-            alertController.view.tintColor = self.view.backgroundColor
-        }
+        
+        self.setupAlertColor(alertController: alertController, string: "Please Enter Information", size: CGFloat(integerLiteral: 22))
         
         alertController.view.layer.cornerRadius = 10.0
         
@@ -242,25 +253,8 @@ class AddUpdateViewController: UIViewController {
             self.mainVC?.updatesCollectionView.reloadData()
         }))
         
-        if color == .white {
-            alertController.view.backgroundColor = .white
-            alertController.view.tintColor = .black
-            
-            let deleteTimelineAlertString = NSAttributedString(string: "Delete Entry", attributes: [
-                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25),
-                NSAttributedString.Key.foregroundColor : UIColor.black
-            ])
-            alertController.setValue(deleteTimelineAlertString, forKey: "attributedTitle")
-        } else {
-            alertController.view.backgroundColor = .white
-            alertController.view.tintColor = self.view.backgroundColor
-            
-            let deleteTimelineAlertString = NSAttributedString(string: "Delete Entry", attributes: [
-                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25),
-                NSAttributedString.Key.foregroundColor : self.view.backgroundColor!
-            ])
-            alertController.setValue(deleteTimelineAlertString, forKey: "attributedTitle")
-        }
+        
+        self.setupAlertColor(alertController: alertController, string: "Delete Entry", size: CGFloat(integerLiteral: 22))
         
         alertController.view.layer.cornerRadius = 10.0
         
@@ -273,25 +267,7 @@ class AddUpdateViewController: UIViewController {
             self.dismiss(animated: true, completion: nil)
         }))
         
-        if color == .white {
-            alertController.view.backgroundColor = .white
-            alertController.view.tintColor = .black
-            
-            let deleteEntryAlertString = NSAttributedString(string: "Entry Deleted!", attributes: [
-                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25),
-                NSAttributedString.Key.foregroundColor : UIColor.black
-            ])
-            alertController.setValue(deleteEntryAlertString, forKey: "attributedTitle")
-        } else {
-            let deleteEntryAlertString = NSAttributedString(string: "Entry Deleted!", attributes: [
-                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25),
-                NSAttributedString.Key.foregroundColor : self.view.backgroundColor!
-            ])
-            alertController.setValue(deleteEntryAlertString, forKey: "attributedTitle")
-            
-            alertController.view.backgroundColor = .white
-            alertController.view.tintColor = self.view.backgroundColor
-        }
+        self.setupAlertColor(alertController: alertController, string: "Entry Deleted!", size: CGFloat(integerLiteral: 22))
         
         alertController.view.layer.cornerRadius = 10.0
         
