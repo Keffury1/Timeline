@@ -27,7 +27,6 @@ class ArchivesViewController: UIViewController {
     
     @IBOutlet weak var archivesTableView: UITableView!
     
-    
     @IBOutlet weak var addTimelineButton: UIButton!
     
     //MARK: - Views
@@ -89,11 +88,15 @@ extension ArchivesViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         cell.colorView.layer.borderColor = UIColor.black.cgColor
-        cell.colorView.layer.borderWidth = 3.0
+        cell.colorView.layer.borderWidth = 2.0
         
         cell.colorView.layer.cornerRadius = 10.0
 
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 

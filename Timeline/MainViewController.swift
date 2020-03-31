@@ -24,18 +24,18 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     var archivesVC: ArchivesViewController?
     
-    lazy var fetchedUpdatesController: NSFetchedResultsController<Update> = {
-
-        //Fetch the specific updates from the timeline.
-
-        let fetchRequest: NSFetchRequest<Update> = Update.fetchRequest()
-        fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "date", ascending: true) ]
-        let moc = CoreDataStack.shared.mainContext
-        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: "date", cacheName: nil)
-        frc.delegate = self
-        try! frc.performFetch()
-        return frc
-    }()
+//    lazy var fetchedUpdatesController: NSFetchedResultsController<Update> = {
+//
+//        //Fetch the specific updates from the timeline.
+//
+//        let fetchRequest: NSFetchRequest<Update> = Update.fetchRequest()
+//        fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "date", ascending: true) ]
+//        let moc = CoreDataStack.shared.mainContext
+//        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: "date", cacheName: nil)
+//        frc.delegate = self
+//        try! frc.performFetch()
+//        return frc
+//    }()
     
     //MARK: - Outlets
     
@@ -67,6 +67,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         super.viewDidLoad()
         
         setupSubviews()
+        setupTimeline()
         setupCollectionVeiw()
         updatesCollectionView.reloadData()
         
@@ -148,6 +149,12 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         button.layer.cornerRadius = 3.0
     }
     
+    func setupTimeline() {
+        if self.timeline == nil {
+            self.timeline = Timeline(color: UIColor.black, title: "Timeline")
+        }
+    }
+    
     func changeColor(for button: UIButton) {
         self.view.backgroundColor = button.backgroundColor
     }
@@ -158,7 +165,11 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         
         saveTimelineAlert.addTextField { (textField) in
             textField.textAlignment = .center
-            textField.textColor = self.view.backgroundColor
+            if self.view.backgroundColor == .white {
+                textField.textColor = .black
+            } else {
+                textField.textColor = self.view.backgroundColor
+            }
             textField.placeholder = "Title:"
             textField.text = self.timeline?.title
         }
@@ -432,7 +443,8 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
             if let addUpdateVC = segue.destination as? AddUpdateViewController, let indexPath = updatesCollectionView.indexPathsForSelectedItems, let first = indexPath.first {
                 addUpdateVC.color = self.view.backgroundColor
                 addUpdateVC.mainVC = self
-                addUpdateVC.update = fetchedUpdatesController.object(at: first)
+                guard let timeline = timeline, let updates = Array(timeline.updates) as? [Update] else { return }
+                addUpdateVC.update = updates[first.row]
                 changeColorView.alpha = 0
             }
         }
@@ -455,13 +467,17 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fetchedUpdatesController.fetchedObjects?.count ?? 0
+        return timeline?.updates.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "updateCell", for: indexPath) as? UpdateCollectionViewCell else { return UICollectionViewCell() }
         
-        let update = fetchedUpdatesController.object(at: indexPath)
+        guard let timeline = timeline, var updates = Array(timeline.updates) as? [Update] else { return UICollectionViewCell() }
+       
+        updates.sort(by: { $0.date! > $1.date! })
+        
+        let update = updates[indexPath.row]
         
         cell.updateLabel.text = update.update
         

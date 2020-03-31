@@ -18,6 +18,10 @@
 		3755ED6F242E94050056EA4F /* UpdateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3755ED6E242E94050056EA4F /* UpdateCollectionViewCell.swift */; };
 		3755ED76242EB5870056EA4F /* AddUpdate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3755ED75242EB5870056EA4F /* AddUpdate.storyboard */; };
 		3755ED78242EB6300056EA4F /* AddUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3755ED77242EB6300056EA4F /* AddUpdateViewController.swift */; };
+		375AFB2E24332388009D5ACD /* Update+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AFB2A24332388009D5ACD /* Update+CoreDataClass.swift */; };
+		375AFB2F24332388009D5ACD /* Update+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AFB2B24332388009D5ACD /* Update+CoreDataProperties.swift */; };
+		375AFB3024332388009D5ACD /* Timeline+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AFB2C24332388009D5ACD /* Timeline+CoreDataClass.swift */; };
+		375AFB3124332388009D5ACD /* Timeline+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AFB2D24332388009D5ACD /* Timeline+CoreDataProperties.swift */; };
 		37CD683F242ED7DA0018A16A /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CD683E242ED7DA0018A16A /* CoreDataStack.swift */; };
 		37DB59F52432E228009830F3 /* Timeline.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 37DB59F32432E228009830F3 /* Timeline.xcdatamodeld */; };
 		37DB59FC2432E592009830F3 /* Timeline+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DB59FB2432E592009830F3 /* Timeline+Convenience.swift */; };
@@ -38,6 +42,10 @@
 		3755ED6E242E94050056EA4F /* UpdateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCollectionViewCell.swift; sourceTree = "<group>"; };
 		3755ED75242EB5870056EA4F /* AddUpdate.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddUpdate.storyboard; sourceTree = "<group>"; };
 		3755ED77242EB6300056EA4F /* AddUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUpdateViewController.swift; sourceTree = "<group>"; };
+		375AFB2A24332388009D5ACD /* Update+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Update+CoreDataClass.swift"; sourceTree = "<group>"; };
+		375AFB2B24332388009D5ACD /* Update+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Update+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		375AFB2C24332388009D5ACD /* Timeline+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timeline+CoreDataClass.swift"; sourceTree = "<group>"; };
+		375AFB2D24332388009D5ACD /* Timeline+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timeline+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		37CD683E242ED7DA0018A16A /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		37DB59F42432E228009830F3 /* Timeline.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Timeline.xcdatamodel; sourceTree = "<group>"; };
 		37DB59FB2432E592009830F3 /* Timeline+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timeline+Convenience.swift"; sourceTree = "<group>"; };
@@ -125,6 +133,10 @@
 		3755ED6A242E8E710056EA4F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				375AFB2A24332388009D5ACD /* Update+CoreDataClass.swift */,
+				375AFB2B24332388009D5ACD /* Update+CoreDataProperties.swift */,
+				375AFB2C24332388009D5ACD /* Timeline+CoreDataClass.swift */,
+				375AFB2D24332388009D5ACD /* Timeline+CoreDataProperties.swift */,
 				37CD683E242ED7DA0018A16A /* CoreDataStack.swift */,
 				37DB59F32432E228009830F3 /* Timeline.xcdatamodeld */,
 				37DB59FB2432E592009830F3 /* Timeline+Convenience.swift */,
@@ -214,9 +226,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				375AFB2E24332388009D5ACD /* Update+CoreDataClass.swift in Sources */,
 				37DB59FE2432E73D009830F3 /* Update+Convenience.swift in Sources */,
 				37DB59F52432E228009830F3 /* Timeline.xcdatamodeld in Sources */,
 				373AFA57242FE18D0068B4A4 /* ArchivesViewController.swift in Sources */,
+				375AFB3024332388009D5ACD /* Timeline+CoreDataClass.swift in Sources */,
+				375AFB2F24332388009D5ACD /* Update+CoreDataProperties.swift in Sources */,
 				3755ED6C242E93970056EA4F /* MainViewController.swift in Sources */,
 				3746518B2430274A003AFE63 /* TimelineTableViewCell.swift in Sources */,
 				3755ED78242EB6300056EA4F /* AddUpdateViewController.swift in Sources */,
@@ -224,6 +239,7 @@
 				37CD683F242ED7DA0018A16A /* CoreDataStack.swift in Sources */,
 				37DB59FC2432E592009830F3 /* Timeline+Convenience.swift in Sources */,
 				3755ED55242E8E310056EA4F /* SceneDelegate.swift in Sources */,
+				375AFB3124332388009D5ACD /* Timeline+CoreDataProperties.swift in Sources */,
 				3755ED6F242E94050056EA4F /* UpdateCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
