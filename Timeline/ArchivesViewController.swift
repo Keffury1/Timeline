@@ -15,9 +15,9 @@ class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelega
     
     lazy var fetchedResultsController: NSFetchedResultsController<Timeline> = {
         let fetchRequest: NSFetchRequest<Timeline> = Timeline.fetchRequest()
-        fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "color", ascending: false) ]
+        fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "title", ascending: true) ]
         let moc = CoreDataStack.shared.mainContext
-        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: "color", cacheName: nil)
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: "title", cacheName: nil)
         frc.delegate = self
         try! frc.performFetch()
         return frc
@@ -65,19 +65,17 @@ class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelega
 
 extension ArchivesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return fetchedResultsController.sections?.count ?? 1
-    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
+        return fetchedResultsController.fetchedObjects?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "timelineCell", for: indexPath) as? TimelineCollectionViewCell else { return UICollectionViewCell() }
-
-        let timeline = fetchedResultsController.object(at: indexPath)
-        let color = UIColor(named: timeline.color!)
+        
+        guard let timelines = fetchedResultsController.fetchedObjects else { return UICollectionViewCell() }
+        
+        let timeline = timelines[indexPath.row]
+        let color = timeline.color as? UIColor
         cell.colorView.backgroundColor = color
         cell.titleLabel.text = timeline.title
         
@@ -86,6 +84,8 @@ extension ArchivesViewController: UICollectionViewDelegate, UICollectionViewData
         } else {
             cell.stripeView.backgroundColor = .white
         }
+        
+        cell.colorView.layer.cornerRadius = 10.0
 
         return cell
     }

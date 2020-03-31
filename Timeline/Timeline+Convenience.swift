@@ -7,12 +7,13 @@
 //
 
 import Foundation
+import UIKit
 import CoreData
 
 extension Timeline {
-    convenience init(color: String, title: String, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+    convenience init(color: NSObject, title: String, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         self.init(context: context)
-        self.color = color
+        self.color = color as? UIColor
         self.title = title
     }
 }

@@ -15,7 +15,12 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     private let spacing: CGFloat = 100.0
     
-    var timeline: Timeline?
+    var timeline: Timeline? {
+        didSet {
+            updateViews()
+        }
+    }
+    
     var archivesVC: ArchivesViewController?
     
     //MARK: - Outlets
@@ -49,7 +54,6 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         
         setupSubviews()
         setupCollectionVeiw()
-        setupTimeline()
         updatesCollectionView.reloadData()
         
         let layout = UICollectionViewFlowLayout()
@@ -126,21 +130,6 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         updatesCollectionView.showsVerticalScrollIndicator = false
     }
     
-    func setupTimeline() {
-        if timeline == nil {
-            timeline = Timeline(color: "", title: "")
-        }
-        DispatchQueue.main.async {
-            do {
-                let moc = CoreDataStack.shared.mainContext
-                try moc.save()
-                
-            } catch {
-                print("Error saving managed object context: \(error)")
-            }
-        }
-    }
-    
     func setupButton(button: UIButton) {
         button.layer.cornerRadius = 3.0
     }
@@ -162,29 +151,13 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         saveTimelineAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
         
         saveTimelineAlert.addAction(UIAlertAction(title: "Save", style: .cancel, handler: { (_) in
-            guard let title = saveTimelineAlert.textFields?.first?.text, let timeline = self.timeline,  let color = self.view.backgroundColor else { return }
-            timeline.title = title
+            guard let title = saveTimelineAlert.textFields?.first?.text, let color = self.view.backgroundColor else { return }
             
-            if color == UIColor(named: "black") {
-                timeline.color = "black"
-            } else if color == UIColor(named: "gold") {
-                timeline.color = "gold"
-            } else if color == UIColor(named: "mint") {
-                timeline.color = "mint"
-            } else if color == UIColor(named: "navy") {
-                timeline.color = "navy"
-            } else if color == UIColor(named: "maroon") {
-                timeline.color = "maroon"
-            } else if color == UIColor(named: "olive") {
-                timeline.color = "olive"
-            } else if color == UIColor(named: "pink") {
-                timeline.color = "pink"
-            } else if color == UIColor(named: "purple") {
-                timeline.color = "purple"
-            } else if color == UIColor(named: "grey") {
-                timeline.color = "grey"
-            } else if color == UIColor(named: "white") {
-                timeline.color = "white"
+            if let timeline = self.timeline {
+                timeline.color = color
+                timeline.title = title
+            } else {
+                _ = Timeline(color: color, title: title)
             }
             
             DispatchQueue.main.async {
@@ -229,6 +202,9 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     func timelineSavedAlert() {
         let alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
+            DispatchQueue.main.async {
+                self.archivesVC?.archivesCollectionView.reloadData()
+            }
             self.dismiss(animated: true, completion: nil)
         }))
         
@@ -304,6 +280,9 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     func timelineDeletedAlert() {
         let alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
+            DispatchQueue.main.async {
+                self.archivesVC?.archivesCollectionView.reloadData()
+            }
             self.dismiss(animated: true, completion: nil)
         }))
         
@@ -330,6 +309,17 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         alertController.view.layer.cornerRadius = 10.0
         
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func updateViews() {
+        let color = timeline?.color as? UIColor
+        
+        self.view.backgroundColor = color
+        self.changeColorView.backgroundColor = color
+        self.changeColorButton.backgroundColor = color
+        self.addUpdateButton.backgroundColor = color
+        self.saveButton.backgroundColor = color
+        self.trashButton.backgroundColor = color
     }
     
     //MARK: - Actions
