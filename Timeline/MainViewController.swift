@@ -18,6 +18,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     var timeline: Timeline? {
         didSet {
             updateViews()
+            setupSubviews()
         }
     }
     
@@ -146,6 +147,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
             textField.textAlignment = .center
             textField.textColor = self.view.backgroundColor
             textField.placeholder = "Title:"
+            textField.text = self.timeline?.title
         }
         
         saveTimelineAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
@@ -203,7 +205,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         let alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
             DispatchQueue.main.async {
-                self.archivesVC?.archivesCollectionView.reloadData()
+                self.archivesVC?.archivesTableView.reloadData()
             }
             self.dismiss(animated: true, completion: nil)
         }))
@@ -281,7 +283,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         let alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
             DispatchQueue.main.async {
-                self.archivesVC?.archivesCollectionView.reloadData()
+                self.archivesVC?.archivesTableView.reloadData()
             }
             self.dismiss(animated: true, completion: nil)
         }))
@@ -445,6 +447,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "updateCell", for: indexPath) as? UpdateCollectionViewCell else { return UICollectionViewCell() }
+        
 //        
 //        cell.updateLabel.text = update.update
 //        

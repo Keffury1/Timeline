@@ -8,8 +8,8 @@
 
 import UIKit
 
-class TimelineCollectionViewCell: UICollectionViewCell {
-    
+class TimelineTableViewCell: UITableViewCell {
+
     @IBOutlet weak var colorView: UIView!
     @IBOutlet weak var stripeView: UIView!
     @IBOutlet weak var titleLabel: UILabel!

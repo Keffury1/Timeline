@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelegate {
+class ArchivesViewController: UIViewController {
 
     //MARK: - Properties
     
@@ -25,7 +25,8 @@ class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelega
 
     //MARK: - Outlets
     
-    @IBOutlet weak var archivesCollectionView: UICollectionView!
+    @IBOutlet weak var archivesTableView: UITableView!
+    
     
     @IBOutlet weak var addTimelineButton: UIButton!
     
@@ -34,8 +35,8 @@ class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        archivesCollectionView.delegate = self
-        archivesCollectionView.dataSource = self
+        archivesTableView.delegate = self
+        archivesTableView.dataSource = self
         setupSubviews()
     }
     
@@ -55,38 +56,88 @@ class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelega
                 mainVC.archivesVC = self
             }
         } else if segue.identifier == "timelineSegue" {
-            if let mainVC = segue.destination as? MainViewController, let indexPath = archivesCollectionView.indexPathsForSelectedItems {
+            if let mainVC = segue.destination as? MainViewController, let indexPath = archivesTableView.indexPathForSelectedRow {
                 mainVC.archivesVC = self
-                mainVC.timeline = fetchedResultsController.fetchedObjects![indexPath.first!.row]
+                mainVC.timeline = fetchedResultsController.object(at: indexPath)
             }
         }
     }
 }
 
-extension ArchivesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ArchivesViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fetchedResultsController.fetchedObjects?.count ?? 0
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return fetchedResultsController.sections?.count ?? 1
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "timelineCell", for: indexPath) as? TimelineCollectionViewCell else { return UICollectionViewCell() }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "timelineCell", for: indexPath) as? TimelineTableViewCell else { return UITableViewCell() }
         
-        guard let timelines = fetchedResultsController.fetchedObjects else { return UICollectionViewCell() }
-        
-        let timeline = timelines[indexPath.row]
+        let timeline = fetchedResultsController.object(at: indexPath)
         let color = timeline.color as? UIColor
         cell.colorView.backgroundColor = color
         cell.titleLabel.text = timeline.title
         
         if color == .white {
-            cell.stripeView.backgroundColor = .black
+                cell.stripeView.backgroundColor = .black
         } else {
-            cell.stripeView.backgroundColor = .white
+                cell.stripeView.backgroundColor = .white
         }
+        
+        cell.colorView.layer.borderColor = UIColor.black.cgColor
+        cell.colorView.layer.borderWidth = 3.0
         
         cell.colorView.layer.cornerRadius = 10.0
 
         return cell
     }
 }
+
+extension ArchivesViewController: NSFetchedResultsControllerDelegate {
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        archivesTableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        archivesTableView.endUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        switch type {
+        case .insert:
+            archivesTableView.insertSections(IndexSet(integer: sectionIndex), with: .automatic)
+        case .delete:
+            archivesTableView.deleteSections(IndexSet(integer: sectionIndex), with: .automatic)
+        default:
+            break
+        }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        switch type {
+        case .insert:
+            guard let newIndexPath = newIndexPath else { return }
+            archivesTableView.insertRows(at: [newIndexPath], with: .automatic)
+        case .update:
+            guard let indexPath = indexPath else { return }
+            archivesTableView.reloadRows(at: [indexPath], with: .automatic)
+        case .move:
+            guard let oldIndexPath = indexPath,
+                let newIndexPath = newIndexPath else { return }
+            archivesTableView.moveRow(at: oldIndexPath, to: newIndexPath)
+        case .delete:
+            guard let indexPath = indexPath else { return }
+            archivesTableView.deleteRows(at: [indexPath], with: .automatic)
+        @unknown default:
+            break
+        }
+    }
+    
+}
+
