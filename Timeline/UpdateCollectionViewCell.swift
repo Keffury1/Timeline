@@ -14,5 +14,4 @@ class UpdateCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var updateLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    
 }
