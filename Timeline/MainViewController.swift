@@ -443,7 +443,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat{
-        return 400
+        return 325
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -465,7 +465,11 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "updateCell", for: indexPath) as? UpdateCollectionViewCell else { return UICollectionViewCell() }
         
-        guard let update = timeline?.updates?[indexPath.row] else { return UICollectionViewCell() }
+        guard var updates = timeline?.updates else { return UICollectionViewCell() }
+        
+        updates.sort(by: { $0.date > $1.date })
+        
+        let update = updates[indexPath.row]
         
         cell.updateLabel.text = update.update
         
