@@ -24,6 +24,19 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     var archivesVC: ArchivesViewController?
     
+    lazy var fetchedUpdatesController: NSFetchedResultsController<Update> = {
+
+        //Fetch the specific updates from the timeline.
+
+        let fetchRequest: NSFetchRequest<Update> = Update.fetchRequest()
+        fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "date", ascending: true) ]
+        let moc = CoreDataStack.shared.mainContext
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: "date", cacheName: nil)
+        frc.delegate = self
+        try! frc.performFetch()
+        return frc
+    }()
+    
     //MARK: - Outlets
     
     @IBOutlet weak var updatesCollectionView: UICollectionView!
@@ -419,7 +432,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
             if let addUpdateVC = segue.destination as? AddUpdateViewController, let indexPath = updatesCollectionView.indexPathsForSelectedItems, let first = indexPath.first {
                 addUpdateVC.color = self.view.backgroundColor
                 addUpdateVC.mainVC = self
-                addUpdateVC.number = first.row
+                addUpdateVC.update = fetchedUpdatesController.object(at: first)
                 changeColorView.alpha = 0
             }
         }
@@ -442,32 +455,33 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return timeline?.updates?.count ?? 0
+        return fetchedUpdatesController.fetchedObjects?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "updateCell", for: indexPath) as? UpdateCollectionViewCell else { return UICollectionViewCell() }
         
-//        
-//        cell.updateLabel.text = update.update
-//        
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateStyle = DateFormatter.Style.medium
-//        let date = update.date
-//        let dateString = dateFormatter.string(from: date!)
-//        cell.dateLabel.text = dateString
-//        
-//        cell.layer.cornerRadius = 10.0
-//        
-//        if view.backgroundColor == .white {
-//            cell.backgroundColor = .black
-//            cell.updateLabel.textColor = .white
-//            cell.dateLabel.textColor = .white
-//        } else {
-//            cell.backgroundColor = .white
-//            cell.updateLabel.textColor = view.backgroundColor
-//            cell.dateLabel.textColor = view.backgroundColor
-//        }
+        let update = fetchedUpdatesController.object(at: indexPath)
+        
+        cell.updateLabel.text = update.update
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.medium
+        let date = update.date
+        let dateString = dateFormatter.string(from: date!)
+        cell.dateLabel.text = dateString
+        
+        cell.layer.cornerRadius = 10.0
+        
+        if view.backgroundColor == .white {
+            cell.backgroundColor = .black
+            cell.updateLabel.textColor = .white
+            cell.dateLabel.textColor = .white
+        } else {
+            cell.backgroundColor = .white
+            cell.updateLabel.textColor = view.backgroundColor
+            cell.dateLabel.textColor = view.backgroundColor
+        }
         
         return cell
     }
