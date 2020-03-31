@@ -44,7 +44,7 @@ class ArchivesViewController: UIViewController {
     
     func setupSubviews() {
         addTimelineButton.layer.borderColor = UIColor.black.cgColor
-        addTimelineButton.layer.borderWidth = 3.0
+        addTimelineButton.layer.borderWidth = 2.0
         addTimelineButton.layer.cornerRadius = 10.0
         
         archivesTableView.backgroundColor = .white
