@@ -10,7 +10,6 @@
 		373AFA57242FE18D0068B4A4 /* ArchivesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373AFA56242FE18D0068B4A4 /* ArchivesViewController.swift */; };
 		3746518924302441003AFE63 /* ColorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3746518824302441003AFE63 /* ColorTableViewCell.swift */; };
 		3746518B2430274A003AFE63 /* TimelineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3746518A2430274A003AFE63 /* TimelineCollectionViewCell.swift */; };
-		3746519224304077003AFE63 /* Timeline+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3746519124304077003AFE63 /* Timeline+Convenience.swift */; };
 		3755ED53242E8E310056EA4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3755ED52242E8E310056EA4F /* AppDelegate.swift */; };
 		3755ED55242E8E310056EA4F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3755ED54242E8E310056EA4F /* SceneDelegate.swift */; };
 		3755ED5A242E8E310056EA4F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3755ED58242E8E310056EA4F /* Main.storyboard */; };
@@ -21,17 +20,16 @@
 		3755ED76242EB5870056EA4F /* AddUpdate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3755ED75242EB5870056EA4F /* AddUpdate.storyboard */; };
 		3755ED78242EB6300056EA4F /* AddUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3755ED77242EB6300056EA4F /* AddUpdateViewController.swift */; };
 		378F45F1243108EC00183DAB /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F45F0243108EC00183DAB /* CustomTabBar.swift */; };
-		378F46082431C86F00183DAB /* Timeline.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 373AFA58242FEA900068B4A4 /* Timeline.xcdatamodeld */; };
-		378F460B2431C91B00183DAB /* Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F460A2431C91B00183DAB /* Update.swift */; };
 		37CD683F242ED7DA0018A16A /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CD683E242ED7DA0018A16A /* CoreDataStack.swift */; };
+		37DB59F52432E228009830F3 /* Timeline.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 37DB59F32432E228009830F3 /* Timeline.xcdatamodeld */; };
+		37DB59FC2432E592009830F3 /* Timeline+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DB59FB2432E592009830F3 /* Timeline+Convenience.swift */; };
+		37DB59FE2432E73D009830F3 /* Update+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DB59FD2432E73D009830F3 /* Update+Convenience.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		373AFA56242FE18D0068B4A4 /* ArchivesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivesViewController.swift; sourceTree = "<group>"; };
-		373AFA59242FEA900068B4A4 /* Timeline.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Timeline.xcdatamodel; sourceTree = "<group>"; };
 		3746518824302441003AFE63 /* ColorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTableViewCell.swift; sourceTree = "<group>"; };
 		3746518A2430274A003AFE63 /* TimelineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineCollectionViewCell.swift; sourceTree = "<group>"; };
-		3746519124304077003AFE63 /* Timeline+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timeline+Convenience.swift"; sourceTree = "<group>"; };
 		3755ED4F242E8E310056EA4F /* Timeline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timeline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3755ED52242E8E310056EA4F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3755ED54242E8E310056EA4F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,8 +42,10 @@
 		3755ED75242EB5870056EA4F /* AddUpdate.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddUpdate.storyboard; sourceTree = "<group>"; };
 		3755ED77242EB6300056EA4F /* AddUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUpdateViewController.swift; sourceTree = "<group>"; };
 		378F45F0243108EC00183DAB /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
-		378F460A2431C91B00183DAB /* Update.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Update.swift; sourceTree = "<group>"; };
 		37CD683E242ED7DA0018A16A /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		37DB59F42432E228009830F3 /* Timeline.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Timeline.xcdatamodel; sourceTree = "<group>"; };
+		37DB59FB2432E592009830F3 /* Timeline+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timeline+Convenience.swift"; sourceTree = "<group>"; };
+		37DB59FD2432E73D009830F3 /* Update+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Update+Convenience.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,9 +110,9 @@
 		3755ED68242E8E4B0056EA4F /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				373AFA56242FE18D0068B4A4 /* ArchivesViewController.swift */,
 				3755ED6B242E93970056EA4F /* MainViewController.swift */,
 				3755ED77242EB6300056EA4F /* AddUpdateViewController.swift */,
-				373AFA56242FE18D0068B4A4 /* ArchivesViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -129,10 +129,10 @@
 		3755ED6A242E8E710056EA4F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				373AFA58242FEA900068B4A4 /* Timeline.xcdatamodeld */,
-				378F460A2431C91B00183DAB /* Update.swift */,
 				37CD683E242ED7DA0018A16A /* CoreDataStack.swift */,
-				3746519124304077003AFE63 /* Timeline+Convenience.swift */,
+				37DB59F32432E228009830F3 /* Timeline.xcdatamodeld */,
+				37DB59FB2432E592009830F3 /* Timeline+Convenience.swift */,
+				37DB59FD2432E73D009830F3 /* Update+Convenience.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -220,18 +220,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37DB59FE2432E73D009830F3 /* Update+Convenience.swift in Sources */,
+				37DB59F52432E228009830F3 /* Timeline.xcdatamodeld in Sources */,
 				373AFA57242FE18D0068B4A4 /* ArchivesViewController.swift in Sources */,
 				3755ED6C242E93970056EA4F /* MainViewController.swift in Sources */,
-				378F46082431C86F00183DAB /* Timeline.xcdatamodeld in Sources */,
 				378F45F1243108EC00183DAB /* CustomTabBar.swift in Sources */,
 				3746518B2430274A003AFE63 /* TimelineCollectionViewCell.swift in Sources */,
 				3755ED78242EB6300056EA4F /* AddUpdateViewController.swift in Sources */,
 				3755ED53242E8E310056EA4F /* AppDelegate.swift in Sources */,
 				37CD683F242ED7DA0018A16A /* CoreDataStack.swift in Sources */,
-				378F460B2431C91B00183DAB /* Update.swift in Sources */,
+				37DB59FC2432E592009830F3 /* Timeline+Convenience.swift in Sources */,
 				3755ED55242E8E310056EA4F /* SceneDelegate.swift in Sources */,
 				3746518924302441003AFE63 /* ColorTableViewCell.swift in Sources */,
-				3746519224304077003AFE63 /* Timeline+Convenience.swift in Sources */,
 				3755ED6F242E94050056EA4F /* UpdateCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -434,12 +434,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		373AFA58242FEA900068B4A4 /* Timeline.xcdatamodeld */ = {
+		37DB59F32432E228009830F3 /* Timeline.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				373AFA59242FEA900068B4A4 /* Timeline.xcdatamodel */,
+				37DB59F42432E228009830F3 /* Timeline.xcdatamodel */,
 			);
-			currentVersion = 373AFA59242FEA900068B4A4 /* Timeline.xcdatamodel */;
+			currentVersion = 37DB59F42432E228009830F3 /* Timeline.xcdatamodel */;
 			path = Timeline.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

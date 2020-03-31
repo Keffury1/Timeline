@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E266" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Update" representedClassName="Update" syncable="YES" codeGenerationType="class" coreSpotlightDisplayNameExpression="Update">
-        <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="update" attributeType="String"/>
-    </entity>
-    <elements>
-        <element name="Update" positionX="-63" positionY="-18" width="128" height="73"/>
-    </elements>
+    <elements/>
 </model>

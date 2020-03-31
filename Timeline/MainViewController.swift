@@ -131,7 +131,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     func setupTimeline() {
         if timeline == nil {
-            timeline = Timeline(color: "", title: "", updates: [])
+            timeline = Timeline(color: "", title: "")
         }
         DispatchQueue.main.async {
             do {
@@ -431,7 +431,6 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
             if let addUpdateVC = segue.destination as? AddUpdateViewController, let indexPath = updatesCollectionView.indexPathsForSelectedItems, let first = indexPath.first {
                 addUpdateVC.color = self.view.backgroundColor
                 addUpdateVC.mainVC = self
-                addUpdateVC.update = timeline?.updates?[first.row]
                 addUpdateVC.number = first.row
                 changeColorView.alpha = 0
             }
@@ -464,32 +463,26 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "updateCell", for: indexPath) as? UpdateCollectionViewCell else { return UICollectionViewCell() }
-        
-        guard var updates = timeline?.updates else { return UICollectionViewCell() }
-        
-        updates.sort(by: { $0.date > $1.date })
-        
-        let update = updates[indexPath.row]
-        
-        cell.updateLabel.text = update.update
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = DateFormatter.Style.medium
-        let date = update.date
-        let dateString = dateFormatter.string(from: date)
-        cell.dateLabel.text = dateString
-        
-        cell.layer.cornerRadius = 10.0
-        
-        if view.backgroundColor == .white {
-            cell.backgroundColor = .black
-            cell.updateLabel.textColor = .white
-            cell.dateLabel.textColor = .white
-        } else {
-            cell.backgroundColor = .white
-            cell.updateLabel.textColor = view.backgroundColor
-            cell.dateLabel.textColor = view.backgroundColor
-        }
+//        
+//        cell.updateLabel.text = update.update
+//        
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateStyle = DateFormatter.Style.medium
+//        let date = update.date
+//        let dateString = dateFormatter.string(from: date!)
+//        cell.dateLabel.text = dateString
+//        
+//        cell.layer.cornerRadius = 10.0
+//        
+//        if view.backgroundColor == .white {
+//            cell.backgroundColor = .black
+//            cell.updateLabel.textColor = .white
+//            cell.dateLabel.textColor = .white
+//        } else {
+//            cell.backgroundColor = .white
+//            cell.updateLabel.textColor = view.backgroundColor
+//            cell.dateLabel.textColor = view.backgroundColor
+//        }
         
         return cell
     }

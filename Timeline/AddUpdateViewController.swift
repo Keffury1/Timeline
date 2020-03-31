@@ -227,8 +227,8 @@ class AddUpdateViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         alertController.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
-            guard let number = self.number else { return }
-            self.mainVC?.timeline?.updates?.remove(at: number)
+            guard let update = self.update else { return }
+            self.mainVC?.timeline?.removeFromUpdates(update)
             DispatchQueue.main.async {
                 let moc = CoreDataStack.shared.mainContext
                 do {
@@ -328,7 +328,7 @@ class AddUpdateViewController: UIViewController {
             dateFormatter.dateStyle = DateFormatter.Style.medium
             if let date = dateFormatter.date(from: date) {
                 let update = Update(date: date, update: updateText)
-                mainVC.timeline?.updates?.append(update)
+                mainVC.timeline?.addToUpdates(update)
                 mainVC.updatesCollectionView.reloadData()
             }
         }

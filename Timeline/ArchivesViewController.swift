@@ -13,24 +13,16 @@ class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelega
 
     //MARK: - Properties
     
-    private var fetchTimelinesController: NSFetchedResultsController<Timeline> {
-
+    lazy var fetchedResultsController: NSFetchedResultsController<Timeline> = {
         let fetchRequest: NSFetchRequest<Timeline> = Timeline.fetchRequest()
-
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "color", ascending: false)]
+        fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "color", ascending: false) ]
         let moc = CoreDataStack.shared.mainContext
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: "color", cacheName: nil)
+        frc.delegate = self
+        try! frc.performFetch()
+        return frc
+    }()
 
-        let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
-
-        fetchResultsController.delegate = self
-
-        do {
-            try fetchResultsController.performFetch()
-        } catch {
-            fatalError("Failed to fetch timelines: \(error)")
-        }
-        return fetchResultsController
-    }
     
     //MARK: - Outlets
     
@@ -70,17 +62,17 @@ class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelega
 extension ArchivesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return fetchTimelinesController.sections?.count ?? 1
+        return fetchedResultsController.sections?.count ?? 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fetchTimelinesController.sections?[section].numberOfObjects ?? 0
+        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "timelineCell", for: indexPath) as? TimelineCollectionViewCell else { return UICollectionViewCell() }
 
-        let timeline = fetchTimelinesController.object(at: indexPath)
+        let timeline = fetchedResultsController.object(at: indexPath)
         let color = UIColor(named: timeline.color!)
         cell.colorView.backgroundColor = color
         cell.titleLabel.text = timeline.title
