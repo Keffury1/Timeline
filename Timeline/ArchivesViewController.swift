@@ -36,6 +36,7 @@ class ArchivesViewController: UIViewController {
         
         archivesTableView.delegate = self
         archivesTableView.dataSource = self
+        
         setupSubviews()
     }
     

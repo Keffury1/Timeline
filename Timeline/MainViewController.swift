@@ -171,7 +171,11 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
                 textField.textColor = self.view.backgroundColor
             }
             textField.placeholder = "Title:"
-            textField.text = self.timeline?.title
+            if self.timeline?.title == "Timeline" {
+                textField.text = nil
+            } else {
+                textField.text = self.timeline?.title
+            }
         }
         
         saveTimelineAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
