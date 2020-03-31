@@ -36,8 +36,8 @@
                                     <segue destination="BYZ-38-t0r" kind="show" identifier="addTimelineSegue" id="W80-Y8-6gb"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WvG-q7-Wde">
-                                <rect key="frame" x="45" y="373" width="304" height="489"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WvG-q7-Wde">
+                                <rect key="frame" x="45" y="298" width="304" height="494"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -98,19 +98,35 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y81-fb-PBI">
+                                <rect key="frame" x="349" y="792" width="45" height="45"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="JE5-Y7-fPK"/>
+                                    <constraint firstAttribute="width" constant="45" id="fpX-JX-tbq"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="line.horizontal.3.decrease.circle" catalog="system"/>
+                                <connections>
+                                    <action selector="editTableViewButtonTapped:" destination="X4c-8L-arr" eventType="touchUpInside" id="Y6n-bB-2zC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="WvG-q7-Wde" firstAttribute="top" secondItem="muL-Cy-vRk" secondAttribute="centerY" constant="-75" id="3Sg-gF-SWj"/>
+                            <constraint firstItem="WvG-q7-Wde" firstAttribute="top" secondItem="muL-Cy-vRk" secondAttribute="centerY" constant="-150" id="3Sg-gF-SWj"/>
                             <constraint firstItem="CBq-NO-7cs" firstAttribute="leading" secondItem="9EA-OY-SzB" secondAttribute="leading" constant="65" id="7XZ-rT-GpT"/>
                             <constraint firstItem="7iD-dW-7jk" firstAttribute="top" secondItem="9EA-OY-SzB" secondAttribute="top" constant="25" id="9Dl-M2-yNh"/>
                             <constraint firstItem="CBq-NO-7cs" firstAttribute="top" secondItem="9EA-OY-SzB" secondAttribute="top" constant="80" id="Fnt-cI-waS"/>
                             <constraint firstItem="WvG-q7-Wde" firstAttribute="trailing" secondItem="CBq-NO-7cs" secondAttribute="trailing" id="ItR-X7-Ptk"/>
-                            <constraint firstItem="WvG-q7-Wde" firstAttribute="bottom" secondItem="9EA-OY-SzB" secondAttribute="bottom" id="UlJ-UH-phS"/>
+                            <constraint firstItem="WvG-q7-Wde" firstAttribute="bottom" secondItem="Y81-fb-PBI" secondAttribute="top" id="RAH-QC-RHr"/>
                             <constraint firstItem="9EA-OY-SzB" firstAttribute="trailing" secondItem="CBq-NO-7cs" secondAttribute="trailing" constant="65" id="Ytw-9K-yYa"/>
+                            <constraint firstItem="Y81-fb-PBI" firstAttribute="trailing" secondItem="7iD-dW-7jk" secondAttribute="trailing" id="Zvb-G3-Mam"/>
                             <constraint firstItem="WvG-q7-Wde" firstAttribute="leading" secondItem="CBq-NO-7cs" secondAttribute="leading" constant="-20" id="dlt-z4-DgS"/>
                             <constraint firstItem="9EA-OY-SzB" firstAttribute="trailing" secondItem="7iD-dW-7jk" secondAttribute="trailing" constant="20" id="k8Z-yD-bLb"/>
+                            <constraint firstItem="Y81-fb-PBI" firstAttribute="bottom" secondItem="9EA-OY-SzB" secondAttribute="bottom" constant="-25" id="lOh-ba-tTZ"/>
                             <constraint firstItem="CBq-NO-7cs" firstAttribute="centerX" secondItem="9EA-OY-SzB" secondAttribute="centerX" id="q5c-UW-Ob6"/>
+                            <constraint firstItem="Y81-fb-PBI" firstAttribute="leading" secondItem="7iD-dW-7jk" secondAttribute="leading" id="yJm-cq-6YS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9EA-OY-SzB"/>
                     </view>
@@ -118,6 +134,7 @@
                     <connections>
                         <outlet property="addTimelineButton" destination="7iD-dW-7jk" id="6om-q5-8QB"/>
                         <outlet property="archivesTableView" destination="WvG-q7-Wde" id="Wtf-2d-T2q"/>
+                        <outlet property="editTableViewButton" destination="Y81-fb-PBI" id="d3M-h0-Kov"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pfn-9Z-sqr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -439,6 +456,7 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="archivebox" catalog="system" width="128" height="106"/>
+        <image name="line.horizontal.3.decrease.circle" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="square.and.arrow.down" catalog="system" width="121" height="128"/>
         <image name="timelapse" catalog="system" width="128" height="122"/>

@@ -28,6 +28,7 @@ class ArchivesViewController: UIViewController {
     @IBOutlet weak var archivesTableView: UITableView!
     
     @IBOutlet weak var addTimelineButton: UIButton!
+    @IBOutlet weak var editTableViewButton: UIButton!
     
     //MARK: - Views
     
@@ -47,8 +48,23 @@ class ArchivesViewController: UIViewController {
         addTimelineButton.layer.borderWidth = 2.0
         addTimelineButton.layer.cornerRadius = 10.0
         
+        editTableViewButton.layer.borderColor = UIColor.black.cgColor
+        editTableViewButton.layer.borderWidth = 2.0
+        editTableViewButton.layer.cornerRadius = 10.0
+    
         archivesTableView.backgroundColor = .white
     }
+    
+    //MARK: - Actions
+    
+    @IBAction func editTableViewButtonTapped(_ sender: Any) {
+        if archivesTableView.isEditing == true {
+            archivesTableView.isEditing = false
+        } else {
+            archivesTableView.isEditing = true
+        }
+    }
+    
     
     //MARK: - Navigation
     
@@ -73,7 +89,15 @@ extension ArchivesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
+        let numberOfObjects = fetchedResultsController.sections?[section].numberOfObjects
+        if numberOfObjects == 0 {
+            editTableViewButton.alpha = 0
+            editTableViewButton.isEnabled = false
+        } else {
+            editTableViewButton.alpha = 1
+            editTableViewButton.isEnabled = true
+        }
+        return  numberOfObjects ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -112,11 +136,27 @@ extension ArchivesViewController: UITableViewDelegate, UITableViewDataSource {
             
             do {
                 try moc.save()
+                archivesTableView.reloadData()
             } catch {
                 print("Error deleting timeline from tableView: \(error)")
                 return
             }
         }
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        guard var timelines = self.fetchedResultsController.fetchedObjects else { return }
+        let movedObject = timelines[sourceIndexPath.row]
+        timelines.remove(at: sourceIndexPath.row)
+        timelines.insert(movedObject, at: destinationIndexPath.row)
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
     }
 }
 
