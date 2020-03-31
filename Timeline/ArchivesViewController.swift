@@ -36,6 +36,8 @@ class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelega
     
     @IBOutlet weak var archivesCollectionView: UICollectionView!
     
+    @IBOutlet weak var addTimelineButton: UIButton!
+    
     //MARK: - Views
     
     override func viewDidLoad() {
@@ -43,6 +45,25 @@ class ArchivesViewController: UIViewController, NSFetchedResultsControllerDelega
         
         archivesCollectionView.delegate = self
         archivesCollectionView.dataSource = self
+        setupSubviews()
+    }
+    
+    //MARK: - Methods
+    
+    func setupSubviews() {
+        addTimelineButton.layer.borderColor = UIColor.black.cgColor
+        addTimelineButton.layer.borderWidth = 3.0
+        addTimelineButton.layer.cornerRadius = 10.0
+    }
+    
+    //MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "addTimelineSegue" {
+            
+        } else if segue.identifier == "timelineSegue" {
+            
+        }
     }
 }
 
