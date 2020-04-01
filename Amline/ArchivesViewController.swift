@@ -47,9 +47,19 @@ class ArchivesViewController: UIViewController {
         addTimelineButton.layer.borderColor = UIColor.black.cgColor
         addTimelineButton.layer.borderWidth = 2.0
         addTimelineButton.layer.cornerRadius = 10.0
-    
-        archivesTableView.backgroundColor = .black
-        archivesTableView.layer.cornerRadius = 20.0
+        
+        let containerView:UIView = UIView(frame:CGRect(x: 10, y: 100, width: 300, height: 400))
+        containerView.backgroundColor = UIColor.clear
+        containerView.layer.shadowColor = UIColor.lightGray.cgColor
+        containerView.layer.shadowOffset = CGSize(width: 5.0, height: 5.0)
+        containerView.layer.shadowOpacity = 1.0
+        containerView.layer.shadowRadius = 2
+
+        self.archivesTableView.layer.cornerRadius = 20.0
+        self.archivesTableView.layer.masksToBounds = true
+        self.archivesTableView.backgroundColor = .black
+        self.view.addSubview(containerView)
+        containerView.addSubview(self.archivesTableView)
     }
     
     //MARK: - Actions
