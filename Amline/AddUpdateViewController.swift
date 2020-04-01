@@ -8,9 +8,11 @@
 
 import Foundation
 import UIKit
+import Photos
+import CoreImage
 import CoreData
 
-class AddUpdateViewController: UIViewController {
+class AddUpdateViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
     //MARK: - Properties
     
@@ -61,6 +63,7 @@ class AddUpdateViewController: UIViewController {
         titleTextField.delegate = self
         
         updateTextView.autocorrectionType = .no
+        titleTextField.autocorrectionType = .no
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -331,8 +334,14 @@ class AddUpdateViewController: UIViewController {
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height/1.5
+            if titleTextField.isEditing == true {
+                if self.view.frame.origin.y == 0 {
+                    self.view.frame.origin.y -= keyboardSize.height/2.0
+                }
+            } else if updateTextView.isFirstResponder == true {
+                if self.view.frame.origin.y == 0 {
+                    self.view.frame.origin.y -= keyboardSize.height/1.5
+                }
             }
         }
     }
