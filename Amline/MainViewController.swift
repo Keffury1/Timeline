@@ -212,7 +212,11 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
                     textField.textColor = self.view.backgroundColor
                 }
             } else {
-                textField.textColor = self.view.backgroundColor
+                if self.view.backgroundColor == .white {
+                    textField.textColor = .black
+                } else {
+                    textField.textColor = self.view.backgroundColor
+                }
             }
             textField.placeholder = "Title:"
             if self.timeline?.title == "Timeline" {
