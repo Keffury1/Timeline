@@ -462,6 +462,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let update = updates[indexPath.row]
         
         cell.updateLabel.text = update.title
+        cell.imageView.image = update.image as? UIImage
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.medium

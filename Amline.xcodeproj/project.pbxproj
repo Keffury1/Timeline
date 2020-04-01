@@ -64,6 +64,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3728FAC8243503A2009794E9 /* Update */ = {
+			isa = PBXGroup;
+			children = (
+				37DB59FD2432E73D009830F3 /* Update+Convenience.swift */,
+				375AFB2A24332388009D5ACD /* Update+CoreDataClass.swift */,
+				375AFB2B24332388009D5ACD /* Update+CoreDataProperties.swift */,
+			);
+			name = Update;
+			sourceTree = "<group>";
+		};
+		3728FAC9243503A5009794E9 /* Timeline */ = {
+			isa = PBXGroup;
+			children = (
+				37DB59FB2432E592009830F3 /* Timeline+Convenience.swift */,
+				375AFB2C24332388009D5ACD /* Timeline+CoreDataClass.swift */,
+				375AFB2D24332388009D5ACD /* Timeline+CoreDataProperties.swift */,
+			);
+			name = Timeline;
+			sourceTree = "<group>";
+		};
 		3755ED46242E8E310056EA4F = {
 			isa = PBXGroup;
 			children = (
@@ -134,14 +154,10 @@
 		3755ED6A242E8E710056EA4F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				37DB59F32432E228009830F3 /* Timeline.xcdatamodeld */,
-				37DB59FB2432E592009830F3 /* Timeline+Convenience.swift */,
-				37DB59FD2432E73D009830F3 /* Update+Convenience.swift */,
-				375AFB2A24332388009D5ACD /* Update+CoreDataClass.swift */,
-				375AFB2B24332388009D5ACD /* Update+CoreDataProperties.swift */,
-				375AFB2C24332388009D5ACD /* Timeline+CoreDataClass.swift */,
-				375AFB2D24332388009D5ACD /* Timeline+CoreDataProperties.swift */,
 				37CD683E242ED7DA0018A16A /* CoreDataStack.swift */,
+				37DB59F32432E228009830F3 /* Timeline.xcdatamodeld */,
+				3728FAC9243503A5009794E9 /* Timeline */,
+				3728FAC8243503A2009794E9 /* Update */,
 			);
 			name = Models;
 			sourceTree = "<group>";

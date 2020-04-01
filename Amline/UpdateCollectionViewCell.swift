@@ -12,6 +12,7 @@ class UpdateCollectionViewCell: UICollectionViewCell {
     
     let mainVC = MainViewController()
     
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var updateLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
 }

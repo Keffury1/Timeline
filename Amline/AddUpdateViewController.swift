@@ -53,10 +53,11 @@ class AddUpdateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         updateViews()
         setupSubviews()
         dateTextField.delegate = self
+        
+        titleTextField.delegate = self
         updateTextView.autocorrectionType = .no
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -153,12 +154,6 @@ class AddUpdateViewController: UIViewController {
         updateTextView.text = update?.update
         
         imageView.image = update?.image as? UIImage
-    }
-    
-    func infoAlert() {
-        let alertController = UIAlertController(title: "Please Enter Information", message: "", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-        self.present(alertController, animated: true, completion: nil)
     }
     
     func presentDatePicker() {
@@ -374,7 +369,12 @@ class AddUpdateViewController: UIViewController {
 extension AddUpdateViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
+        if textField == titleTextField {
+            self.view.endEditing(true)
+            return false
+        } else {
+            self.view.endEditing(true)
+            return false
+        }
     }
 }
