@@ -7,12 +7,15 @@
 //
 
 import Foundation
+import UIKit
 import CoreData
 
 extension Update {
-    convenience init(date: Date, update: String, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+    convenience init(title: String, date: Date, update: String, image: NSObject?, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         self.init(context: context)
+        self.title = title
         self.date = date
         self.update = update
+        self.image = image as? UIImage
     }
 }

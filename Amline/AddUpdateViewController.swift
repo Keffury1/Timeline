@@ -28,12 +28,16 @@ class AddUpdateViewController: UIViewController {
     
     @IBOutlet weak var updateView: UIView!
     
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleTextField: UITextField!
+    
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var dateTextField: UITextField!
     
     @IBOutlet weak var updateLabel: UILabel!
     @IBOutlet weak var updateTextView: UITextView!
     
+    @IBOutlet weak var imageView: UIImageView!
     
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
@@ -68,6 +72,7 @@ class AddUpdateViewController: UIViewController {
             saveButton.layer.borderColor = UIColor.black.cgColor
             saveButton.backgroundColor = .black
             
+            titleTextField.textColor = .black
             dateTextField.textColor = .black
             updateTextView.textColor = .black
             deleteButton.backgroundColor = .black
@@ -82,6 +87,7 @@ class AddUpdateViewController: UIViewController {
             saveButton.titleLabel?.textColor = color
             saveButton.layer.borderColor = UIColor.white.cgColor
             
+            titleTextField.textColor = color
             dateTextField.textColor = color
             updateTextView.textColor = color
             deleteButton.backgroundColor = color
@@ -95,15 +101,17 @@ class AddUpdateViewController: UIViewController {
         
         updateView.layer.borderColor = UIColor.white.cgColor
         
-        dateLabel.textColor = .white
+        titleLabel.textColor = .white
+        dateTextField.backgroundColor = .white
         
+        dateLabel.textColor = .white
         dateTextField.backgroundColor = .white
         
         
         updateLabel.textColor = .white
-        
         updateTextView.backgroundColor = .white
         
+        imageView.tintColor = .white
         
         view.backgroundColor = color
         
@@ -132,6 +140,8 @@ class AddUpdateViewController: UIViewController {
     func updateViews() {
         guard isViewLoaded else { return }
         
+        titleTextField.text = update.title
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.medium
         if let date = update?.date {
@@ -140,6 +150,8 @@ class AddUpdateViewController: UIViewController {
         }
         
         updateTextView.text = update?.update
+        
+        imageView.image = update.image as? UIImage
     }
     
     func infoAlert() {
@@ -291,20 +303,32 @@ class AddUpdateViewController: UIViewController {
     //MARK: - Actions
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        guard let mainVC = mainVC, let date = dateTextField.text, !date.isEmpty, let updateText = updateTextView.text, !updateText.isEmpty else {
+        guard let mainVC = mainVC, let date = dateTextField.text, !date.isEmpty, let updateText = updateTextView.text, !updateText.isEmpty, let titleText = titleTextField.text, !titleText.isEmpty, let image = imageView.image else {
             enterInformationAlert()
             return
         }
         
         if let update = update {
+            update.title = titleText
             update.update = updateText
+            
+            if image == UIImage(systemName: "photo") {
+                update.image = nil
+            } else {
+                update.image = image
+            }
+            
             mainVC.updatesCollectionView.reloadData()
         } else {
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = DateFormatter.Style.medium
             if let date = dateFormatter.date(from: date) {
-                let update = Update(date: date, update: updateText)
-                mainVC.timeline?.addToUpdates(update)
+                if image == UIImage(systemName: "photo") {
+                    let update = Update(title: titleText, date: date, update: updateText, image: nil)
+                } else {
+                    let update = Update(title: titleText, date: date, update: updateText, image: image)
+                }
+                mainVC.timeline?.addToUpdates(update!)
                 mainVC.updatesCollectionView.reloadData()
             }
         }
