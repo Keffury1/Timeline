@@ -102,16 +102,17 @@ class AddUpdateViewController: UIViewController {
         updateView.layer.borderColor = UIColor.white.cgColor
         
         titleLabel.textColor = .white
-        dateTextField.backgroundColor = .white
+        titleTextField.backgroundColor = .white
         
         dateLabel.textColor = .white
         dateTextField.backgroundColor = .white
         
+        imageView.tintColor = .white
+        imageView.backgroundColor = color
+        imageView.image = UIImage(systemName: "photo")
         
         updateLabel.textColor = .white
         updateTextView.backgroundColor = .white
-        
-        imageView.tintColor = .white
         
         view.backgroundColor = color
         
@@ -140,7 +141,7 @@ class AddUpdateViewController: UIViewController {
     func updateViews() {
         guard isViewLoaded else { return }
         
-        titleTextField.text = update.title
+        titleTextField.text = update?.title
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.medium
@@ -151,7 +152,7 @@ class AddUpdateViewController: UIViewController {
         
         updateTextView.text = update?.update
         
-        imageView.image = update.image as? UIImage
+        imageView.image = update?.image as? UIImage
     }
     
     func infoAlert() {
@@ -325,10 +326,12 @@ class AddUpdateViewController: UIViewController {
             if let date = dateFormatter.date(from: date) {
                 if image == UIImage(systemName: "photo") {
                     let update = Update(title: titleText, date: date, update: updateText, image: nil)
+                    mainVC.timeline?.addToUpdates(update)
                 } else {
                     let update = Update(title: titleText, date: date, update: updateText, image: image)
+                    mainVC.timeline?.addToUpdates(update)
                 }
-                mainVC.timeline?.addToUpdates(update!)
+                
                 mainVC.updatesCollectionView.reloadData()
             }
         }

@@ -17,8 +17,10 @@ extension Update {
         return NSFetchRequest<Update>(entityName: "Update")
     }
 
+    @NSManaged public var title: String?
     @NSManaged public var date: Date?
     @NSManaged public var update: String?
+    @NSManaged public var image: NSObject?
     @NSManaged public var timeline: Timeline?
 
 }

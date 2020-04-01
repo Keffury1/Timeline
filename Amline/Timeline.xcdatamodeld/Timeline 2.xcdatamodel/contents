@@ -7,11 +7,13 @@
     </entity>
     <entity name="Update" representedClassName=".Update" syncable="YES">
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="image" attributeType="Transformable" valueTransformerName="NSValueTransformer valueTransformerForName"/>
+        <attribute name="title" attributeType="String"/>
         <attribute name="update" attributeType="String"/>
         <relationship name="timeline" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Timeline" inverseName="updates" inverseEntity="Timeline"/>
     </entity>
     <elements>
         <element name="Timeline" positionX="-54" positionY="-9" width="128" height="88"/>
-        <element name="Update" positionX="-27" positionY="45" width="128" height="88"/>
+        <element name="Update" positionX="-27" positionY="45" width="128" height="118"/>
     </elements>
 </model>

@@ -29,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3728FAC72434FC5A009794E9 /* Timeline 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Timeline 2.xcdatamodel"; sourceTree = "<group>"; };
 		373AFA56242FE18D0068B4A4 /* ArchivesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivesViewController.swift; sourceTree = "<group>"; };
 		3746518A2430274A003AFE63 /* TimelineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTableViewCell.swift; sourceTree = "<group>"; };
 		3755ED4F242E8E310056EA4F /* Amline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amline.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -447,9 +448,10 @@
 		37DB59F32432E228009830F3 /* Timeline.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				3728FAC72434FC5A009794E9 /* Timeline 2.xcdatamodel */,
 				37DB59F42432E228009830F3 /* Timeline.xcdatamodel */,
 			);
-			currentVersion = 37DB59F42432E228009830F3 /* Timeline.xcdatamodel */;
+			currentVersion = 3728FAC72434FC5A009794E9 /* Timeline 2.xcdatamodel */;
 			path = Timeline.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
