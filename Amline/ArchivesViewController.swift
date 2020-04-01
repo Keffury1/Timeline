@@ -47,12 +47,9 @@ class ArchivesViewController: UIViewController {
         addTimelineButton.layer.borderColor = UIColor.black.cgColor
         addTimelineButton.layer.borderWidth = 2.0
         addTimelineButton.layer.cornerRadius = 10.0
-        
-        editTableViewButton.layer.borderColor = UIColor.black.cgColor
-        editTableViewButton.layer.borderWidth = 2.0
-        editTableViewButton.layer.cornerRadius = 10.0
     
-        archivesTableView.backgroundColor = .white
+        archivesTableView.backgroundColor = .black
+        archivesTableView.layer.cornerRadius = 20.0
     }
     
     //MARK: - Actions
@@ -89,15 +86,7 @@ extension ArchivesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let numberOfObjects = fetchedResultsController.sections?[section].numberOfObjects
-        if numberOfObjects == 0 {
-            editTableViewButton.alpha = 0
-            editTableViewButton.isEnabled = false
-        } else {
-            editTableViewButton.alpha = 1
-            editTableViewButton.isEnabled = true
-        }
-        return  numberOfObjects ?? 0
+        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
