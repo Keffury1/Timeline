@@ -16,13 +16,32 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5lw-Zd-E1Q">
-                                <rect key="frame" x="40" y="134" width="240" height="300"/>
+                                <rect key="frame" x="22.5" y="34" width="275" height="500"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="bDt-lb-dwo">
-                                        <rect key="frame" x="20" y="25.5" width="200" height="249"/>
+                                        <rect key="frame" x="37.5" y="39" width="200" height="422.5"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="dT8-Zl-TRA">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="roW-2d-R9w">
                                                 <rect key="frame" x="0.0" y="0.0" width="200" height="71.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NK7-CX-i8h">
+                                                        <rect key="frame" x="78.5" y="0.0" width="43.5" height="27.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Shg-kF-0nd">
+                                                        <rect key="frame" x="0.0" y="37.5" width="200" height="34"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="200" id="D1l-hO-hXj"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="dT8-Zl-TRA">
+                                                <rect key="frame" x="0.0" y="111.5" width="200" height="71.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uRT-e9-zyh">
                                                         <rect key="frame" x="76.5" y="0.0" width="47" height="27.5"/>
@@ -41,10 +60,10 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="7xB-ge-k3r">
-                                                <rect key="frame" x="0.0" y="111.5" width="200" height="137.5"/>
+                                                <rect key="frame" x="0.0" y="223" width="200" height="137.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Entry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="leg-ah-Jxk">
-                                                        <rect key="frame" x="74" y="0.0" width="52" height="27.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="leg-ah-Jxk">
+                                                        <rect key="frame" x="70.5" y="0.0" width="59.5" height="27.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -61,6 +80,13 @@
                                                     </textView>
                                                 </subviews>
                                             </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDv-2Y-tmr">
+                                                <rect key="frame" x="88" y="400.5" width="24" height="22"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" image="photo" catalog="system">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -70,14 +96,14 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="240" id="A8F-WR-ZVg"/>
+                                    <constraint firstAttribute="width" constant="275" id="A8F-WR-ZVg"/>
                                     <constraint firstItem="bDt-lb-dwo" firstAttribute="centerX" secondItem="5lw-Zd-E1Q" secondAttribute="centerX" id="LLO-h6-aEb"/>
                                     <constraint firstItem="bDt-lb-dwo" firstAttribute="centerY" secondItem="5lw-Zd-E1Q" secondAttribute="centerY" id="MvE-T8-jkG"/>
-                                    <constraint firstAttribute="height" constant="300" id="jLU-Qb-llB"/>
+                                    <constraint firstAttribute="height" constant="500" id="jLU-Qb-llB"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZFZ-oq-g32">
-                                <rect key="frame" x="110" y="454" width="100" height="50"/>
+                                <rect key="frame" x="110" y="554" width="100" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="6YE-7H-kPW"/>
                                     <constraint firstAttribute="width" constant="100" id="Zde-7c-eTC"/>
@@ -91,7 +117,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="frB-eU-N7g">
-                                <rect key="frame" x="135" y="512" width="50" height="50"/>
+                                <rect key="frame" x="135" y="612" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="W6U-yV-4NH"/>
                                     <constraint firstAttribute="height" constant="50" id="rcS-Na-fRX"/>
@@ -103,7 +129,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DgM-kq-7ql">
-                                <rect key="frame" x="260" y="189" width="80" height="50"/>
+                                <rect key="frame" x="260" y="214" width="80" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="Jec-AW-G61"/>
                                     <constraint firstAttribute="height" constant="50" id="d8x-7u-m7B"/>
@@ -115,7 +141,7 @@
                                 </connections>
                             </button>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TRI-b5-eOb">
-                                <rect key="frame" x="35" y="159.5" width="250" height="150"/>
+                                <rect key="frame" x="35" y="184.5" width="250" height="150"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="FkO-lq-Dcz">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="130"/>
@@ -186,6 +212,7 @@
     </scenes>
     <resources>
         <image name="calendar.circle" catalog="system" width="128" height="121"/>
+        <image name="photo" catalog="system" width="128" height="93"/>
         <image name="trash" catalog="system" width="121" height="128"/>
     </resources>
 </document>
