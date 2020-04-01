@@ -98,13 +98,13 @@ extension ArchivesViewController: UITableViewDelegate, UITableViewDataSource {
         cell.titleLabel.text = timeline.title
         
         if color == .white {
-                cell.stripeView.backgroundColor = .black
+            cell.stripeView.backgroundColor = .black
+            cell.colorView.layer.borderColor = UIColor.black.cgColor
+            cell.colorView.layer.borderWidth = 1.5
         } else {
-                cell.stripeView.backgroundColor = .white
+            cell.stripeView.backgroundColor = .white
+            cell.colorView.layer.borderColor = UIColor.white.cgColor
         }
-        
-        cell.colorView.layer.borderColor = UIColor.black.cgColor
-        cell.colorView.layer.borderWidth = 1.5
         
         cell.colorView.layer.cornerRadius = 10.0
 
