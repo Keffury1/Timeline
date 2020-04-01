@@ -80,13 +80,17 @@
                                                     </textView>
                                                 </subviews>
                                             </stackView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="I4Q-ln-Wfe">
+                                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="I4Q-ln-Wfe">
                                                 <rect key="frame" x="90" y="331" width="50" height="47.5"/>
                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="hxa-5v-Wc3"/>
                                                     <constraint firstAttribute="width" constant="50" id="i4d-oB-EC5"/>
                                                 </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="g8V-dW-8Pm" appends="YES" id="Aqd-fs-q0p"/>
+                                                </connections>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -181,7 +185,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ZFZ-oq-g32" firstAttribute="top" secondItem="5lw-Zd-E1Q" secondAttribute="bottom" constant="20" id="MBu-if-xHZ"/>
                             <constraint firstItem="frB-eU-N7g" firstAttribute="centerX" secondItem="WgC-AZ-GAw" secondAttribute="centerX" id="Mun-6U-g7l"/>
@@ -206,6 +210,7 @@
                         <outlet property="enterDateButton" destination="cqW-u0-S6R" id="cmi-Lq-00b"/>
                         <outlet property="imageView" destination="I4Q-ln-Wfe" id="1wF-4t-x22"/>
                         <outlet property="saveButton" destination="ZFZ-oq-g32" id="KZG-rf-0u1"/>
+                        <outlet property="tapGestureRecognizer" destination="g8V-dW-8Pm" id="bDA-Q3-nZk"/>
                         <outlet property="titleLabel" destination="nmm-2W-2gV" id="bep-fT-McX"/>
                         <outlet property="titleTextField" destination="S1K-Hk-jhO" id="KVe-qr-zKE"/>
                         <outlet property="updateLabel" destination="leg-ah-Jxk" id="MA3-6D-hWg"/>
@@ -214,6 +219,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ov3-M3-SMD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="g8V-dW-8Pm">
+                    <connections>
+                        <action selector="imageTapped:" destination="LJP-OM-743" id="Rxm-vz-3tS"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="171.01449275362319" y="150"/>
         </scene>

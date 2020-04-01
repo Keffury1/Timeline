@@ -48,6 +48,7 @@ class AddUpdateViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var enterDateButton: UIButton!
     
+    @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     //MARK: - Views
     
     override func viewDidLoad() {
@@ -55,9 +56,10 @@ class AddUpdateViewController: UIViewController {
         
         updateViews()
         setupSubviews()
-        dateTextField.delegate = self
         
+        dateTextField.delegate = self
         titleTextField.delegate = self
+        
         updateTextView.autocorrectionType = .no
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -76,6 +78,7 @@ class AddUpdateViewController: UIViewController {
             titleTextField.textColor = .black
             dateTextField.textColor = .black
             updateTextView.textColor = .black
+            imageView.backgroundColor = .black
             deleteButton.backgroundColor = .black
             calendarButton.backgroundColor = .clear
             calendarButton.tintColor = .black
@@ -91,6 +94,7 @@ class AddUpdateViewController: UIViewController {
             titleTextField.textColor = color
             dateTextField.textColor = color
             updateTextView.textColor = color
+            imageView.backgroundColor = color
             deleteButton.backgroundColor = color
             calendarButton.backgroundColor = color
             calendarButton.tintColor = .white
@@ -109,7 +113,6 @@ class AddUpdateViewController: UIViewController {
         dateTextField.backgroundColor = .white
         
         imageView.tintColor = .white
-        imageView.backgroundColor = color
         imageView.image = UIImage(systemName: "photo")
         
         updateLabel.textColor = .white
@@ -170,13 +173,13 @@ class AddUpdateViewController: UIViewController {
         enterDateButton.isEnabled = false
     }
     
-    func setupAlertColor(alertController: UIAlertController, string: String, size: CGFloat) {
+    func setupAlertColor(alertController: UIAlertController, string: String?, size: CGFloat) {
         if self.traitCollection.userInterfaceStyle == .light {
             if self.view.backgroundColor == .white {
                 alertController.view.backgroundColor = .white
                 alertController.view.tintColor = .black
                 
-                let saveTimelineAlertString = NSAttributedString(string: string, attributes: [
+                let saveTimelineAlertString = NSAttributedString(string: string ?? "", attributes: [
                     NSAttributedString.Key.font : UIFont.systemFont(ofSize: size),
                     NSAttributedString.Key.foregroundColor : UIColor.black
                 ])
@@ -185,7 +188,7 @@ class AddUpdateViewController: UIViewController {
                 alertController.view.backgroundColor = .white
                 alertController.view.tintColor = self.view.backgroundColor
                 
-                let saveTimelineAlertString = NSAttributedString(string: string, attributes: [
+                let saveTimelineAlertString = NSAttributedString(string: string ?? "", attributes: [
                     NSAttributedString.Key.font : UIFont.systemFont(ofSize: size),
                     NSAttributedString.Key.foregroundColor : self.view.backgroundColor!
                 ])
@@ -197,15 +200,23 @@ class AddUpdateViewController: UIViewController {
             if self.view.backgroundColor == .black {
                 alertController.view.tintColor = .white
                 
-                let saveTimelineAlertString = NSAttributedString(string: string, attributes: [
+                let saveTimelineAlertString = NSAttributedString(string: string ?? "", attributes: [
                     NSAttributedString.Key.font : UIFont.systemFont(ofSize: size),
                     NSAttributedString.Key.foregroundColor : UIColor.white
+                ])
+                alertController.setValue(saveTimelineAlertString, forKey: "attributedTitle")
+            } else if self.view.backgroundColor == .white {
+                alertController.view.tintColor = .black
+                
+                let saveTimelineAlertString = NSAttributedString(string: string ?? "", attributes: [
+                    NSAttributedString.Key.font : UIFont.systemFont(ofSize: size),
+                    NSAttributedString.Key.foregroundColor : self.view.backgroundColor!
                 ])
                 alertController.setValue(saveTimelineAlertString, forKey: "attributedTitle")
             } else {
                 alertController.view.tintColor = self.view.backgroundColor
                 
-                let saveTimelineAlertString = NSAttributedString(string: string, attributes: [
+                let saveTimelineAlertString = NSAttributedString(string: string ?? "", attributes: [
                     NSAttributedString.Key.font : UIFont.systemFont(ofSize: size),
                     NSAttributedString.Key.foregroundColor : self.view.backgroundColor!
                 ])
@@ -279,6 +290,42 @@ class AddUpdateViewController: UIViewController {
         
         alertController.view.layer.cornerRadius = 10.0
         
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func addImageAlert() {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "Upload Photo", style: .default, handler: { (_) in
+            //Ask for camera roll permission
+        }))
+        alertController.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (_) in
+            //Ask for camera permission
+        }))
+        
+        if self.traitCollection.userInterfaceStyle == .light {
+            if self.view.backgroundColor == .white {
+                alertController.view.backgroundColor = .white
+                alertController.view.tintColor = .black
+            } else {
+                alertController.view.backgroundColor = .white
+                alertController.view.tintColor = self.view.backgroundColor
+            }
+        } else {
+            alertController.view.backgroundColor = .black
+            
+            if self.view.backgroundColor == .black {
+                alertController.view.tintColor = .white
+                
+            } else if self.view.backgroundColor == .white {
+                alertController.view.tintColor = .black
+
+            } else {
+                alertController.view.tintColor = self.view.backgroundColor
+            }
+        }
+        alertController.view.layer.cornerRadius = 10.0
+        let height: NSLayoutConstraint = NSLayoutConstraint(item: alertController.view!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 300.0)
+        alertController.view.addConstraint(height)
         self.present(alertController, animated: true, completion: nil)
     }
     
@@ -364,6 +411,13 @@ class AddUpdateViewController: UIViewController {
         removeDatePicker()
     }
     
+    @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
+        guard tapGestureRecognizer.view != nil else { return }
+             
+        if tapGestureRecognizer.state == .ended {
+             addImageAlert()
+        }
+    }
 }
 
 extension AddUpdateViewController: UITextFieldDelegate {
