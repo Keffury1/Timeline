@@ -19,7 +19,6 @@ class AddUpdateViewController: UIViewController {
     
     var mainVC: MainViewController?
     var color: UIColor?
-    var number: Int?
     
     var update: Update? {
         didSet {
@@ -29,27 +28,31 @@ class AddUpdateViewController: UIViewController {
     
     //MARK: - Outlets
     
+    //Views
     @IBOutlet weak var updateView: UIView!
-    
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var titleTextField: UITextField!
-    
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var dateTextField: UITextField!
-    
-    @IBOutlet weak var updateLabel: UILabel!
-    @IBOutlet weak var updateTextView: UITextView!
-    
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var datePickerView: UIView!
     
+    //Labels
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var updateLabel: UILabel!
+    
+    //Buttons
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
-    
-    @IBOutlet weak var datePickerView: UIView!
-    @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var enterDateButton: UIButton!
     
+    //TextFields/Views
+    @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var dateTextField: UITextField!
+    @IBOutlet weak var updateTextView: UITextView!
+    
+    
+    //Misc
+    @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
+    
     //MARK: - Views
     
     override func viewDidLoad() {
@@ -70,6 +73,7 @@ class AddUpdateViewController: UIViewController {
     
     //MARK: - Methods
     
+    //Views
     func setupSubviews() {
         
         if color == UIColor.white {
@@ -85,7 +89,6 @@ class AddUpdateViewController: UIViewController {
             
             titleTextField.textColor = .black
             dateTextField.textColor = .black
-            
             updateTextView.textColor = .black
             imageView.backgroundColor = .black
             
@@ -107,10 +110,8 @@ class AddUpdateViewController: UIViewController {
             
             titleTextField.textColor = color
             dateTextField.textColor = color
-            
             updateTextView.textColor = color
             imageView.backgroundColor = color
-            
             
             enterDateButton.backgroundColor = color
             
@@ -119,7 +120,11 @@ class AddUpdateViewController: UIViewController {
             datePicker.setValue(false, forKeyPath: "highlightsToday")
         }
         
+        view.backgroundColor = color
+        
         updateView.layer.borderColor = UIColor.white.cgColor
+        updateView.layer.borderWidth = 3.0
+        updateView.layer.cornerRadius = 10.0
         updateView.addShadow()
         
         titleLabel.textColor = .white
@@ -127,29 +132,24 @@ class AddUpdateViewController: UIViewController {
         
         dateLabel.textColor = .white
         dateTextField.backgroundColor = .white
+        dateTextField.layer.cornerRadius = 10.0
+        
+        datePickerView.layer.cornerRadius = 10.0
+        enterDateButton.layer.cornerRadius = 5.0
+        
+        updateLabel.textColor = .white
+        updateTextView.backgroundColor = .white
+        updateTextView.layer.cornerRadius = 10.0
         
         imageView.tintColor = .white
-        
         if imageView.image == nil {
             imageView.image = UIImage(systemName: "photo")
             imageView.contentMode = .scaleAspectFit
         } else {
             imageView.contentMode = .scaleToFill
         }
-        imageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-        imageView.layer.cornerRadius = imageView.frame.size.height/3.0
-        
-        updateLabel.textColor = .white
-        updateTextView.backgroundColor = .white
-        
-        view.backgroundColor = color
-        
-        updateView.layer.borderWidth = 3.0
-        updateView.layer.cornerRadius = 10.0
-       
-        dateTextField.layer.cornerRadius = 10.0
-        
-        updateTextView.layer.cornerRadius = 10.0
+        imageView.frame = CGRect(x: 0, y: 0, width: 200, height: 100)
+        imageView.layer.cornerRadius = 20.0
         
         saveButton.layer.borderWidth = 2.0
         saveButton.layer.cornerRadius = 10.0
@@ -158,9 +158,6 @@ class AddUpdateViewController: UIViewController {
         deleteButton.layer.borderWidth = 2.0
         deleteButton.layer.cornerRadius = 10.0
         deleteButton.addShadow()
-        
-        datePickerView.layer.cornerRadius = 10.0
-        enterDateButton.layer.cornerRadius = 5.0
     }
     
     func updateViews() {
@@ -181,71 +178,58 @@ class AddUpdateViewController: UIViewController {
         imageView.image = update?.image as? UIImage
     }
     
-    func presentDatePicker() {
-        UIView.animate(withDuration: 0.5, animations: {
-            self.datePickerView.alpha = 1
-        })
-        enterDateButton.isEnabled = true
-    }
-    
-    func removeDatePicker() {
-        UIView.animate(withDuration: 0.5, animations: {
-            self.datePickerView.alpha = 0
-        })
-        enterDateButton.isEnabled = false
-    }
-    
+    //Alerts
     func setupAlertColor(alertController: UIAlertController, string: String?, size: CGFloat) {
-        if self.traitCollection.userInterfaceStyle == .light {
-            if self.view.backgroundColor == .white {
-                alertController.view.backgroundColor = .white
-                alertController.view.tintColor = .black
-                
-                let saveTimelineAlertString = NSAttributedString(string: string ?? "", attributes: [
-                    NSAttributedString.Key.font : UIFont.systemFont(ofSize: size),
-                    NSAttributedString.Key.foregroundColor : UIColor.black
-                ])
-                alertController.setValue(saveTimelineAlertString, forKey: "attributedTitle")
-            } else {
-                alertController.view.backgroundColor = .white
-                alertController.view.tintColor = self.view.backgroundColor
-                
-                let saveTimelineAlertString = NSAttributedString(string: string ?? "", attributes: [
-                    NSAttributedString.Key.font : UIFont.systemFont(ofSize: size),
-                    NSAttributedString.Key.foregroundColor : self.view.backgroundColor!
-                ])
-                alertController.setValue(saveTimelineAlertString, forKey: "attributedTitle")
-            }
-        } else {
-            alertController.view.backgroundColor = .black
-            
-            if self.view.backgroundColor == .black {
-                alertController.view.tintColor = .white
-                
-                let saveTimelineAlertString = NSAttributedString(string: string ?? "", attributes: [
-                    NSAttributedString.Key.font : UIFont.systemFont(ofSize: size),
-                    NSAttributedString.Key.foregroundColor : UIColor.white
-                ])
-                alertController.setValue(saveTimelineAlertString, forKey: "attributedTitle")
-            } else if self.view.backgroundColor == .white {
-                alertController.view.tintColor = .black
-                
-                let saveTimelineAlertString = NSAttributedString(string: string ?? "", attributes: [
-                    NSAttributedString.Key.font : UIFont.systemFont(ofSize: size),
-                    NSAttributedString.Key.foregroundColor : self.view.backgroundColor!
-                ])
-                alertController.setValue(saveTimelineAlertString, forKey: "attributedTitle")
-            } else {
-                alertController.view.tintColor = self.view.backgroundColor
-                
-                let saveTimelineAlertString = NSAttributedString(string: string ?? "", attributes: [
-                    NSAttributedString.Key.font : UIFont.systemFont(ofSize: size),
-                    NSAttributedString.Key.foregroundColor : self.view.backgroundColor!
-                ])
-                alertController.setValue(saveTimelineAlertString, forKey: "attributedTitle")
-            }
-        }
-    }
+           if self.traitCollection.userInterfaceStyle == .light {
+               if self.view.backgroundColor == .white {
+                   alertController.view.backgroundColor = .white
+                   alertController.view.tintColor = .black
+                   
+                   let saveTimelineAlertString = NSAttributedString(string: string ?? "", attributes: [
+                       NSAttributedString.Key.font : UIFont.systemFont(ofSize: size),
+                       NSAttributedString.Key.foregroundColor : UIColor.black
+                   ])
+                   alertController.setValue(saveTimelineAlertString, forKey: "attributedTitle")
+               } else {
+                   alertController.view.backgroundColor = .white
+                   alertController.view.tintColor = self.view.backgroundColor
+                   
+                   let saveTimelineAlertString = NSAttributedString(string: string ?? "", attributes: [
+                       NSAttributedString.Key.font : UIFont.systemFont(ofSize: size),
+                       NSAttributedString.Key.foregroundColor : self.view.backgroundColor!
+                   ])
+                   alertController.setValue(saveTimelineAlertString, forKey: "attributedTitle")
+               }
+           } else {
+               alertController.view.backgroundColor = .black
+               
+               if self.view.backgroundColor == .black {
+                   alertController.view.tintColor = .white
+                   
+                   let saveTimelineAlertString = NSAttributedString(string: string ?? "", attributes: [
+                       NSAttributedString.Key.font : UIFont.systemFont(ofSize: size),
+                       NSAttributedString.Key.foregroundColor : UIColor.white
+                   ])
+                   alertController.setValue(saveTimelineAlertString, forKey: "attributedTitle")
+               } else if self.view.backgroundColor == .white {
+                   alertController.view.tintColor = .black
+                   
+                   let saveTimelineAlertString = NSAttributedString(string: string ?? "", attributes: [
+                       NSAttributedString.Key.font : UIFont.systemFont(ofSize: size),
+                       NSAttributedString.Key.foregroundColor : self.view.backgroundColor!
+                   ])
+                   alertController.setValue(saveTimelineAlertString, forKey: "attributedTitle")
+               } else {
+                   alertController.view.tintColor = self.view.backgroundColor
+                   
+                   let saveTimelineAlertString = NSAttributedString(string: string ?? "", attributes: [
+                       NSAttributedString.Key.font : UIFont.systemFont(ofSize: size),
+                       NSAttributedString.Key.foregroundColor : self.view.backgroundColor!
+                   ])
+                   alertController.setValue(saveTimelineAlertString, forKey: "attributedTitle")
+               }
+           }
+       }
     
     func saveEntryAlert() {
         let alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
@@ -394,7 +378,7 @@ class AddUpdateViewController: UIViewController {
                 
             } else if self.view.backgroundColor == .white {
                 alertController.view.tintColor = .black
-
+                
             } else {
                 alertController.view.tintColor = self.view.backgroundColor
             }
@@ -405,13 +389,19 @@ class AddUpdateViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    func camera() {
-        if UIImagePickerController.isSourceTypeAvailable(.camera){
-            let myPickerController = UIImagePickerController()
-            myPickerController.delegate = self;
-            myPickerController.sourceType = .camera
-            self.present(myPickerController, animated: true, completion: nil)
-        }
+    //Pickers
+    func presentDatePicker() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.datePickerView.alpha = 1
+        })
+        enterDateButton.isEnabled = true
+    }
+    
+    func removeDatePicker() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.datePickerView.alpha = 0
+        })
+        enterDateButton.isEnabled = false
     }
     
     private func presentImagePickerController() {
@@ -427,8 +417,18 @@ class AddUpdateViewController: UIViewController {
             imagePicker.delegate = self
             
             imagePicker.sourceType = .photoLibrary
-
+            
             self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    //Misc
+    func camera() {
+        if UIImagePickerController.isSourceTypeAvailable(.camera){
+            let myPickerController = UIImagePickerController()
+            myPickerController.delegate = self;
+            myPickerController.sourceType = .camera
+            self.present(myPickerController, animated: true, completion: nil)
         }
     }
     
@@ -445,7 +445,7 @@ class AddUpdateViewController: UIViewController {
             }
         }
     }
-
+    
     @objc func keyboardWillHide(notification: NSNotification) {
         if self.view.frame.origin.y != 0 {
             self.view.frame.origin.y = 0
