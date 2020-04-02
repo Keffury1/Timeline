@@ -22,7 +22,7 @@ class ArchivesViewController: UIViewController {
         try! frc.performFetch()
         return frc
     }()
-
+    
     //MARK: - Outlets
     
     @IBOutlet weak var archivesTableView: UITableView!
@@ -54,19 +54,19 @@ class ArchivesViewController: UIViewController {
         tableViewView.layer.shadowOffset = CGSize(width: 2, height: 2)
         tableViewView.layer.shadowOpacity = 3.0
         tableViewView.layer.shadowColor = UIColor.lightGray.cgColor
-        tableViewView.layer.shadowRadius = 10.0
+        tableViewView.layer.shadowRadius = 5.0
         tableViewView.layer.shadowPath = shadowPath.cgPath
         
         let buttonShadowPath = UIBezierPath(roundedRect: self.addTimelineButton.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 10.0, height: 10.0))
         addTimelineButton.layer.shadowOffset = CGSize(width: 2, height: 2)
         addTimelineButton.layer.shadowOpacity = 3.0
         addTimelineButton.layer.shadowColor = UIColor.lightGray.cgColor
-        addTimelineButton.layer.shadowRadius = 10.0
+        addTimelineButton.layer.shadowRadius = 5.0
         addTimelineButton.layer.shadowPath = buttonShadowPath.cgPath
         
-        self.tableViewView.layer.cornerRadius = 20.0
-        self.archivesTableView.backgroundColor = .white
+        tableViewView.layer.cornerRadius = 20.0
         
+        archivesTableView.backgroundColor = .white
     }
     
     //MARK: - Actions
@@ -128,10 +128,12 @@ extension ArchivesViewController: UITableViewDelegate, UITableViewDataSource {
         cell.layer.cornerRadius = 20.0
         
         cell.view.layer.cornerRadius = 20.0
-        
-        cell.view.addShadow()
 
         cell.selectionStyle = .none
+        
+        cell.backgroundColor = .clear
+        
+        cell.layer.shouldRasterize = true
         
         return cell
     }

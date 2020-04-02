@@ -15,4 +15,13 @@ class TimelineTableViewCell: UITableViewCell {
     @IBOutlet weak var stripeView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+        self.backgroundColor = UIColor.clear
+        self.contentView.backgroundColor = UIColor.clear
+        
+        view.addShadow()
+    }
 }

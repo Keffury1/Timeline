@@ -32,21 +32,23 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     @IBOutlet weak var changeColorButton: UIButton!
     @IBOutlet weak var addUpdateButton: UIButton!
     
-    //Colors
-    @IBOutlet weak var blackButton: UIButton!
-    @IBOutlet weak var goldButton: UIButton!
-    @IBOutlet weak var mintButton: UIButton!
-    @IBOutlet weak var maroonButton: UIButton!
-    @IBOutlet weak var oliveButton: UIButton!
-    @IBOutlet weak var pinkButton: UIButton!
-    @IBOutlet weak var greyButton: UIButton!
+    @IBOutlet weak var redButton: UIButton!
+    @IBOutlet weak var orangeButton: UIButton!
+    @IBOutlet weak var yellowButton: UIButton!
+    @IBOutlet weak var greenButton: UIButton!
+    @IBOutlet weak var blueButton: UIButton!
+    @IBOutlet weak var purpleButton: UIButton!
     @IBOutlet weak var whiteButton: UIButton!
+    @IBOutlet weak var blackButton: UIButton!
     
 
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var trashButton: UIButton!
     
     @IBOutlet weak var toolsView: UIView!
+    
+    @IBOutlet weak var titleTextField: UITextField!
+    
     
     //MARK: - Views
     
@@ -63,6 +65,9 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         layout.minimumLineSpacing = spacing
         layout.minimumInteritemSpacing = spacing
         self.updatesCollectionView.collectionViewLayout = layout
+        
+        titleTextField.delegate = self
+        titleTextField.autocorrectionType = .no
     }
     
     //MARK: - Methods
@@ -108,33 +113,36 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         }
         
         setupButton(button: blackButton)
-        setupButton(button: goldButton)
-        setupButton(button: mintButton)
-        setupButton(button: maroonButton)
-        setupButton(button: oliveButton)
-        setupButton(button: pinkButton)
-        setupButton(button: greyButton)
+        setupButton(button: blueButton)
+        setupButton(button: purpleButton)
+        setupButton(button: orangeButton)
+        setupButton(button: yellowButton)
+        setupButton(button: greenButton)
+        setupButton(button: redButton)
         setupButton(button: whiteButton)
         
         addUpdateButton.layer.cornerRadius = 10.0
         addUpdateButton.layer.borderColor = UIColor.white.cgColor
         addUpdateButton.layer.borderWidth = 2.0
-        addShadeTo(button: addUpdateButton)
+        addUpdateButton.addShadow()
         
         saveButton.layer.cornerRadius = 10.0
         saveButton.layer.borderColor = UIColor.white.cgColor
         saveButton.layer.borderWidth = 2.0
-        addShadeTo(button: saveButton)
+        saveButton.addShadow()
         
         trashButton.layer.cornerRadius = 10.0
         trashButton.layer.borderColor = UIColor.white.cgColor
         trashButton.layer.borderWidth = 2.0
-        addShadeTo(button: trashButton)
+        trashButton.addShadow()
         
         changeColorButton.layer.cornerRadius = 10.0
         changeColorButton.layer.borderColor = UIColor.white.cgColor
         changeColorButton.layer.borderWidth = 2.0
-        addShadeTo(button: changeColorButton)
+        changeColorButton.addShadow()
+        
+        titleTextField.layer.cornerRadius = 10.0
+        titleTextField.textColor = self.view.backgroundColor
     }
     
     func setupCollectionVeiw() {
@@ -144,30 +152,57 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         updatesCollectionView.showsVerticalScrollIndicator = false
     }
     
+    func setupTimeline() {
+        if self.timeline == nil {
+            self.timeline = Timeline(color: UIColor.black, title: "Timeline")
+            titleTextField.text = "Timeline"
+            titleTextField.textColor = .black
+        } else {
+            guard let timeline = timeline else { return }
+            titleTextField.text = timeline.title
+            titleTextField.textColor = timeline.color as? UIColor
+            titleTextField.tintColor = timeline.color as? UIColor
+        }
+        
+        DispatchQueue.main.async {
+            let moc = CoreDataStack.shared.mainContext
+            do {
+                try moc.save()
+            } catch {
+                print("Error Saving Empty Timeline: \(error)")
+            }
+        }
+    }
+    
+    func updateViews() {
+        
+        
+        if self.timeline == nil {
+            
+        } else {
+            
+        }
+        
+        
+        
+//        let color = timeline?.color as? UIColor
+//
+//        self.view.backgroundColor = color
+//        self.changeColorView.backgroundColor = color
+//        self.changeColorButton.backgroundColor = color
+//        self.addUpdateButton.backgroundColor = color
+//        self.saveButton.backgroundColor = color
+//        self.trashButton.backgroundColor = color
+    }
+    
     func setupButton(button: UIButton) {
         button.layer.cornerRadius = 3.0
     }
     
-    func addShadeTo(button: UIButton) {
-        let buttonShadowPath = UIBezierPath(roundedRect: button.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 10.0, height: 10.0))
-        button.layer.shadowOpacity = 3.0
-        if self.view.backgroundColor == .white {
-            button.layer.shadowColor = nil
-        } else {
-            button.layer.shadowColor = UIColor.lightGray.cgColor
-        }
+    func saveColor(color: UIColor) {
+        guard let timeline = timeline else { return }
         
-        button.layer.shadowOffset = CGSize(width: 5, height: 5)
-        
-        button.layer.shadowRadius = 10.0
-        button.layer.shadowPath = buttonShadowPath.cgPath
-    }
-    
-    func setupTimeline() {
-        if self.timeline == nil {
-            self.timeline = Timeline(color: UIColor.black, title: "Timeline")
-        }
-        
+        timeline.color = color
         DispatchQueue.main.async {
             let moc = CoreDataStack.shared.mainContext
             do {
@@ -346,17 +381,6 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    func updateViews() {
-        let color = timeline?.color as? UIColor
-        
-        self.view.backgroundColor = color
-        self.changeColorView.backgroundColor = color
-        self.changeColorButton.backgroundColor = color
-        self.addUpdateButton.backgroundColor = color
-        self.saveButton.backgroundColor = color
-        self.trashButton.backgroundColor = color
-    }
-    
     //MARK: - Actions
     
     @IBAction func changeColorButtonTapped(_ sender: Any) {
@@ -371,51 +395,67 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         }
     }
     
-    @IBAction func blackButtonTapped(_ sender: Any) {
-        changeColor(for: blackButton)
+    @IBAction func redButtonTapped(_ sender: Any) {
+        changeColor(for: redButton)
         setupSubviews()
+        setupTimeline()
+        saveColor(color: .systemRed)
         updatesCollectionView.reloadData()
     }
     
-    @IBAction func goldButtonTapped(_ sender: Any) {
-        changeColor(for: goldButton)
+    @IBAction func orangeButtonTapped(_ sender: Any) {
+        changeColor(for: orangeButton)
         setupSubviews()
+        setupTimeline()
+        saveColor(color: .systemOrange)
         updatesCollectionView.reloadData()
     }
     
-    @IBAction func mintButtonTapped(_ sender: Any) {
-        changeColor(for: mintButton)
+    @IBAction func yellowButtonTapped(_ sender: Any) {
+        changeColor(for: yellowButton)
         setupSubviews()
+        setupTimeline()
+        saveColor(color: .systemYellow)
         updatesCollectionView.reloadData()
     }
     
-    @IBAction func maroonButtonTapped(_ sender: Any) {
-        changeColor(for: maroonButton)
+    @IBAction func greenButtonTapped(_ sender: Any) {
+        changeColor(for: greenButton)
         setupSubviews()
+        setupTimeline()
+        saveColor(color: .systemGreen)
         updatesCollectionView.reloadData()
     }
     
-    @IBAction func oliveButtonTapped(_ sender: Any) {
-        changeColor(for: oliveButton)
+    @IBAction func blueButtonTapped(_ sender: Any) {
+        changeColor(for: blueButton)
         setupSubviews()
+        setupTimeline()
+        saveColor(color: .systemBlue)
         updatesCollectionView.reloadData()
     }
     
-    @IBAction func pinkButtonTapped(_ sender: Any) {
-        changeColor(for: pinkButton)
+    @IBAction func purpleButtonTapped(_ sender: Any) {
+        changeColor(for: purpleButton)
         setupSubviews()
-        updatesCollectionView.reloadData()
-    }
-    
-    @IBAction func greyButtonTapped(_ sender: Any) {
-        changeColor(for: greyButton)
-        setupSubviews()
+        setupTimeline()
+        saveColor(color: .systemPurple)
         updatesCollectionView.reloadData()
     }
     
     @IBAction func whiteButtonTapped(_ sender: Any) {
         changeColor(for: whiteButton)
         setupSubviews()
+        setupTimeline()
+        saveColor(color: .white)
+        updatesCollectionView.reloadData()
+    }
+    
+    @IBAction func blackButtonTapped(_ sender: Any) {
+        changeColor(for: blackButton)
+        setupSubviews()
+        setupTimeline()
+        saveColor(color: .black)
         updatesCollectionView.reloadData()
     }
     
@@ -446,7 +486,6 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
             }
         }
     }
-    
 }
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -522,6 +561,18 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         
         return cell
+    }
+}
+
+extension MainViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == titleTextField {
+            self.view.endEditing(true)
+            return false
+        } else {
+            self.view.endEditing(true)
+            return false
+        }
     }
 }
 
