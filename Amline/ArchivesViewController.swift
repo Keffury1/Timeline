@@ -26,10 +26,11 @@ class ArchivesViewController: UIViewController {
     //MARK: - Outlets
     
     //Views
-    @IBOutlet weak var tableViewView: UIView!
     @IBOutlet weak var archivesTableView: UITableView!
+    @IBOutlet weak var tableViewView: UIView!
     
     //Buttons
+
     @IBOutlet weak var addTimelineButton: UIButton!
     
     //MARK: - Views
@@ -47,8 +48,7 @@ class ArchivesViewController: UIViewController {
     
     func setupSubviews() {
         
-        archivesTableView.layer.masksToBounds = false
-        archivesTableView.layer.shadowColor = UIColor.black.cgColor
+        archivesTableView.addShadow()
         archivesTableView.layer.cornerRadius = 20.0
         archivesTableView.backgroundColor = .white
         
