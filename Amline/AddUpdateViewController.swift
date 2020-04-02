@@ -331,6 +331,7 @@ class AddUpdateViewController: UIViewController {
     
     func addImageAlert() {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
         alertController.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (_) in
             let authorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
             
@@ -361,6 +362,7 @@ class AddUpdateViewController: UIViewController {
             
             self.camera()
         }))
+        
         alertController.addAction(UIAlertAction(title: "Upload Photo", style: .default, handler: { (_) in
             let authorizationStatus = PHPhotoLibrary.authorizationStatus()
             
@@ -428,11 +430,13 @@ class AddUpdateViewController: UIViewController {
     }
     
     func photoLibrary() {
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
-            let myPickerController = UIImagePickerController()
-            myPickerController.delegate = self;
-            myPickerController.sourceType = .photoLibrary
-            self.present(myPickerController, animated: true, completion: nil)
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            DispatchQueue.main.async {
+                let myPickerController = UIImagePickerController()
+                myPickerController.delegate = self;
+                myPickerController.sourceType = .photoLibrary
+                self.present(myPickerController, animated: true, completion: nil)
+            }
         }
     }
     
