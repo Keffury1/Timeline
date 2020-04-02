@@ -112,14 +112,18 @@ extension ArchivesViewController: UITableViewDelegate, UITableViewDataSource {
         let color = timeline.color as? UIColor
         cell.colorView.backgroundColor = color
         cell.titleLabel.text = timeline.title
+        cell.titleLabel.backgroundColor = color
         
         if color == .white {
             cell.stripeView.backgroundColor = .black
             cell.colorView.layer.borderColor = UIColor.black.cgColor
             cell.colorView.layer.borderWidth = 1.5
+            cell.titleLabel.textColor = .black
         } else {
             cell.stripeView.backgroundColor = .white
             cell.colorView.layer.borderColor = UIColor.white.cgColor
+            cell.colorView.layer.borderWidth = 1.5
+            cell.titleLabel.textColor = .white
         }
         
         cell.colorView.layer.cornerRadius = 15.0
@@ -128,6 +132,7 @@ extension ArchivesViewController: UITableViewDelegate, UITableViewDataSource {
         cell.layer.cornerRadius = 20.0
         
         cell.view.layer.cornerRadius = 20.0
+        cell.view.backgroundColor = color
 
         cell.selectionStyle = .none
         

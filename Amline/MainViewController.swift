@@ -18,7 +18,6 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     var timeline: Timeline? {
         didSet {
             updateViews()
-            setupSubviews()
         }
     }
     
@@ -56,7 +55,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         super.viewDidLoad()
         
         setupSubviews()
-        setupTimeline()
+        updateViews()
         setupCollectionVeiw()
         updatesCollectionView.reloadData()
         
@@ -70,47 +69,30 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         titleTextField.autocorrectionType = .no
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        
+        guard let color = self.view.backgroundColor, let title = titleTextField.text else { return }
+        
+        if let timeline = timeline {
+            timeline.color = color
+            timeline.title = title
+        } else {
+            timeline = Timeline(color: color, title: title)
+        }
+        
+        do {
+            let moc = CoreDataStack.shared.mainContext
+            try moc.save()
+            
+        } catch {
+            print("Error saving timeline: \(error)")
+        }
+    }
+    
     //MARK: - Methods
     
     func setupSubviews() {
-        
-        if view.backgroundColor == .white {
-            stripeView.backgroundColor = .black
-            
-            changeColorButton.backgroundColor = .black
-            changeColorButton.tintColor = .white
-            
-            addUpdateButton.backgroundColor = .black
-            addUpdateButton.tintColor = .white
-            
-            saveButton.backgroundColor = .black
-            saveButton.tintColor = .white
-            
-            trashButton.backgroundColor = .black
-            trashButton.tintColor = .white
-            
-            toolsView.backgroundColor = .black
-            
-            changeColorView.backgroundColor = .white
-        } else {
-            stripeView.backgroundColor = .white
-            
-            changeColorButton.backgroundColor = self.view.backgroundColor
-            changeColorButton.tintColor = .white
-            
-            addUpdateButton.backgroundColor = self.view.backgroundColor
-            addUpdateButton.tintColor = .white
-            
-            saveButton.backgroundColor = self.view.backgroundColor
-            saveButton.tintColor = .white
-            
-            trashButton.backgroundColor = self.view.backgroundColor
-            trashButton.tintColor = .white
-            
-            toolsView.backgroundColor = .white
-            
-            changeColorView.backgroundColor = self.view.backgroundColor
-        }
         
         setupButton(button: blackButton)
         setupButton(button: blueButton)
@@ -122,27 +104,22 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         setupButton(button: whiteButton)
         
         addUpdateButton.layer.cornerRadius = 10.0
-        addUpdateButton.layer.borderColor = UIColor.white.cgColor
         addUpdateButton.layer.borderWidth = 2.0
         addUpdateButton.addShadow()
         
         saveButton.layer.cornerRadius = 10.0
-        saveButton.layer.borderColor = UIColor.white.cgColor
         saveButton.layer.borderWidth = 2.0
         saveButton.addShadow()
         
         trashButton.layer.cornerRadius = 10.0
-        trashButton.layer.borderColor = UIColor.white.cgColor
         trashButton.layer.borderWidth = 2.0
         trashButton.addShadow()
         
         changeColorButton.layer.cornerRadius = 10.0
-        changeColorButton.layer.borderColor = UIColor.white.cgColor
         changeColorButton.layer.borderWidth = 2.0
         changeColorButton.addShadow()
         
         titleTextField.layer.cornerRadius = 10.0
-        titleTextField.textColor = self.view.backgroundColor
     }
     
     func setupCollectionVeiw() {
@@ -152,69 +129,85 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         updatesCollectionView.showsVerticalScrollIndicator = false
     }
     
-    func setupTimeline() {
-        if self.timeline == nil {
-            self.timeline = Timeline(color: UIColor.black, title: "Timeline")
-            titleTextField.text = "Timeline"
-            titleTextField.textColor = .black
-        } else {
-            guard let timeline = timeline else { return }
-            titleTextField.text = timeline.title
-            titleTextField.textColor = timeline.color as? UIColor
-            titleTextField.tintColor = timeline.color as? UIColor
-        }
-        
-        DispatchQueue.main.async {
-            let moc = CoreDataStack.shared.mainContext
-            do {
-                try moc.save()
-            } catch {
-                print("Error Saving Empty Timeline: \(error)")
-            }
-        }
-    }
-    
     func updateViews() {
+        guard isViewLoaded else { return }
         
-        
-        if self.timeline == nil {
-            
+        if let timeline = timeline {
+            titleTextField.text = timeline.title
+            let color = timeline.color as? UIColor
+            if color == .white {
+                self.view.backgroundColor = color
+                self.changeColorView.backgroundColor = color
+                
+                self.changeColorButton.backgroundColor = color
+                self.changeColorButton.layer.borderColor = UIColor.black.cgColor
+                self.changeColorButton.tintColor = .black
+                
+                self.addUpdateButton.backgroundColor = color
+                self.addUpdateButton.layer.borderColor = UIColor.black.cgColor
+                self.addUpdateButton.tintColor = .black
+                
+                self.saveButton.backgroundColor = color
+                self.saveButton.layer.borderColor = UIColor.black.cgColor
+                self.saveButton.tintColor = .black
+                
+                self.trashButton.backgroundColor = color
+                self.trashButton.layer.borderColor = UIColor.black.cgColor
+                self.trashButton.tintColor = .black
+                
+                self.titleTextField.textColor = .white
+                self.titleTextField.backgroundColor = .black
+                
+                self.toolsView.backgroundColor = .black
+                
+                self.stripeView.backgroundColor = .black
+            } else {
+                self.view.backgroundColor = color
+                self.changeColorView.backgroundColor = color
+                
+                self.changeColorButton.backgroundColor = color
+                self.changeColorButton.layer.borderColor = UIColor.white.cgColor
+                self.changeColorButton.tintColor = .white
+                
+                self.addUpdateButton.backgroundColor = color
+                self.addUpdateButton.layer.borderColor = UIColor.white.cgColor
+                self.addUpdateButton.tintColor = .white
+                
+                self.saveButton.backgroundColor = color
+                self.saveButton.layer.borderColor = UIColor.white.cgColor
+                self.saveButton.tintColor = .white
+                
+                self.trashButton.backgroundColor = color
+                self.trashButton.layer.borderColor = UIColor.white.cgColor
+                self.trashButton.tintColor = .white
+                
+                self.titleTextField.textColor = color
+                self.titleTextField.backgroundColor = .white
+                
+                self.toolsView.backgroundColor = .white
+                
+                self.stripeView.backgroundColor = .white
+            }
         } else {
-            
+            titleTextField.text = "Timeline"
+            self.view.backgroundColor = .black
+            self.changeColorView.backgroundColor = .black
+            self.changeColorButton.backgroundColor = .black
+            self.addUpdateButton.backgroundColor = .black
+            self.saveButton.backgroundColor = .black
+            self.trashButton.backgroundColor = .black
+            self.titleTextField.textColor = .black
         }
-        
-        
-        
-//        let color = timeline?.color as? UIColor
-//
-//        self.view.backgroundColor = color
-//        self.changeColorView.backgroundColor = color
-//        self.changeColorButton.backgroundColor = color
-//        self.addUpdateButton.backgroundColor = color
-//        self.saveButton.backgroundColor = color
-//        self.trashButton.backgroundColor = color
+        updatesCollectionView.reloadData()
     }
     
     func setupButton(button: UIButton) {
         button.layer.cornerRadius = 3.0
     }
     
-    func saveColor(color: UIColor) {
-        guard let timeline = timeline else { return }
-        
-        timeline.color = color
-        DispatchQueue.main.async {
-            let moc = CoreDataStack.shared.mainContext
-            do {
-                try moc.save()
-            } catch {
-                print("Error Saving Empty Timeline: \(error)")
-            }
-        }
-    }
-    
     func changeColor(for button: UIButton) {
         self.view.backgroundColor = button.backgroundColor
+        titleTextField.textColor = button.backgroundColor
     }
     
     func setupAlertColor(alertController: UIAlertController, string: String, size: CGFloat) {
@@ -259,83 +252,6 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
                 alertController.setValue(saveTimelineAlertString, forKey: "attributedTitle")
             }
         }
-    }
-    
-    func saveTimelineAlert() {
-        
-        let saveTimelineAlert = UIAlertController(title: "", message: "", preferredStyle: .alert)
-        
-        saveTimelineAlert.addTextField { (textField) in
-            textField.textAlignment = .center
-            if self.traitCollection.userInterfaceStyle == .dark {
-                if self.view.backgroundColor == .black {
-                    textField.textColor = .white
-                } else {
-                    textField.textColor = self.view.backgroundColor
-                }
-            } else {
-                if self.view.backgroundColor == .white {
-                    textField.textColor = .black
-                } else {
-                    textField.textColor = self.view.backgroundColor
-                }
-            }
-            textField.placeholder = "Title:"
-            if self.timeline?.title == "Timeline" {
-                textField.text = nil
-            } else {
-                textField.text = self.timeline?.title
-            }
-        }
-        
-        saveTimelineAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
-        
-        saveTimelineAlert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (_) in
-            guard let title = saveTimelineAlert.textFields?.first?.text, let color = self.view.backgroundColor else { return }
-            
-            if let timeline = self.timeline {
-                timeline.color = color
-                timeline.title = title
-            } else {
-                _ = Timeline(color: color, title: title)
-            }
-            
-            DispatchQueue.main.async {
-                do {
-                    let moc = CoreDataStack.shared.mainContext
-                    try moc.save()
-                    
-                    self.timelineSavedAlert()
-                } catch {
-                    print("Error saving Timeline: \(error)")
-                    return
-                }
-            }
-            
-        }))
-        
-        self.setupAlertColor(alertController: saveTimelineAlert, string: "Timeline", size: CGFloat(integerLiteral: 30))
-        
-        saveTimelineAlert.view.layer.cornerRadius = 10.0
-        
-        self.present(saveTimelineAlert, animated: true, completion: nil)
-    }
-    
-    func timelineSavedAlert() {
-        let alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
-            DispatchQueue.main.async {
-                self.archivesVC?.archivesTableView.reloadData()
-            }
-            self.dismiss(animated: true, completion: nil)
-        }))
-        
-        
-        self.setupAlertColor(alertController: alertController, string: "Timeline Saved!", size: CGFloat(integerLiteral: 22))
-        
-        alertController.view.layer.cornerRadius = 10.0
-        
-        self.present(alertController, animated: true, completion: nil)
     }
     
     func deleteTimelineAlert() {
@@ -398,69 +314,53 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     @IBAction func redButtonTapped(_ sender: Any) {
         changeColor(for: redButton)
         setupSubviews()
-        setupTimeline()
-        saveColor(color: .systemRed)
         updatesCollectionView.reloadData()
     }
     
     @IBAction func orangeButtonTapped(_ sender: Any) {
         changeColor(for: orangeButton)
         setupSubviews()
-        setupTimeline()
-        saveColor(color: .systemOrange)
         updatesCollectionView.reloadData()
     }
     
     @IBAction func yellowButtonTapped(_ sender: Any) {
         changeColor(for: yellowButton)
         setupSubviews()
-        setupTimeline()
-        saveColor(color: .systemYellow)
         updatesCollectionView.reloadData()
     }
     
     @IBAction func greenButtonTapped(_ sender: Any) {
         changeColor(for: greenButton)
         setupSubviews()
-        setupTimeline()
-        saveColor(color: .systemGreen)
         updatesCollectionView.reloadData()
     }
     
     @IBAction func blueButtonTapped(_ sender: Any) {
         changeColor(for: blueButton)
         setupSubviews()
-        setupTimeline()
-        saveColor(color: .systemBlue)
         updatesCollectionView.reloadData()
     }
     
     @IBAction func purpleButtonTapped(_ sender: Any) {
         changeColor(for: purpleButton)
         setupSubviews()
-        setupTimeline()
-        saveColor(color: .systemPurple)
         updatesCollectionView.reloadData()
     }
     
     @IBAction func whiteButtonTapped(_ sender: Any) {
         changeColor(for: whiteButton)
         setupSubviews()
-        setupTimeline()
-        saveColor(color: .white)
         updatesCollectionView.reloadData()
     }
     
     @IBAction func blackButtonTapped(_ sender: Any) {
         changeColor(for: blackButton)
         setupSubviews()
-        setupTimeline()
-        saveColor(color: .black)
         updatesCollectionView.reloadData()
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        saveTimelineAlert()
+       //Upload the timeline to messages, mail, notes, etc.
     }
     
     @IBAction func trashButtonTapped(_ sender: Any) {
@@ -477,11 +377,11 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
                 changeColorView.alpha = 0
             }
         } else if segue.identifier == "detailSegue" {
-            if let addUpdateVC = segue.destination as? AddUpdateViewController, let indexPath = updatesCollectionView.indexPathsForSelectedItems, let first = indexPath.first {
+            if let addUpdateVC = segue.destination as? AddUpdateViewController, let indexPath = updatesCollectionView.indexPathForItem(at: updatesCollectionView.convert(CGPoint(), to: updatesCollectionView)) {
                 addUpdateVC.color = self.view.backgroundColor
                 addUpdateVC.mainVC = self
                 guard let timeline = timeline, let updates = Array(timeline.updates) as? [Update] else { return }
-                addUpdateVC.update = updates[first.row]
+                addUpdateVC.update = updates[indexPath.row]
                 changeColorView.alpha = 0
             }
         }

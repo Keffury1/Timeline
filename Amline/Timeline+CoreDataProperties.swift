@@ -17,8 +17,8 @@ extension Timeline {
         return NSFetchRequest<Timeline>(entityName: "Timeline")
     }
 
-    @NSManaged public var color: NSObject?
-    @NSManaged public var title: String?
+    @NSManaged public var color: NSObject
+    @NSManaged public var title: String
     @NSManaged public var updates: NSSet
 
 }

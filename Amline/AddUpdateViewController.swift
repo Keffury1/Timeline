@@ -152,7 +152,8 @@ class AddUpdateViewController: UIViewController {
         titleTextField.text = update?.title
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = DateFormatter.Style.medium
+        dateFormatter.dateStyle = DateFormatter.Style.long
+        dateFormatter.timeStyle = .short
         if let date = update?.date {
             let dateString = dateFormatter.string(from: date)
             dateTextField.text = dateString
