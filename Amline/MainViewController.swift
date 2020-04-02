@@ -106,8 +106,6 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         setupButton(button: whiteButton)
         setupButton(button: changeColorButton)
         
-        
-        
         addUpdateButton.layer.cornerRadius = 10.0
         addUpdateButton.layer.borderColor = UIColor.white.cgColor
         addUpdateButton.layer.borderWidth = 2.0
@@ -432,7 +430,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     internal func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 175, height: 100)
+        return CGSize(width: 200, height: 200)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -448,25 +446,39 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         let update = updates[indexPath.row]
         
-        cell.updateLabel.text = update.title
-        cell.imageView.image = update.image as? UIImage
+        DispatchQueue.main.async {
+            cell.updateLabel.text = update.title
+            cell.imageView.image = update.image as? UIImage
+            
+            cell.imageView.layer.borderWidth = 1.0
+            cell.imageView.layer.masksToBounds = false
+            cell.imageView.layer.borderColor = UIColor.white.cgColor
+            cell.imageView.layer.cornerRadius = cell.imageView.frame.size.height/2
+            cell.imageView.clipsToBounds = true
+            cell.imageView.backgroundColor = .clear
+            cell.imageView.contentMode = .scaleAspectFit
+            cell.imageView.addShadow()
+        }
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.medium
         let date = update.date
         let dateString = dateFormatter.string(from: date!)
-        cell.dateLabel.text = dateString
         
-        cell.layer.cornerRadius = 10.0
-        
-        if view.backgroundColor == .white {
-            cell.backgroundColor = .black
-            cell.updateLabel.textColor = .white
-            cell.dateLabel.textColor = .white
-        } else {
-            cell.backgroundColor = .white
-            cell.updateLabel.textColor = view.backgroundColor
-            cell.dateLabel.textColor = view.backgroundColor
+        DispatchQueue.main.async {
+            cell.dateLabel.text = dateString
+            
+            cell.layer.cornerRadius = 20.0
+            
+            if self.view.backgroundColor == .white {
+                cell.backgroundColor = .black
+                cell.updateLabel.textColor = .white
+                cell.dateLabel.textColor = .white
+            } else {
+                cell.backgroundColor = .white
+                cell.updateLabel.textColor = self.view.backgroundColor
+                cell.dateLabel.textColor = self.view.backgroundColor
+            }
         }
         
         return cell

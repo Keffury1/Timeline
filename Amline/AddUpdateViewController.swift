@@ -140,7 +140,11 @@ class AddUpdateViewController: UIViewController {
         dateTextField.backgroundColor = .white
         
         imageView.tintColor = .white
-        imageView.image = UIImage(systemName: "photo")
+        if imageView.image == nil {
+            imageView.image = UIImage(systemName: "photo")
+        }
+        imageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        imageView.layer.cornerRadius = imageView.frame.size.height/3.0
         
         updateLabel.textColor = .white
         updateTextView.backgroundColor = .white
@@ -320,15 +324,6 @@ class AddUpdateViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    func presentInformationalAlertController(title: String?, message: String?, dismissActionCompletion: ((UIAlertAction) -> Void)? = nil, completion: (() -> Void)? = nil) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: dismissActionCompletion)
-        
-        alertController.addAction(dismissAction)
-        
-        present(alertController, animated: true, completion: completion)
-    }
-    
     func addImageAlert() {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
@@ -352,14 +347,13 @@ class AddUpdateViewController: UIViewController {
                 }
                 
             case .denied:
-                self.presentInformationalAlertController(title: "Error", message: "In order to access the Camera, you must allow this application access to it.")
+                self.presentInformationalAlertController(title: "Error", message: "In order to access the camera, you must allow this application access to it.")
             case .restricted:
-                self.presentInformationalAlertController(title: "Error", message: "Unable to access the Camera. Your device's restrictions do not allow access.")
+                self.presentInformationalAlertController(title: "Error", message: "Unable to access the camera. Your device's restrictions do not allow access.")
                 
             @unknown default:
                 fatalError()
             }
-            
             self.camera()
         }))
         
@@ -368,7 +362,7 @@ class AddUpdateViewController: UIViewController {
             
             switch authorizationStatus {
             case .authorized:
-                self.photoLibrary()
+                self.presentImagePickerController()
             case .notDetermined:
                 
                 PHPhotoLibrary.requestAuthorization { (status) in
@@ -379,7 +373,7 @@ class AddUpdateViewController: UIViewController {
                         return
                     }
                     
-                    self.photoLibrary()
+                    self.presentImagePickerController()
                 }
                 
             case .denied:
@@ -390,7 +384,7 @@ class AddUpdateViewController: UIViewController {
             @unknown default:
                 fatalError()
             }
-            self.photoLibrary()
+            self.presentImagePickerController()
         }))
         
         if self.traitCollection.userInterfaceStyle == .light {
@@ -429,14 +423,21 @@ class AddUpdateViewController: UIViewController {
         }
     }
     
-    func photoLibrary() {
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            DispatchQueue.main.async {
-                let myPickerController = UIImagePickerController()
-                myPickerController.delegate = self;
-                myPickerController.sourceType = .photoLibrary
-                self.present(myPickerController, animated: true, completion: nil)
-            }
+    private func presentImagePickerController() {
+        
+        guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
+            presentInformationalAlertController(title: "Error", message: "The photo library is unavailable")
+            return
+        }
+        
+        DispatchQueue.main.async {
+            let imagePicker = UIImagePickerController()
+            
+            imagePicker.delegate = self
+            
+            imagePicker.sourceType = .photoLibrary
+
+            self.present(imagePicker, animated: true, completion: nil)
         }
     }
     
@@ -483,7 +484,7 @@ class AddUpdateViewController: UIViewController {
             if image == UIImage(systemName: "photo") {
                 update.image = nil
             } else {
-                update.image = image
+                update.image = image as NSObject
             }
             
             mainVC.updatesCollectionView.reloadData()

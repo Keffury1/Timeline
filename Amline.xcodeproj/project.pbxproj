@@ -10,6 +10,7 @@
 		37133D4F24354F11000BD486 /* UIImage+Ratio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37133D4E24354F11000BD486 /* UIImage+Ratio.swift */; };
 		37133D5124356C3E000BD486 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37133D5024356C3E000BD486 /* UIViewExtension.swift */; };
 		372AC6692434FAF500CCEA32 /* Timeline.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 37DB59F32432E228009830F3 /* Timeline.xcdatamodeld */; };
+		3738570724358087002860F0 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3738570624358087002860F0 /* UIViewControllerExtension.swift */; };
 		373AFA57242FE18D0068B4A4 /* ArchivesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373AFA56242FE18D0068B4A4 /* ArchivesViewController.swift */; };
 		3746518B2430274A003AFE63 /* TimelineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3746518A2430274A003AFE63 /* TimelineTableViewCell.swift */; };
 		3755ED53242E8E310056EA4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3755ED52242E8E310056EA4F /* AppDelegate.swift */; };
@@ -34,6 +35,7 @@
 		37133D4E24354F11000BD486 /* UIImage+Ratio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ratio.swift"; sourceTree = "<group>"; };
 		37133D5024356C3E000BD486 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		3728FAC72434FC5A009794E9 /* Timeline 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Timeline 2.xcdatamodel"; sourceTree = "<group>"; };
+		3738570624358087002860F0 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		373AFA56242FE18D0068B4A4 /* ArchivesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivesViewController.swift; sourceTree = "<group>"; };
 		3746518A2430274A003AFE63 /* TimelineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTableViewCell.swift; sourceTree = "<group>"; };
 		3755ED4F242E8E310056EA4F /* Amline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amline.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +75,7 @@
 			children = (
 				37133D4E24354F11000BD486 /* UIImage+Ratio.swift */,
 				37133D5024356C3E000BD486 /* UIViewExtension.swift */,
+				3738570624358087002860F0 /* UIViewControllerExtension.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 			files = (
 				375AFB2E24332388009D5ACD /* Update+CoreDataClass.swift in Sources */,
 				37DB59FE2432E73D009830F3 /* Update+Convenience.swift in Sources */,
+				3738570724358087002860F0 /* UIViewControllerExtension.swift in Sources */,
 				373AFA57242FE18D0068B4A4 /* ArchivesViewController.swift in Sources */,
 				375AFB3024332388009D5ACD /* Timeline+CoreDataClass.swift in Sources */,
 				375AFB2F24332388009D5ACD /* Update+CoreDataProperties.swift in Sources */,
