@@ -46,6 +46,8 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var trashButton: UIButton!
     
+    @IBOutlet weak var toolsView: UIView!
+    
     //MARK: - Views
     
     override func viewDidLoad() {
@@ -70,30 +72,39 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         if view.backgroundColor == .white {
             stripeView.backgroundColor = .black
             
-            blackButton.layer.borderColor = UIColor.white.cgColor
-            blackButton.layer.borderWidth = 0.5
-            
             changeColorButton.backgroundColor = .black
+            changeColorButton.tintColor = .white
+            
             addUpdateButton.backgroundColor = .black
+            addUpdateButton.tintColor = .white
+            
             saveButton.backgroundColor = .black
+            saveButton.tintColor = .white
+            
             trashButton.backgroundColor = .black
+            trashButton.tintColor = .white
             
+            toolsView.backgroundColor = .black
             
-            changeColorButton.layer.borderColor = UIColor.black.cgColor
-            changeColorButton.layer.borderWidth = 2.0
+            changeColorView.backgroundColor = .white
         } else {
             stripeView.backgroundColor = .white
             
-            whiteButton.layer.borderColor = UIColor.black.cgColor
-            whiteButton.layer.borderWidth = 0.5
-            
             changeColorButton.backgroundColor = self.view.backgroundColor
-            addUpdateButton.backgroundColor = self.view.backgroundColor
-            saveButton.backgroundColor = self.view.backgroundColor
-            trashButton.backgroundColor = self.view.backgroundColor
+            changeColorButton.tintColor = .white
             
-            changeColorButton.layer.borderColor = UIColor.white.cgColor
-            changeColorButton.layer.borderWidth = 2.0
+            addUpdateButton.backgroundColor = self.view.backgroundColor
+            addUpdateButton.tintColor = .white
+            
+            saveButton.backgroundColor = self.view.backgroundColor
+            saveButton.tintColor = .white
+            
+            trashButton.backgroundColor = self.view.backgroundColor
+            trashButton.tintColor = .white
+            
+            toolsView.backgroundColor = .white
+            
+            changeColorView.backgroundColor = self.view.backgroundColor
         }
         
         setupButton(button: blackButton)
@@ -104,22 +115,26 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         setupButton(button: pinkButton)
         setupButton(button: greyButton)
         setupButton(button: whiteButton)
-        setupButton(button: changeColorButton)
         
         addUpdateButton.layer.cornerRadius = 10.0
         addUpdateButton.layer.borderColor = UIColor.white.cgColor
         addUpdateButton.layer.borderWidth = 2.0
+        addShadeTo(button: addUpdateButton)
         
         saveButton.layer.cornerRadius = 10.0
         saveButton.layer.borderColor = UIColor.white.cgColor
         saveButton.layer.borderWidth = 2.0
+        addShadeTo(button: saveButton)
         
         trashButton.layer.cornerRadius = 10.0
         trashButton.layer.borderColor = UIColor.white.cgColor
         trashButton.layer.borderWidth = 2.0
+        addShadeTo(button: trashButton)
         
         changeColorButton.layer.cornerRadius = 10.0
-        changeColorView.backgroundColor = self.view.backgroundColor
+        changeColorButton.layer.borderColor = UIColor.white.cgColor
+        changeColorButton.layer.borderWidth = 2.0
+        addShadeTo(button: changeColorButton)
     }
     
     func setupCollectionVeiw() {
@@ -131,6 +146,17 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     func setupButton(button: UIButton) {
         button.layer.cornerRadius = 3.0
+    }
+    
+    func addShadeTo(button: UIButton) {
+        let buttonShadowPath = UIBezierPath(roundedRect: button.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 10.0, height: 10.0))
+        button.layer.shadowOpacity = 3.0
+        
+        button.layer.shadowColor = UIColor.lightGray.cgColor
+        button.layer.shadowOffset = CGSize(width: 5, height: 5)
+        
+        button.layer.shadowRadius = 10.0
+        button.layer.shadowPath = buttonShadowPath.cgPath
     }
     
     func setupTimeline() {
@@ -450,13 +476,10 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.updateLabel.text = update.title
             cell.imageView.image = update.image as? UIImage
             
-            cell.imageView.layer.borderWidth = 1.0
             cell.imageView.layer.masksToBounds = false
-            cell.imageView.layer.borderColor = UIColor.white.cgColor
-            cell.imageView.layer.cornerRadius = cell.imageView.frame.size.height/2
             cell.imageView.clipsToBounds = true
             cell.imageView.backgroundColor = .clear
-            cell.imageView.contentMode = .scaleAspectFit
+            cell.imageView.contentMode = .scaleAspectFill
             cell.imageView.addShadow()
         }
         
@@ -468,17 +491,23 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         DispatchQueue.main.async {
             cell.dateLabel.text = dateString
             
-            cell.layer.cornerRadius = 20.0
+            cell.layer.cornerRadius = 100.0
             
-            if self.view.backgroundColor == .white {
-                cell.backgroundColor = .black
+            if cell.imageView.image == nil {
+                if self.view.backgroundColor == .white {
+                    cell.backgroundColor = .black
+                    cell.updateLabel.textColor = .white
+                    cell.dateLabel.textColor = .white
+                } else {
+                    cell.backgroundColor = .white
+                    cell.updateLabel.textColor = self.view.backgroundColor
+                    cell.dateLabel.textColor = self.view.backgroundColor
+                }
+            } else {
                 cell.updateLabel.textColor = .white
                 cell.dateLabel.textColor = .white
-            } else {
-                cell.backgroundColor = .white
-                cell.updateLabel.textColor = self.view.backgroundColor
-                cell.dateLabel.textColor = self.view.backgroundColor
             }
+            
         }
         
         return cell
