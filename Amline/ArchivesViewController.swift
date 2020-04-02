@@ -123,6 +123,7 @@ extension ArchivesViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         cell.colorView.layer.cornerRadius = 15.0
+        cell.colorView.addShadow()
         
         cell.layer.cornerRadius = 20.0
         

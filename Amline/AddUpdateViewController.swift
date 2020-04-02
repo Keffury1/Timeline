@@ -45,8 +45,6 @@ class AddUpdateViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     
-    @IBOutlet weak var calendarButton: UIButton!
-    
     @IBOutlet weak var datePickerView: UIView!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var enterDateButton: UIButton!
@@ -84,8 +82,6 @@ class AddUpdateViewController: UIViewController {
             updateTextView.textColor = .black
             imageView.backgroundColor = .black
             deleteButton.backgroundColor = .black
-            calendarButton.backgroundColor = .clear
-            calendarButton.tintColor = .black
             enterDateButton.backgroundColor = .black
             datePickerView.backgroundColor = color
             datePicker.setValue(UIColor.black, forKeyPath: "textColor")
@@ -100,8 +96,6 @@ class AddUpdateViewController: UIViewController {
             updateTextView.textColor = color
             imageView.backgroundColor = color
             deleteButton.backgroundColor = color
-            calendarButton.backgroundColor = color
-            calendarButton.tintColor = .white
             enterDateButton.backgroundColor = color
             datePickerView.backgroundColor = color
             datePicker.setValue(UIColor.white, forKeyPath: "textColor")
@@ -147,7 +141,6 @@ class AddUpdateViewController: UIViewController {
         
         datePickerView.layer.cornerRadius = 10.0
         enterDateButton.layer.cornerRadius = 5.0
-        calendarButton.layer.cornerRadius = 5.0
     }
     
     func updateViews() {
@@ -418,8 +411,6 @@ class AddUpdateViewController: UIViewController {
         }
     }
     
-
-    
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if titleTextField.isEditing == true {
@@ -461,7 +452,8 @@ class AddUpdateViewController: UIViewController {
             mainVC.updatesCollectionView.reloadData()
         } else {
             let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = DateFormatter.Style.medium
+            dateFormatter.dateStyle = DateFormatter.Style.long
+            dateFormatter.timeStyle = .short
             if let date = dateFormatter.date(from: date) {
                 if image == UIImage(systemName: "photo") {
                     let update = Update(title: titleText, date: date, update: updateText, image: nil)
@@ -488,14 +480,6 @@ class AddUpdateViewController: UIViewController {
         deleteEntryAlert()
     }
     
-    @IBAction func calendarButtonTapped(_ sender: Any) {
-        if datePickerView.alpha == 0 {
-            presentDatePicker()
-        } else {
-            removeDatePicker()
-        }
-    }
-    
     @IBAction func enterDateTapped(_ sender: Any) {
         let date = datePicker.date
         
@@ -503,7 +487,8 @@ class AddUpdateViewController: UIViewController {
             update.date = date
         }
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = DateFormatter.Style.medium
+        dateFormatter.dateStyle = DateFormatter.Style.long
+        dateFormatter.timeStyle = .short
         dateTextField.text = dateFormatter.string(from: date)
         removeDatePicker()
     }
@@ -526,6 +511,15 @@ extension AddUpdateViewController: UITextFieldDelegate {
         } else {
             self.view.endEditing(true)
             return false
+        }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == dateTextField {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.enterDateButton.isEnabled = true
+                self.datePickerView.alpha = 1
+            })
         }
     }
 }

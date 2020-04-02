@@ -151,8 +151,11 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     func addShadeTo(button: UIButton) {
         let buttonShadowPath = UIBezierPath(roundedRect: button.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 10.0, height: 10.0))
         button.layer.shadowOpacity = 3.0
-        
-        button.layer.shadowColor = UIColor.lightGray.cgColor
+        if self.view.backgroundColor == .white {
+            button.layer.shadowColor = nil
+        } else {
+            button.layer.shadowColor = UIColor.lightGray.cgColor
+        }
         
         button.layer.shadowOffset = CGSize(width: 5, height: 5)
         
@@ -483,12 +486,18 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = DateFormatter.Style.medium
+        dateFormatter.dateStyle = DateFormatter.Style.long
         let date = update.date
         let dateString = dateFormatter.string(from: date!)
         
+        let timeFormatter = DateFormatter()
+        timeFormatter.timeStyle = .short
+        let time = update.date
+        let timeString = timeFormatter.string(from: time!)
+        
         DispatchQueue.main.async {
             cell.dateLabel.text = dateString
+            cell.timeLabel.text = timeString
             
             cell.layer.cornerRadius = 100.0
             
@@ -497,14 +506,17 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     cell.backgroundColor = .black
                     cell.updateLabel.textColor = .white
                     cell.dateLabel.textColor = .white
+                    cell.timeLabel.textColor = .white
                 } else {
                     cell.backgroundColor = .white
                     cell.updateLabel.textColor = self.view.backgroundColor
                     cell.dateLabel.textColor = self.view.backgroundColor
+                    cell.timeLabel.textColor = self.view.backgroundColor
                 }
             } else {
                 cell.updateLabel.textColor = .white
                 cell.dateLabel.textColor = .white
+                cell.timeLabel.textColor = .white
             }
             
         }
