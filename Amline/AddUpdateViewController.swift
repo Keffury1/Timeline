@@ -113,6 +113,9 @@ class AddUpdateViewController: UIViewController {
         imageView.tintColor = .white
         if imageView.image == nil {
             imageView.image = UIImage(systemName: "photo")
+            imageView.contentMode = .scaleAspectFit
+        } else {
+            imageView.contentMode = .scaleToFill
         }
         imageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         imageView.layer.cornerRadius = imageView.frame.size.height/3.0
@@ -533,6 +536,7 @@ extension AddUpdateViewController: UIImagePickerControllerDelegate, UINavigation
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
 
         imageView.image = image
+        imageView.contentMode = .scaleToFill
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

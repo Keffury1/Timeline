@@ -51,14 +51,14 @@ class ArchivesViewController: UIViewController {
         self.archivesTableView.layer.cornerRadius = 20.0
         
         let shadowPath = UIBezierPath(roundedRect: self.tableViewView.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 10.0, height: 10.0))
-        tableViewView.layer.shadowOffset = CGSize(width: 5, height: 5)
+        tableViewView.layer.shadowOffset = CGSize(width: 2, height: 2)
         tableViewView.layer.shadowOpacity = 3.0
         tableViewView.layer.shadowColor = UIColor.lightGray.cgColor
         tableViewView.layer.shadowRadius = 10.0
         tableViewView.layer.shadowPath = shadowPath.cgPath
         
         let buttonShadowPath = UIBezierPath(roundedRect: self.addTimelineButton.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 10.0, height: 10.0))
-        addTimelineButton.layer.shadowOffset = CGSize(width: 5, height: 5)
+        addTimelineButton.layer.shadowOffset = CGSize(width: 2, height: 2)
         addTimelineButton.layer.shadowOpacity = 3.0
         addTimelineButton.layer.shadowColor = UIColor.lightGray.cgColor
         addTimelineButton.layer.shadowRadius = 10.0
