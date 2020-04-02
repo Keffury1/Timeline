@@ -10,7 +10,9 @@ import UIKit
 
 class TimelineTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var view: UIView!
     @IBOutlet weak var colorView: UIView!
     @IBOutlet weak var stripeView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
+    
 }

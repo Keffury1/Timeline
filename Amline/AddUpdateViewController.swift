@@ -7,12 +7,13 @@
 //
 
 import Foundation
+import AVFoundation
 import UIKit
 import Photos
 import CoreImage
 import CoreData
 
-class AddUpdateViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+class AddUpdateViewController: UIViewController {
 
     //MARK: - Properties
     
@@ -23,6 +24,29 @@ class AddUpdateViewController: UIViewController, UIImagePickerControllerDelegate
     var update: Update? {
         didSet {
             updateViews()
+        }
+    }
+    
+    var originalImage: UIImage? {
+        didSet {
+            guard let originalImage = originalImage else { return }
+            
+            var scaledSize = imageView.bounds.size
+            let scale = CGFloat(0.5)
+            
+            scaledSize = CGSize(width: scaledSize.width*scale,
+                                height: scaledSize.height*scale)
+            
+            let scaledUIImage = originalImage.imageByScaling(toSize: scaledSize)
+            guard let scaledCGImage = scaledUIImage?.cgImage else { return }
+            
+            scaledImage = CIImage(cgImage: scaledCGImage)
+        }
+    }
+    
+    var scaledImage: CIImage? {
+        didSet {
+            updateImage()
         }
     }
     
@@ -296,13 +320,75 @@ class AddUpdateViewController: UIViewController, UIImagePickerControllerDelegate
         self.present(alertController, animated: true, completion: nil)
     }
     
+    func presentInformationalAlertController(title: String?, message: String?, dismissActionCompletion: ((UIAlertAction) -> Void)? = nil, completion: (() -> Void)? = nil) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: dismissActionCompletion)
+        
+        alertController.addAction(dismissAction)
+        
+        present(alertController, animated: true, completion: completion)
+    }
+    
     func addImageAlert() {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alertController.addAction(UIAlertAction(title: "Upload Photo", style: .default, handler: { (_) in
-            //Ask for camera roll permission
-        }))
         alertController.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (_) in
-            //Ask for camera permission
+            let authorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
+            
+            switch authorizationStatus {
+            case .authorized:
+                self.camera()
+            case .notDetermined:
+                
+                PHPhotoLibrary.requestAuthorization { (status) in
+                    
+                    guard status == .authorized else {
+                        NSLog("User did not authorize access to the camera")
+                        self.presentInformationalAlertController(title: "Error", message: "In order to access the camera, you must allow this application access to it.")
+                        return
+                    }
+                    
+                    self.camera()
+                }
+                
+            case .denied:
+                self.presentInformationalAlertController(title: "Error", message: "In order to access the Camera, you must allow this application access to it.")
+            case .restricted:
+                self.presentInformationalAlertController(title: "Error", message: "Unable to access the Camera. Your device's restrictions do not allow access.")
+                
+            @unknown default:
+                fatalError()
+            }
+            
+            self.camera()
+        }))
+        alertController.addAction(UIAlertAction(title: "Upload Photo", style: .default, handler: { (_) in
+            let authorizationStatus = PHPhotoLibrary.authorizationStatus()
+            
+            switch authorizationStatus {
+            case .authorized:
+                self.photoLibrary()
+            case .notDetermined:
+                
+                PHPhotoLibrary.requestAuthorization { (status) in
+                    
+                    guard status == .authorized else {
+                        NSLog("User did not authorize access to the photo library")
+                        self.presentInformationalAlertController(title: "Error", message: "In order to access the photo library, you must allow this application access to it.")
+                        return
+                    }
+                    
+                    self.photoLibrary()
+                }
+                
+            case .denied:
+                self.presentInformationalAlertController(title: "Error", message: "In order to access the photo library, you must allow this application access to it.")
+            case .restricted:
+                self.presentInformationalAlertController(title: "Error", message: "Unable to access the photo library. Your device's restrictions do not allow access.")
+                
+            @unknown default:
+                fatalError()
+            }
+            self.photoLibrary()
         }))
         
         if self.traitCollection.userInterfaceStyle == .light {
@@ -330,6 +416,32 @@ class AddUpdateViewController: UIViewController, UIImagePickerControllerDelegate
         let height: NSLayoutConstraint = NSLayoutConstraint(item: alertController.view!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 300.0)
         alertController.view.addConstraint(height)
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func camera() {
+        if UIImagePickerController.isSourceTypeAvailable(.camera){
+            let myPickerController = UIImagePickerController()
+            myPickerController.delegate = self;
+            myPickerController.sourceType = .camera
+            self.present(myPickerController, animated: true, completion: nil)
+        }
+    }
+    
+    func photoLibrary() {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+            let myPickerController = UIImagePickerController()
+            myPickerController.delegate = self;
+            myPickerController.sourceType = .photoLibrary
+            self.present(myPickerController, animated: true, completion: nil)
+        }
+    }
+    
+    private func updateImage() {
+        if let scaledImage = scaledImage {
+            imageView.image = UIImage(ciImage: scaledImage)
+        } else {
+            imageView.image = nil
+        }
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -441,3 +553,22 @@ extension AddUpdateViewController: UITextFieldDelegate {
         }
     }
 }
+
+extension AddUpdateViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        picker.dismiss(animated: true, completion: nil)
+        
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+        
+        imageView.image = image
+        
+        originalImage = imageView.image
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
+

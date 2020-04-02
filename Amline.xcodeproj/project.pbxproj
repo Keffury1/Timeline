@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37133D4F24354F11000BD486 /* UIImage+Ratio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37133D4E24354F11000BD486 /* UIImage+Ratio.swift */; };
+		37133D5124356C3E000BD486 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37133D5024356C3E000BD486 /* UIViewExtension.swift */; };
 		372AC6692434FAF500CCEA32 /* Timeline.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 37DB59F32432E228009830F3 /* Timeline.xcdatamodeld */; };
 		373AFA57242FE18D0068B4A4 /* ArchivesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373AFA56242FE18D0068B4A4 /* ArchivesViewController.swift */; };
 		3746518B2430274A003AFE63 /* TimelineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3746518A2430274A003AFE63 /* TimelineTableViewCell.swift */; };
@@ -29,6 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		37133D4E24354F11000BD486 /* UIImage+Ratio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ratio.swift"; sourceTree = "<group>"; };
+		37133D5024356C3E000BD486 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		3728FAC72434FC5A009794E9 /* Timeline 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Timeline 2.xcdatamodel"; sourceTree = "<group>"; };
 		373AFA56242FE18D0068B4A4 /* ArchivesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivesViewController.swift; sourceTree = "<group>"; };
 		3746518A2430274A003AFE63 /* TimelineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTableViewCell.swift; sourceTree = "<group>"; };
@@ -64,6 +68,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37133D4B24354D4C000BD486 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				37133D4E24354F11000BD486 /* UIImage+Ratio.swift */,
+				37133D5024356C3E000BD486 /* UIViewExtension.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		3728FAC8243503A2009794E9 /* Update */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +121,7 @@
 				3755ED6D242E93D00056EA4F /* Views */,
 				3755ED68242E8E4B0056EA4F /* View Controllers */,
 				3755ED67242E8E480056EA4F /* Storyboards */,
+				37133D4B24354D4C000BD486 /* Helpers */,
 				3755ED66242E8E450056EA4F /* Resources */,
 			);
 			path = Amline;
@@ -251,7 +265,9 @@
 				3755ED6C242E93970056EA4F /* MainViewController.swift in Sources */,
 				3746518B2430274A003AFE63 /* TimelineTableViewCell.swift in Sources */,
 				3755ED78242EB6300056EA4F /* AddUpdateViewController.swift in Sources */,
+				37133D5124356C3E000BD486 /* UIViewExtension.swift in Sources */,
 				3755ED53242E8E310056EA4F /* AppDelegate.swift in Sources */,
+				37133D4F24354F11000BD486 /* UIImage+Ratio.swift in Sources */,
 				37CD683F242ED7DA0018A16A /* CoreDataStack.swift in Sources */,
 				37DB59FC2432E592009830F3 /* Timeline+Convenience.swift in Sources */,
 				3755ED55242E8E310056EA4F /* SceneDelegate.swift in Sources */,

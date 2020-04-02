@@ -36,11 +36,9 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     @IBOutlet weak var blackButton: UIButton!
     @IBOutlet weak var goldButton: UIButton!
     @IBOutlet weak var mintButton: UIButton!
-    @IBOutlet weak var navyButton: UIButton!
     @IBOutlet weak var maroonButton: UIButton!
     @IBOutlet weak var oliveButton: UIButton!
     @IBOutlet weak var pinkButton: UIButton!
-    @IBOutlet weak var purpleButton: UIButton!
     @IBOutlet weak var greyButton: UIButton!
     @IBOutlet weak var whiteButton: UIButton!
     
@@ -101,14 +99,14 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         setupButton(button: blackButton)
         setupButton(button: goldButton)
         setupButton(button: mintButton)
-        setupButton(button: navyButton)
         setupButton(button: maroonButton)
         setupButton(button: oliveButton)
         setupButton(button: pinkButton)
-        setupButton(button: purpleButton)
         setupButton(button: greyButton)
         setupButton(button: whiteButton)
         setupButton(button: changeColorButton)
+        
+        
         
         addUpdateButton.layer.cornerRadius = 10.0
         addUpdateButton.layer.borderColor = UIColor.white.cgColor
@@ -122,6 +120,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         trashButton.layer.borderColor = UIColor.white.cgColor
         trashButton.layer.borderWidth = 2.0
         
+        changeColorButton.layer.cornerRadius = 10.0
         changeColorView.backgroundColor = self.view.backgroundColor
     }
     
@@ -228,7 +227,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         
         saveTimelineAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
         
-        saveTimelineAlert.addAction(UIAlertAction(title: "Save", style: .cancel, handler: { (_) in
+        saveTimelineAlert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (_) in
             guard let title = saveTimelineAlert.textFields?.first?.text, let color = self.view.backgroundColor else { return }
             
             if let timeline = self.timeline {
@@ -362,12 +361,6 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         updatesCollectionView.reloadData()
     }
     
-    @IBAction func navyButtonTapped(_ sender: Any) {
-        changeColor(for: navyButton)
-        setupSubviews()
-        updatesCollectionView.reloadData()
-    }
-    
     @IBAction func maroonButtonTapped(_ sender: Any) {
         changeColor(for: maroonButton)
         setupSubviews()
@@ -382,12 +375,6 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     @IBAction func pinkButtonTapped(_ sender: Any) {
         changeColor(for: pinkButton)
-        setupSubviews()
-        updatesCollectionView.reloadData()
-    }
-    
-    @IBAction func purpleButtonTapped(_ sender: Any) {
-        changeColor(for: purpleButton)
         setupSubviews()
         updatesCollectionView.reloadData()
     }

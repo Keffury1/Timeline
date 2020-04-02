@@ -112,7 +112,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZFZ-oq-g32">
-                                <rect key="frame" x="110" y="464" width="100" height="50"/>
+                                <rect key="frame" x="110" y="454" width="100" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="6YE-7H-kPW"/>
                                     <constraint firstAttribute="width" constant="100" id="Zde-7c-eTC"/>
@@ -126,7 +126,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="frB-eU-N7g">
-                                <rect key="frame" x="135" y="522" width="50" height="50"/>
+                                <rect key="frame" x="135" y="504" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="W6U-yV-4NH"/>
                                     <constraint firstAttribute="height" constant="50" id="rcS-Na-fRX"/>
@@ -187,7 +187,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ZFZ-oq-g32" firstAttribute="top" secondItem="5lw-Zd-E1Q" secondAttribute="bottom" constant="20" id="MBu-if-xHZ"/>
+                            <constraint firstItem="ZFZ-oq-g32" firstAttribute="top" secondItem="5lw-Zd-E1Q" secondAttribute="bottom" constant="10" id="MBu-if-xHZ"/>
                             <constraint firstItem="frB-eU-N7g" firstAttribute="centerX" secondItem="WgC-AZ-GAw" secondAttribute="centerX" id="Mun-6U-g7l"/>
                             <constraint firstItem="5lw-Zd-E1Q" firstAttribute="centerX" secondItem="WgC-AZ-GAw" secondAttribute="centerX" id="PjK-eQ-UUs"/>
                             <constraint firstItem="TRI-b5-eOb" firstAttribute="centerX" secondItem="WgC-AZ-GAw" secondAttribute="centerX" id="QVU-BK-6k6"/>
@@ -195,7 +195,7 @@
                             <constraint firstItem="TRI-b5-eOb" firstAttribute="top" secondItem="dT8-Zl-TRA" secondAttribute="top" id="WW6-T4-T7q"/>
                             <constraint firstItem="DgM-kq-7ql" firstAttribute="leading" secondItem="It2-Jj-LAZ" secondAttribute="trailing" id="g7t-Ke-8Cb"/>
                             <constraint firstItem="ZFZ-oq-g32" firstAttribute="centerX" secondItem="WgC-AZ-GAw" secondAttribute="centerX" id="ooy-nd-0o5"/>
-                            <constraint firstItem="frB-eU-N7g" firstAttribute="top" secondItem="ZFZ-oq-g32" secondAttribute="bottom" constant="8" id="p3O-RG-uLp"/>
+                            <constraint firstItem="frB-eU-N7g" firstAttribute="top" secondItem="ZFZ-oq-g32" secondAttribute="bottom" id="p3O-RG-uLp"/>
                             <constraint firstItem="5lw-Zd-E1Q" firstAttribute="centerY" secondItem="WgC-AZ-GAw" secondAttribute="centerY" constant="-40" id="tAf-v0-7Vi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="WgC-AZ-GAw"/>

@@ -28,7 +28,7 @@ class ArchivesViewController: UIViewController {
     @IBOutlet weak var archivesTableView: UITableView!
     
     @IBOutlet weak var addTimelineButton: UIButton!
-    @IBOutlet weak var editTableViewButton: UIButton!
+    @IBOutlet weak var tableViewView: UIView!
     
     //MARK: - Views
     
@@ -44,22 +44,31 @@ class ArchivesViewController: UIViewController {
     //MARK: - Methods
     
     func setupSubviews() {
-        addTimelineButton.layer.borderColor = UIColor.black.cgColor
-        addTimelineButton.layer.borderWidth = 2.0
+//        addTimelineButton.layer.borderColor = UIColor.black.cgColor
+//        addTimelineButton.layer.borderWidth = 2.0
         addTimelineButton.layer.cornerRadius = 10.0
         
-        let containerView:UIView = UIView(frame:CGRect(x: 10, y: 100, width: 300, height: 400))
-        containerView.backgroundColor = UIColor.clear
-        containerView.layer.shadowColor = UIColor.lightGray.cgColor
-        containerView.layer.shadowOffset = CGSize(width: 5.0, height: 5.0)
-        containerView.layer.shadowOpacity = 1.0
-        containerView.layer.shadowRadius = 2
-
+        archivesTableView.layer.masksToBounds = false
+        archivesTableView.layer.shadowColor = UIColor.black.cgColor
         self.archivesTableView.layer.cornerRadius = 20.0
-        self.archivesTableView.layer.masksToBounds = true
-        self.archivesTableView.backgroundColor = .black
-        self.view.addSubview(containerView)
-        containerView.addSubview(self.archivesTableView)
+        
+        let shadowPath = UIBezierPath(roundedRect: self.tableViewView.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 10.0, height: 10.0))
+        tableViewView.layer.shadowOffset = CGSize(width: 5, height: 5)
+        tableViewView.layer.shadowOpacity = 3.0
+        tableViewView.layer.shadowColor = UIColor.lightGray.cgColor
+        tableViewView.layer.shadowRadius = 10.0
+        tableViewView.layer.shadowPath = shadowPath.cgPath
+        
+        let buttonShadowPath = UIBezierPath(roundedRect: self.addTimelineButton.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 10.0, height: 10.0))
+        addTimelineButton.layer.shadowOffset = CGSize(width: 5, height: 5)
+        addTimelineButton.layer.shadowOpacity = 3.0
+        addTimelineButton.layer.shadowColor = UIColor.lightGray.cgColor
+        addTimelineButton.layer.shadowRadius = 10.0
+        addTimelineButton.layer.shadowPath = buttonShadowPath.cgPath
+        
+        self.tableViewView.layer.cornerRadius = 20.0
+        self.archivesTableView.backgroundColor = .white
+        
     }
     
     //MARK: - Actions
@@ -115,7 +124,13 @@ extension ArchivesViewController: UITableViewDelegate, UITableViewDataSource {
             cell.colorView.layer.borderColor = UIColor.white.cgColor
         }
         
-        cell.colorView.layer.cornerRadius = 10.0
+        cell.colorView.layer.cornerRadius = 15.0
+        
+        cell.layer.cornerRadius = 20.0
+        
+        cell.view.layer.cornerRadius = 20.0
+        
+        cell.view.addShadow()
 
         cell.selectionStyle = .none
         
@@ -124,37 +139,6 @@ extension ArchivesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            let timeline = fetchedResultsController.object(at: indexPath)
-            let moc = CoreDataStack.shared.mainContext
-            moc.delete(timeline)
-            
-            do {
-                try moc.save()
-                archivesTableView.reloadData()
-            } catch {
-                print("Error deleting timeline from tableView: \(error)")
-                return
-            }
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        guard var timelines = self.fetchedResultsController.fetchedObjects else { return }
-        let movedObject = timelines[sourceIndexPath.row]
-        timelines.remove(at: sourceIndexPath.row)
-        timelines.insert(movedObject, at: destinationIndexPath.row)
-    }
-    
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .delete
-    }
-    
-    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
-        return false
     }
 }
 
