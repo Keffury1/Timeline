@@ -238,7 +238,7 @@
                                 </cells>
                             </collectionView>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YQC-dV-1YT">
-                                <rect key="frame" x="10" y="241.5" width="40" height="325"/>
+                                <rect key="frame" x="10" y="208" width="40" height="325"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="nqa-jN-XqG">
                                         <rect key="frame" x="5" y="10" width="30" height="305"/>
@@ -427,7 +427,7 @@
                             <constraint firstItem="gZt-aH-gk7" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="WIY-dU-PYB"/>
                             <constraint firstItem="nYC-fL-n1j" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="WjQ-PC-LjY"/>
                             <constraint firstAttribute="bottom" secondItem="02b-4o-Wi2" secondAttribute="bottom" id="Zgk-HB-FBF"/>
-                            <constraint firstItem="YQC-dV-1YT" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="a0X-TB-rdR"/>
+                            <constraint firstItem="YQC-dV-1YT" firstAttribute="top" secondItem="keg-Fa-110" secondAttribute="bottom" constant="40" id="cN5-b3-k70"/>
                             <constraint firstItem="02b-4o-Wi2" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="hoz-tR-PWW"/>
                             <constraint firstItem="gZt-aH-gk7" firstAttribute="top" secondItem="keg-Fa-110" secondAttribute="bottom" constant="100" id="joa-bH-axA"/>
                             <constraint firstItem="nYC-fL-n1j" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="n9N-FJ-91k"/>
