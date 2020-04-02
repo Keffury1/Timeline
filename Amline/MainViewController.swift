@@ -13,7 +13,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
 
     //MARK: - Properties
     
-    private let spacing: CGFloat = 100.0
+    var archivesVC: ArchivesViewController?
     
     var timeline: Timeline? {
         didSet {
@@ -21,16 +21,17 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         }
     }
     
-    var archivesVC: ArchivesViewController?
-    
     //MARK: - Outlets
     
+    //Views
     @IBOutlet weak var updatesCollectionView: UICollectionView!
     @IBOutlet weak var stripeView: UIView!
     @IBOutlet weak var changeColorView: UIView!
+    @IBOutlet weak var toolsView: UIView!
+    
+    //Buttons
     @IBOutlet weak var changeColorButton: UIButton!
     @IBOutlet weak var addUpdateButton: UIButton!
-    
     @IBOutlet weak var redButton: UIButton!
     @IBOutlet weak var orangeButton: UIButton!
     @IBOutlet weak var yellowButton: UIButton!
@@ -39,15 +40,11 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     @IBOutlet weak var purpleButton: UIButton!
     @IBOutlet weak var whiteButton: UIButton!
     @IBOutlet weak var blackButton: UIButton!
-    
-
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var trashButton: UIButton!
     
-    @IBOutlet weak var toolsView: UIView!
-    
+    //Misc
     @IBOutlet weak var titleTextField: UITextField!
-    
     
     //MARK: - Views
     
@@ -58,12 +55,6 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         updateViews()
         setupCollectionVeiw()
         updatesCollectionView.reloadData()
-        
-        let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
-        layout.minimumLineSpacing = spacing
-        layout.minimumInteritemSpacing = spacing
-        self.updatesCollectionView.collectionViewLayout = layout
         
         titleTextField.delegate = self
         titleTextField.autocorrectionType = .no
@@ -91,6 +82,8 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     }
     
     //MARK: - Methods
+    
+    //Views
     
     func setupSubviews() {
         
@@ -248,23 +241,6 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         updatesCollectionView.reloadData()
     }
     
-    func saveColor(color: UIColor) {
-        if let timeline = timeline {
-            timeline.color = color
-            
-            updateViews()
-            
-            do {
-                let moc = CoreDataStack.shared.mainContext
-                try moc.save()
-            } catch {
-                print("Error saving color: \(error)")
-            }
-        } else {
-            
-        }
-    }
-    
     func setupButton(button: UIButton) {
         button.layer.cornerRadius = 3.0
     }
@@ -273,6 +249,8 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         self.view.backgroundColor = button.backgroundColor
         titleTextField.textColor = button.backgroundColor
     }
+    
+    //Alerts
     
     func setupAlertColor(alertController: UIAlertController, string: String, size: CGFloat) {
         if self.traitCollection.userInterfaceStyle == .light {
@@ -359,6 +337,25 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         alertController.view.layer.cornerRadius = 10.0
         
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    //Misc
+    
+    func saveColor(color: UIColor) {
+        if let timeline = timeline {
+            timeline.color = color
+            
+            updateViews()
+            
+            do {
+                let moc = CoreDataStack.shared.mainContext
+                try moc.save()
+            } catch {
+                print("Error saving color: \(error)")
+            }
+        } else {
+            
+        }
     }
     
     //MARK: - Actions
