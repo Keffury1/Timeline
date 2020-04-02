@@ -153,6 +153,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         button.layer.shadowOpacity = 3.0
         
         button.layer.shadowColor = UIColor.lightGray.cgColor
+        
         button.layer.shadowOffset = CGSize(width: 5, height: 5)
         
         button.layer.shadowRadius = 10.0
@@ -478,9 +479,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             cell.imageView.layer.masksToBounds = false
             cell.imageView.clipsToBounds = true
-            cell.imageView.backgroundColor = .clear
             cell.imageView.contentMode = .scaleAspectFill
-            cell.imageView.addShadow()
         }
         
         let dateFormatter = DateFormatter()
