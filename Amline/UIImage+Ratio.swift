@@ -14,21 +14,30 @@ extension UIImage {
         return size.height / size.width
     }
     
-    func imageByScaling(toSize size: CGSize) -> UIImage? {
-        guard size.width > 0 && size.height > 0 else { return nil }
-        
-        let originalAspectRatio = self.size.width/self.size.height
-        var correctedSize = size
-        
-        if correctedSize.width > correctedSize.width*originalAspectRatio {
-            correctedSize.width = correctedSize.width*originalAspectRatio
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        let size = image.size
+
+        let widthRatio  = targetSize.width  / size.width
+        let heightRatio = targetSize.height / size.height
+
+        // Figure out what our orientation is, and use that to form the rectangle
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
         } else {
-            correctedSize.height = correctedSize.height/originalAspectRatio
+            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
         }
-        
-        return UIGraphicsImageRenderer(size: correctedSize, format: imageRendererFormat).image { context in
-            draw(in: CGRect(origin: .zero, size: correctedSize))
-        }
+
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return newImage!
     }
     
     var flattened: UIImage {

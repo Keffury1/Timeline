@@ -27,29 +27,6 @@ class AddUpdateViewController: UIViewController {
         }
     }
     
-    var originalImage: UIImage? {
-        didSet {
-            guard let originalImage = originalImage else { return }
-            
-            var scaledSize = imageView.bounds.size
-            let scale = CGFloat(0.5)
-            
-            scaledSize = CGSize(width: scaledSize.width*scale,
-                                height: scaledSize.height*scale)
-            
-            let scaledUIImage = originalImage.imageByScaling(toSize: scaledSize)
-            guard let scaledCGImage = scaledUIImage?.cgImage else { return }
-            
-            scaledImage = CIImage(cgImage: scaledCGImage)
-        }
-    }
-    
-    var scaledImage: CIImage? {
-        didSet {
-            updateImage()
-        }
-    }
-    
     //MARK: - Outlets
     
     @IBOutlet weak var updateView: UIView!
@@ -441,13 +418,7 @@ class AddUpdateViewController: UIViewController {
         }
     }
     
-    private func updateImage() {
-        if let scaledImage = scaledImage {
-            imageView.image = UIImage(ciImage: scaledImage)
-        } else {
-            imageView.image = nil
-        }
-    }
+
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
@@ -566,10 +537,8 @@ extension AddUpdateViewController: UIImagePickerControllerDelegate, UINavigation
         picker.dismiss(animated: true, completion: nil)
         
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
-        
+
         imageView.image = image
-        
-        originalImage = imageView.image
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
