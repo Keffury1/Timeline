@@ -25,10 +25,12 @@ class ArchivesViewController: UIViewController {
     
     //MARK: - Outlets
     
+    //Views
+    @IBOutlet weak var tableViewView: UIView!
     @IBOutlet weak var archivesTableView: UITableView!
     
+    //Buttons
     @IBOutlet weak var addTimelineButton: UIButton!
-    @IBOutlet weak var tableViewView: UIView!
     
     //MARK: - Views
     
@@ -44,11 +46,11 @@ class ArchivesViewController: UIViewController {
     //MARK: - Methods
     
     func setupSubviews() {
-        addTimelineButton.layer.cornerRadius = 10.0
         
         archivesTableView.layer.masksToBounds = false
         archivesTableView.layer.shadowColor = UIColor.black.cgColor
-        self.archivesTableView.layer.cornerRadius = 20.0
+        archivesTableView.layer.cornerRadius = 20.0
+        archivesTableView.backgroundColor = .white
         
         let shadowPath = UIBezierPath(roundedRect: self.tableViewView.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 10.0, height: 10.0))
         tableViewView.layer.shadowOffset = CGSize(width: 2, height: 2)
@@ -56,6 +58,7 @@ class ArchivesViewController: UIViewController {
         tableViewView.layer.shadowColor = UIColor.lightGray.cgColor
         tableViewView.layer.shadowRadius = 5.0
         tableViewView.layer.shadowPath = shadowPath.cgPath
+        tableViewView.layer.cornerRadius = 20.0
         
         let buttonShadowPath = UIBezierPath(roundedRect: self.addTimelineButton.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 10.0, height: 10.0))
         addTimelineButton.layer.shadowOffset = CGSize(width: 2, height: 2)
@@ -63,10 +66,8 @@ class ArchivesViewController: UIViewController {
         addTimelineButton.layer.shadowColor = UIColor.lightGray.cgColor
         addTimelineButton.layer.shadowRadius = 5.0
         addTimelineButton.layer.shadowPath = buttonShadowPath.cgPath
+        addTimelineButton.layer.cornerRadius = 10.0
         
-        tableViewView.layer.cornerRadius = 20.0
-        
-        archivesTableView.backgroundColor = .white
     }
     
     //MARK: - Actions

@@ -10,15 +10,18 @@ import UIKit
 
 class TimelineTableViewCell: UITableViewCell {
 
+    //MARK: - Outlets
+    
     @IBOutlet weak var view: UIView!
     @IBOutlet weak var colorView: UIView!
     @IBOutlet weak var stripeView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     
+    //MARK: - Views
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
         self.backgroundColor = UIColor.clear
         self.contentView.backgroundColor = UIColor.clear
         

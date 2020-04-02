@@ -10,7 +10,7 @@ import UIKit
 
 class UpdateCollectionViewCell: UICollectionViewCell {
     
-    let mainVC = MainViewController()
+    //MARK: - Outlets
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var updateLabel: UILabel!
