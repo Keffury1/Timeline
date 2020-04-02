@@ -74,35 +74,53 @@ class AddUpdateViewController: UIViewController {
         
         if color == UIColor.white {
             updateView.backgroundColor = .black
+            
             saveButton.layer.borderColor = UIColor.black.cgColor
             saveButton.backgroundColor = .black
+            saveButton.tintColor = .white
+            
+            deleteButton.layer.borderColor = UIColor.white.cgColor
+            deleteButton.backgroundColor = color
+            deleteButton.tintColor = .white
             
             titleTextField.textColor = .black
             dateTextField.textColor = .black
+            
             updateTextView.textColor = .black
             imageView.backgroundColor = .black
-            deleteButton.backgroundColor = .black
+            
             enterDateButton.backgroundColor = .black
+            
             datePickerView.backgroundColor = color
             datePicker.setValue(UIColor.black, forKeyPath: "textColor")
             datePicker.setValue(false, forKeyPath: "highlightsToday")
         } else {
             updateView.backgroundColor = color
-            saveButton.titleLabel?.textColor = color
+            
             saveButton.layer.borderColor = UIColor.white.cgColor
+            saveButton.backgroundColor = color
+            saveButton.tintColor = .white
+            
+            deleteButton.layer.borderColor = UIColor.white.cgColor
+            deleteButton.backgroundColor = color
+            deleteButton.tintColor = .white
             
             titleTextField.textColor = color
             dateTextField.textColor = color
+            
             updateTextView.textColor = color
             imageView.backgroundColor = color
-            deleteButton.backgroundColor = color
+            
+            
             enterDateButton.backgroundColor = color
+            
             datePickerView.backgroundColor = color
             datePicker.setValue(UIColor.white, forKeyPath: "textColor")
             datePicker.setValue(false, forKeyPath: "highlightsToday")
         }
         
         updateView.layer.borderColor = UIColor.white.cgColor
+        updateView.addShadow()
         
         titleLabel.textColor = .white
         titleTextField.backgroundColor = .white
@@ -111,6 +129,7 @@ class AddUpdateViewController: UIViewController {
         dateTextField.backgroundColor = .white
         
         imageView.tintColor = .white
+        
         if imageView.image == nil {
             imageView.image = UIImage(systemName: "photo")
             imageView.contentMode = .scaleAspectFit
@@ -132,15 +151,13 @@ class AddUpdateViewController: UIViewController {
         
         updateTextView.layer.cornerRadius = 10.0
         
-        saveButton.layer.borderWidth = 3.0
+        saveButton.layer.borderWidth = 2.0
         saveButton.layer.cornerRadius = 10.0
+        saveButton.addShadow()
         
+        deleteButton.layer.borderWidth = 2.0
         deleteButton.layer.cornerRadius = 10.0
-        if update == nil {
-            deleteButton.alpha = 0
-        } else {
-            deleteButton.alpha = 1
-        }
+        deleteButton.addShadow()
         
         datePickerView.layer.cornerRadius = 10.0
         enterDateButton.layer.cornerRadius = 5.0

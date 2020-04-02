@@ -146,6 +146,25 @@ extension ArchivesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let timeline = fetchedResultsController.object(at: indexPath)
+            
+            DispatchQueue.main.async {
+                let moc = CoreDataStack.shared.mainContext
+                moc.delete(timeline)
+                
+                do {
+                    try moc.save()
+                    self.archivesTableView.reloadData()
+                } catch {
+                    print("Error Deleting Timeline: \(error)")
+                    return
+                }
+            }
+        }
+    }
 }
 
 extension ArchivesViewController: NSFetchedResultsControllerDelegate {

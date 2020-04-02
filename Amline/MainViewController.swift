@@ -94,14 +94,14 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     func setupSubviews() {
         
-        setupButton(button: blackButton)
-        setupButton(button: blueButton)
-        setupButton(button: purpleButton)
+        setupButton(button: redButton)
         setupButton(button: orangeButton)
         setupButton(button: yellowButton)
         setupButton(button: greenButton)
-        setupButton(button: redButton)
+        setupButton(button: blueButton)
+        setupButton(button: purpleButton)
         setupButton(button: whiteButton)
+        setupButton(button: blackButton)
         
         addUpdateButton.layer.cornerRadius = 10.0
         addUpdateButton.layer.borderWidth = 2.0
@@ -190,15 +190,79 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
             }
         } else {
             titleTextField.text = "Timeline"
-            self.view.backgroundColor = .black
-            self.changeColorView.backgroundColor = .black
-            self.changeColorButton.backgroundColor = .black
-            self.addUpdateButton.backgroundColor = .black
-            self.saveButton.backgroundColor = .black
-            self.trashButton.backgroundColor = .black
-            self.titleTextField.textColor = .black
+            let color = self.view.backgroundColor
+            if color == .white {
+                self.view.backgroundColor = color
+                self.changeColorView.backgroundColor = color
+                
+                self.changeColorButton.backgroundColor = color
+                self.changeColorButton.layer.borderColor = UIColor.black.cgColor
+                self.changeColorButton.tintColor = .black
+                
+                self.addUpdateButton.backgroundColor = color
+                self.addUpdateButton.layer.borderColor = UIColor.black.cgColor
+                self.addUpdateButton.tintColor = .black
+                
+                self.saveButton.backgroundColor = color
+                self.saveButton.layer.borderColor = UIColor.black.cgColor
+                self.saveButton.tintColor = .black
+                
+                self.trashButton.backgroundColor = color
+                self.trashButton.layer.borderColor = UIColor.black.cgColor
+                self.trashButton.tintColor = .black
+                
+                self.titleTextField.textColor = .white
+                self.titleTextField.backgroundColor = .black
+                
+                self.toolsView.backgroundColor = .black
+                
+                self.stripeView.backgroundColor = .black
+            } else {
+                self.view.backgroundColor = color
+                self.changeColorView.backgroundColor = color
+                
+                self.changeColorButton.backgroundColor = color
+                self.changeColorButton.layer.borderColor = UIColor.white.cgColor
+                self.changeColorButton.tintColor = .white
+                
+                self.addUpdateButton.backgroundColor = color
+                self.addUpdateButton.layer.borderColor = UIColor.white.cgColor
+                self.addUpdateButton.tintColor = .white
+                
+                self.saveButton.backgroundColor = color
+                self.saveButton.layer.borderColor = UIColor.white.cgColor
+                self.saveButton.tintColor = .white
+                
+                self.trashButton.backgroundColor = color
+                self.trashButton.layer.borderColor = UIColor.white.cgColor
+                self.trashButton.tintColor = .white
+                
+                self.titleTextField.textColor = color
+                self.titleTextField.backgroundColor = .white
+                
+                self.toolsView.backgroundColor = .white
+                
+                self.stripeView.backgroundColor = .white
+            }
         }
         updatesCollectionView.reloadData()
+    }
+    
+    func saveColor(color: UIColor) {
+        if let timeline = timeline {
+            timeline.color = color
+            
+            updateViews()
+            
+            do {
+                let moc = CoreDataStack.shared.mainContext
+                try moc.save()
+            } catch {
+                print("Error saving color: \(error)")
+            }
+        } else {
+            
+        }
     }
     
     func setupButton(button: UIButton) {
@@ -313,49 +377,57 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     @IBAction func redButtonTapped(_ sender: Any) {
         changeColor(for: redButton)
-        setupSubviews()
+        saveColor(color: redButton.backgroundColor!)
+        updateViews()
         updatesCollectionView.reloadData()
     }
     
     @IBAction func orangeButtonTapped(_ sender: Any) {
         changeColor(for: orangeButton)
-        setupSubviews()
+        saveColor(color: orangeButton.backgroundColor!)
+        updateViews()
         updatesCollectionView.reloadData()
     }
     
     @IBAction func yellowButtonTapped(_ sender: Any) {
         changeColor(for: yellowButton)
-        setupSubviews()
+        saveColor(color: yellowButton.backgroundColor!)
+        updateViews()
         updatesCollectionView.reloadData()
     }
     
     @IBAction func greenButtonTapped(_ sender: Any) {
         changeColor(for: greenButton)
-        setupSubviews()
+        saveColor(color: greenButton.backgroundColor!)
+        updateViews()
         updatesCollectionView.reloadData()
     }
     
     @IBAction func blueButtonTapped(_ sender: Any) {
         changeColor(for: blueButton)
-        setupSubviews()
+        saveColor(color: blueButton.backgroundColor!)
+        updateViews()
         updatesCollectionView.reloadData()
     }
     
     @IBAction func purpleButtonTapped(_ sender: Any) {
         changeColor(for: purpleButton)
-        setupSubviews()
+        saveColor(color: purpleButton.backgroundColor!)
+        updateViews()
         updatesCollectionView.reloadData()
     }
     
     @IBAction func whiteButtonTapped(_ sender: Any) {
         changeColor(for: whiteButton)
-        setupSubviews()
+        saveColor(color: whiteButton.backgroundColor!)
+        updateViews()
         updatesCollectionView.reloadData()
     }
     
     @IBAction func blackButtonTapped(_ sender: Any) {
         changeColor(for: blackButton)
-        setupSubviews()
+        saveColor(color: blackButton.backgroundColor!)
+        updateViews()
         updatesCollectionView.reloadData()
     }
     
