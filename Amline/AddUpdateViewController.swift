@@ -275,7 +275,7 @@ class AddUpdateViewController: UIViewController {
                     return
                 }
             }
-            self.mainVC?.updatesCollectionView.reloadData()
+            self.mainVC?.updatesTableView.reloadData()
         }))
         
         
@@ -470,7 +470,7 @@ class AddUpdateViewController: UIViewController {
                 update.image = image as NSObject
             }
             
-            mainVC.updatesCollectionView.reloadData()
+            mainVC.updatesTableView.reloadData()
         } else {
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = DateFormatter.Style.long
@@ -484,7 +484,7 @@ class AddUpdateViewController: UIViewController {
                     mainVC.timeline?.addToUpdates(update)
                 }
                 
-                mainVC.updatesCollectionView.reloadData()
+                mainVC.updatesTableView.reloadData()
             }
         }
         

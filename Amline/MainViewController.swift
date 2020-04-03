@@ -24,8 +24,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     //MARK: - Outlets
     
     //Views
-    @IBOutlet weak var updatesCollectionView: UICollectionView!
-    @IBOutlet weak var stripeView: UIView!
+    @IBOutlet weak var updatesTableView: UITableView!
     @IBOutlet weak var changeColorView: UIView!
     @IBOutlet weak var toolsView: UIView!
     
@@ -53,8 +52,8 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         
         setupSubviews()
         updateViews()
-        setupCollectionVeiw()
-        updatesCollectionView.reloadData()
+        setupTableVeiw()
+        updatesTableView.reloadData()
         
         titleTextField.delegate = self
         titleTextField.autocorrectionType = .no
@@ -115,11 +114,11 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         titleTextField.layer.cornerRadius = 10.0
     }
     
-    func setupCollectionVeiw() {
-        updatesCollectionView.delegate = self
-        updatesCollectionView.dataSource = self
+    func setupTableVeiw() {
+        updatesTableView.delegate = self
+        updatesTableView.dataSource = self
         
-        updatesCollectionView.showsVerticalScrollIndicator = false
+        updatesTableView.showsVerticalScrollIndicator = false
     }
     
     func updateViews() {
@@ -130,6 +129,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
             let color = timeline.color as? UIColor
             if color == .white {
                 self.view.backgroundColor = color
+                self.updatesTableView.backgroundColor = color
                 self.changeColorView.backgroundColor = color
                 
                 self.changeColorButton.backgroundColor = color
@@ -152,10 +152,9 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
                 self.titleTextField.backgroundColor = .black
                 
                 self.toolsView.backgroundColor = .black
-                
-                self.stripeView.backgroundColor = .black
             } else {
                 self.view.backgroundColor = color
+                self.updatesTableView.backgroundColor = color
                 self.changeColorView.backgroundColor = color
                 
                 self.changeColorButton.backgroundColor = color
@@ -178,14 +177,13 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
                 self.titleTextField.backgroundColor = .white
                 
                 self.toolsView.backgroundColor = .white
-                
-                self.stripeView.backgroundColor = .white
             }
         } else {
             titleTextField.text = "Timeline"
             let color = self.view.backgroundColor
             if color == .white {
                 self.view.backgroundColor = color
+                self.updatesTableView.backgroundColor = color
                 self.changeColorView.backgroundColor = color
                 
                 self.changeColorButton.backgroundColor = color
@@ -208,10 +206,9 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
                 self.titleTextField.backgroundColor = .black
                 
                 self.toolsView.backgroundColor = .black
-                
-                self.stripeView.backgroundColor = .black
             } else {
                 self.view.backgroundColor = color
+                self.updatesTableView.backgroundColor = color
                 self.changeColorView.backgroundColor = color
                 
                 self.changeColorButton.backgroundColor = color
@@ -234,11 +231,9 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
                 self.titleTextField.backgroundColor = .white
                 
                 self.toolsView.backgroundColor = .white
-                
-                self.stripeView.backgroundColor = .white
             }
         }
-        updatesCollectionView.reloadData()
+        updatesTableView.reloadData()
     }
     
     func setupButton(button: UIButton) {
@@ -376,56 +371,56 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         changeColor(for: redButton)
         saveColor(color: redButton.backgroundColor!)
         updateViews()
-        updatesCollectionView.reloadData()
+        updatesTableView.reloadData()
     }
     
     @IBAction func orangeButtonTapped(_ sender: Any) {
         changeColor(for: orangeButton)
         saveColor(color: orangeButton.backgroundColor!)
         updateViews()
-        updatesCollectionView.reloadData()
+        updatesTableView.reloadData()
     }
     
     @IBAction func yellowButtonTapped(_ sender: Any) {
         changeColor(for: yellowButton)
         saveColor(color: yellowButton.backgroundColor!)
         updateViews()
-        updatesCollectionView.reloadData()
+        updatesTableView.reloadData()
     }
     
     @IBAction func greenButtonTapped(_ sender: Any) {
         changeColor(for: greenButton)
         saveColor(color: greenButton.backgroundColor!)
         updateViews()
-        updatesCollectionView.reloadData()
+        updatesTableView.reloadData()
     }
     
     @IBAction func blueButtonTapped(_ sender: Any) {
         changeColor(for: blueButton)
         saveColor(color: blueButton.backgroundColor!)
         updateViews()
-        updatesCollectionView.reloadData()
+        updatesTableView.reloadData()
     }
     
     @IBAction func purpleButtonTapped(_ sender: Any) {
         changeColor(for: purpleButton)
         saveColor(color: purpleButton.backgroundColor!)
         updateViews()
-        updatesCollectionView.reloadData()
+        updatesTableView.reloadData()
     }
     
     @IBAction func whiteButtonTapped(_ sender: Any) {
         changeColor(for: whiteButton)
         saveColor(color: whiteButton.backgroundColor!)
         updateViews()
-        updatesCollectionView.reloadData()
+        updatesTableView.reloadData()
     }
     
     @IBAction func blackButtonTapped(_ sender: Any) {
         changeColor(for: blackButton)
         saveColor(color: blackButton.backgroundColor!)
         updateViews()
-        updatesCollectionView.reloadData()
+        updatesTableView.reloadData()
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
@@ -445,52 +440,58 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
                 addUpdateVC.mainVC = self
                 changeColorView.alpha = 0
             }
-        } else if segue.identifier == "detailSegue" {
-            if let addUpdateVC = segue.destination as? AddUpdateViewController, let indexPath = updatesCollectionView.indexPathForItem(at: updatesCollectionView.convert(CGPoint(), to: updatesCollectionView)) {
+        } else if segue.identifier == "updateSegue" {
+            if let addUpdateVC = segue.destination as? AddUpdateViewController, let indexPath = updatesTableView.indexPathForSelectedRow, let timeline = timeline {
                 addUpdateVC.color = self.view.backgroundColor
                 addUpdateVC.mainVC = self
-                guard let timeline = timeline, let updates = Array(timeline.updates) as? [Update] else { return }
-                addUpdateVC.update = updates[indexPath.row]
+                var updates = Array(timeline.updates) as? [Update]
+                updates?.sort(by: { $0.date! > $1.date! })
+                addUpdateVC.update = updates?[indexPath.row]
                 changeColorView.alpha = 0
             }
         }
     }
 }
 
-extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat{
-        return 325
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 300, right: 0)
-    }
-    
-    internal func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 200, height: 200)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return timeline?.updates.count ?? 0
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "updateCell", for: indexPath) as? UpdateCollectionViewCell else { return UICollectionViewCell() }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "updateCell", for: indexPath) as? UpdatesTableViewCell else { return UITableViewCell() }
         
-        guard let timeline = timeline, var updates = Array(timeline.updates) as? [Update] else { return UICollectionViewCell() }
-       
+        guard let timeline = timeline, var updates = Array(timeline.updates) as? [Update] else { return UITableViewCell() }
+        
         updates.sort(by: { $0.date! > $1.date! })
         
         let update = updates[indexPath.row]
         
         DispatchQueue.main.async {
             cell.updateLabel.text = update.title
-            cell.imageView.image = update.image as? UIImage
+            cell.ImageView.image = update.image as? UIImage
             
-            cell.imageView.layer.masksToBounds = false
-            cell.imageView.clipsToBounds = true
-            cell.imageView.contentMode = .scaleAspectFill
+            cell.ImageView.layer.masksToBounds = false
+            cell.ImageView.clipsToBounds = true
+            cell.ImageView.contentMode = .scaleAspectFill
+            cell.ImageView.layer.cornerRadius = 75.0
+            
+            let color = timeline.color as? UIColor
+            
+            if color == .white {
+                cell.topStripe.backgroundColor = .black
+                cell.bottomStripe.backgroundColor = .black
+                cell.contentView.backgroundColor = .white
+            } else {
+                cell.topStripe.backgroundColor = .white
+                cell.bottomStripe.backgroundColor = .white
+                cell.contentView.backgroundColor = color
+            }
+            
+            let totalRows = tableView.numberOfRows(inSection: indexPath.section)
+            if indexPath.row == totalRows - 1 {
+                cell.bottomStripe.alpha = 0
+            }
         }
         
         let dateFormatter = DateFormatter()
@@ -507,19 +508,19 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.dateLabel.text = dateString
             cell.timeLabel.text = timeString
             
-            cell.layer.cornerRadius = 100.0
-            
-            if cell.imageView.image == nil {
+            if cell.ImageView.image == nil {
                 if self.view.backgroundColor == .white {
                     cell.backgroundColor = .black
                     cell.updateLabel.textColor = .white
                     cell.dateLabel.textColor = .white
                     cell.timeLabel.textColor = .white
+                    cell.ImageView.backgroundColor = .black
                 } else {
                     cell.backgroundColor = .white
                     cell.updateLabel.textColor = self.view.backgroundColor
                     cell.dateLabel.textColor = self.view.backgroundColor
                     cell.timeLabel.textColor = self.view.backgroundColor
+                    cell.ImageView.backgroundColor = .white
                 }
             } else {
                 cell.updateLabel.textColor = .white
