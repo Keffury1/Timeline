@@ -43,6 +43,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     @IBOutlet weak var blackButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var editCellButton: UIButton!
+    @IBOutlet weak var zoomButton: UIButton!
     
     //Misc
     @IBOutlet weak var titleTextField: UITextField!
@@ -114,11 +115,6 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         changeColorButton.addShadow()
         
         titleTextField.layer.cornerRadius = 10.0
-        
-        let doubleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.zoom))
-        doubleTap.cancelsTouchesInView = false
-        doubleTap.numberOfTouchesRequired = 2
-        view.addGestureRecognizer(doubleTap)
     }
     
     func setupTableVeiw() {
@@ -153,6 +149,8 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         self.editCellButton.tintColor = .black
         self.editCellButton.layer.shadowColor = UIColor.white.cgColor
         
+        self.zoomButton.tintColor = .black
+        
         self.titleTextField.textColor = .white
         self.titleTextField.backgroundColor = .black
         
@@ -183,6 +181,8 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         self.editCellButton.layer.borderColor = UIColor.white.cgColor
         self.editCellButton.tintColor = .white
         self.editCellButton.layer.shadowColor = UIColor.lightGray.cgColor
+        
+        self.zoomButton.tintColor = .white
         
         self.titleTextField.textColor = color
         self.titleTextField.backgroundColor = .white
@@ -295,7 +295,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         }
     }
     
-    @objc func zoom() {
+    func zoom() {
         if isZoomed {
             isZoomed = false
             updatesTableView.reloadData()
@@ -380,7 +380,11 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     }
     
     @IBAction func editCellButtonTapped(_ sender: Any) {
-        
+        //Present cell options
+    }
+    
+    @IBAction func zoomButtonTapped(_ sender: Any) {
+        zoom()
     }
     
     //MARK: - Navigation
@@ -429,11 +433,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             cell.ImageView.layer.masksToBounds = false
             cell.ImageView.clipsToBounds = true
             cell.ImageView.contentMode = .scaleAspectFill
-            if self.isZoomed {
-                cell.ImageView.layer.cornerRadius = 75.0
-            } else {
-                cell.ImageView.layer.cornerRadius = 37.5
-            }
+            cell.ImageView.layer.cornerRadius = 50
             
             let color = timeline.color as? UIColor
             

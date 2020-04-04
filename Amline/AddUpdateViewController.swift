@@ -94,19 +94,19 @@ class AddUpdateViewController: UIViewController {
             dateTextField.textColor = .black
             updateTextView.textColor = .black
             imageView.backgroundColor = .black
-            dateView.backgroundColor = .black
+            dateView.backgroundColor = .white
             
-            datePicker.setValue(UIColor.white, forKeyPath: "textColor")
+            datePicker.setValue(UIColor.black, forKeyPath: "textColor")
             datePicker.setValue(false, forKeyPath: "highlightsToday")
             datePicker.subviews[0].subviews[1].isHidden = true
             datePicker.subviews[0].subviews[2].isHidden = true
             
-            timePicker.setValue(UIColor.white, forKeyPath: "textColor")
+            timePicker.setValue(UIColor.black, forKeyPath: "textColor")
             timePicker.setValue(false, forKeyPath: "highlightsToday")
             timePicker.subviews[0].subviews[1].isHidden = true
             timePicker.subviews[0].subviews[2].isHidden = true
             
-            enterDateButton.tintColor = .white
+            enterDateButton.tintColor = .black
         } else {
             updateView.backgroundColor = color
             
