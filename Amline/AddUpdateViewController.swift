@@ -52,7 +52,8 @@ class AddUpdateViewController: UIViewController {
     
     //Misc
     @IBOutlet weak var datePicker: UIDatePicker!
-    @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
+    @IBOutlet var dateTapRecognizer: UITapGestureRecognizer!
+    @IBOutlet var imageTapRecognizer: UITapGestureRecognizer!
     
     //MARK: - Views
     
@@ -96,6 +97,7 @@ class AddUpdateViewController: UIViewController {
             enterDateButton.backgroundColor = .black
             
             datePickerView.backgroundColor = color
+            
             datePicker.setValue(UIColor.black, forKeyPath: "textColor")
             datePicker.setValue(false, forKeyPath: "highlightsToday")
         } else {
@@ -117,7 +119,8 @@ class AddUpdateViewController: UIViewController {
             enterDateButton.backgroundColor = color
             
             datePickerView.backgroundColor = color
-            datePicker.setValue(UIColor.white, forKeyPath: "textColor")
+            
+            datePicker.setValue(UIColor.black, forKeyPath: "textColor")
             datePicker.setValue(false, forKeyPath: "highlightsToday")
         }
         
@@ -410,7 +413,7 @@ class AddUpdateViewController: UIViewController {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if titleTextField.isEditing == true {
                 if self.view.frame.origin.y == 0 {
-                    self.view.frame.origin.y -= keyboardSize.height/2.0
+                    self.view.frame.origin.y -= 0
                 }
             } else if updateTextView.isFirstResponder == true {
                 if self.view.frame.origin.y == 0 {
@@ -487,6 +490,13 @@ class AddUpdateViewController: UIViewController {
         deleteEntryAlert()
     }
     
+    @IBAction func dateTextFieldTapped(_ sender: UITapGestureRecognizer) {
+        if dateTapRecognizer.state == .ended {
+            datePicker.alpha = 1
+            enterDateButton.isEnabled = true
+        }
+    }
+    
     @IBAction func enterDateTapped(_ sender: Any) {
         let date = datePicker.date
         
@@ -501,9 +511,9 @@ class AddUpdateViewController: UIViewController {
     }
     
     @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
-        guard tapGestureRecognizer.view != nil else { return }
+        guard imageTapRecognizer.view != nil else { return }
              
-        if tapGestureRecognizer.state == .ended {
+        if imageTapRecognizer.state == .ended {
              addImageAlert()
         }
     }
@@ -518,15 +528,6 @@ extension AddUpdateViewController: UITextFieldDelegate {
         } else {
             self.view.endEditing(true)
             return false
-        }
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField == dateTextField {
-            UIView.animate(withDuration: 0.5, animations: {
-                self.enterDateButton.isEnabled = true
-                self.datePickerView.alpha = 1
-            })
         }
     }
 }

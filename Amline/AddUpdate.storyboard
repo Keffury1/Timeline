@@ -52,11 +52,15 @@
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="It2-Jj-LAZ">
                                                         <rect key="frame" x="0.0" y="37.5" width="200" height="34"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <gestureRecognizers/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="200" id="JwU-CH-fhc"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <outletCollection property="gestureRecognizers" destination="rOr-j4-VRe" appends="YES" id="EW6-aZ-0FT"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
@@ -199,12 +203,13 @@
                         <outlet property="dateLabel" destination="uRT-e9-zyh" id="0Qt-Ht-Et5"/>
                         <outlet property="datePicker" destination="xrx-xc-KdX" id="XEp-c6-uUW"/>
                         <outlet property="datePickerView" destination="TRI-b5-eOb" id="lLG-oZ-Od3"/>
+                        <outlet property="dateTapRecognizer" destination="rOr-j4-VRe" id="fVU-Qs-ARZ"/>
                         <outlet property="dateTextField" destination="It2-Jj-LAZ" id="vrN-8e-uOb"/>
                         <outlet property="deleteButton" destination="frB-eU-N7g" id="cF2-N2-Jsh"/>
                         <outlet property="enterDateButton" destination="cqW-u0-S6R" id="cmi-Lq-00b"/>
+                        <outlet property="imageTapRecognizer" destination="g8V-dW-8Pm" id="liO-kV-4cE"/>
                         <outlet property="imageView" destination="I4Q-ln-Wfe" id="1wF-4t-x22"/>
                         <outlet property="saveButton" destination="ZFZ-oq-g32" id="KZG-rf-0u1"/>
-                        <outlet property="tapGestureRecognizer" destination="g8V-dW-8Pm" id="bDA-Q3-nZk"/>
                         <outlet property="titleLabel" destination="nmm-2W-2gV" id="bep-fT-McX"/>
                         <outlet property="titleTextField" destination="S1K-Hk-jhO" id="KVe-qr-zKE"/>
                         <outlet property="updateLabel" destination="leg-ah-Jxk" id="MA3-6D-hWg"/>
@@ -216,6 +221,11 @@
                 <tapGestureRecognizer id="g8V-dW-8Pm">
                     <connections>
                         <action selector="imageTapped:" destination="LJP-OM-743" id="Rxm-vz-3tS"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="rOr-j4-VRe">
+                    <connections>
+                        <action selector="dateTextFieldTapped:" destination="LJP-OM-743" id="2vW-ns-Pl9"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
