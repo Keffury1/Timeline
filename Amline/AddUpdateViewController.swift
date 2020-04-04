@@ -79,12 +79,12 @@ class AddUpdateViewController: UIViewController {
         if color == UIColor.white {
             updateView.backgroundColor = .black
             
-            saveButton.layer.borderColor = UIColor.black.cgColor
+            saveButton.layer.borderColor = UIColor.white.cgColor
             saveButton.backgroundColor = .black
             saveButton.tintColor = .white
             
             deleteButton.layer.borderColor = UIColor.white.cgColor
-            deleteButton.backgroundColor = color
+            deleteButton.backgroundColor = .black
             deleteButton.tintColor = .white
             
             titleTextField.textColor = .black
@@ -231,20 +231,6 @@ class AddUpdateViewController: UIViewController {
            }
        }
     
-    func saveEntryAlert() {
-        let alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
-            self.dismiss(animated: true, completion: nil)
-        }))
-        
-        
-        self.setupAlertColor(alertController: alertController, string: "Entry Saved!", size: CGFloat(integerLiteral: 22))
-        
-        alertController.view.layer.cornerRadius = 10.0
-        
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
     func enterInformationAlert() {
         let alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
@@ -269,7 +255,7 @@ class AddUpdateViewController: UIViewController {
                 let moc = CoreDataStack.shared.mainContext
                 do {
                     try moc.save()
-                    self.entryDeletedAlert()
+                    self.dismiss(animated: true, completion: nil)
                 } catch {
                     print("Error Deleting Entry : \(error)")
                     return
@@ -280,19 +266,6 @@ class AddUpdateViewController: UIViewController {
         
         
         self.setupAlertColor(alertController: alertController, string: "Delete Entry", size: CGFloat(integerLiteral: 22))
-        
-        alertController.view.layer.cornerRadius = 10.0
-        
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
-    func entryDeletedAlert() {
-        let alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
-            self.dismiss(animated: true, completion: nil)
-        }))
-        
-        self.setupAlertColor(alertController: alertController, string: "Entry Deleted!", size: CGFloat(integerLiteral: 22))
         
         alertController.view.layer.cornerRadius = 10.0
         
@@ -491,7 +464,7 @@ class AddUpdateViewController: UIViewController {
         do {
             let moc = CoreDataStack.shared.mainContext
             try moc.save()
-            saveEntryAlert()
+            self.dismiss(animated: true, completion: nil)
         } catch {
             print("Error saving managed object context: \(error)")
         }

@@ -121,6 +121,68 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         updatesTableView.showsVerticalScrollIndicator = false
     }
     
+    func setupIfWhite(color: UIColor?) {
+        self.view.backgroundColor = color
+        self.updatesTableView.backgroundColor = color
+        self.changeColorView.backgroundColor = color
+        
+        self.changeColorButton.backgroundColor = color
+        self.changeColorButton.layer.borderColor = UIColor.black.cgColor
+        self.changeColorButton.tintColor = .black
+        self.changeColorButton.layer.shadowColor = UIColor.white.cgColor
+        
+        self.addUpdateButton.backgroundColor = color
+        self.addUpdateButton.layer.borderColor = UIColor.black.cgColor
+        self.addUpdateButton.tintColor = .black
+        self.addUpdateButton.layer.shadowColor = UIColor.white.cgColor
+        
+        self.saveButton.backgroundColor = color
+        self.saveButton.layer.borderColor = UIColor.black.cgColor
+        self.saveButton.tintColor = .black
+        self.saveButton.layer.shadowColor = UIColor.white.cgColor
+        
+        self.trashButton.backgroundColor = color
+        self.trashButton.layer.borderColor = UIColor.black.cgColor
+        self.trashButton.tintColor = .black
+        self.trashButton.layer.shadowColor = UIColor.white.cgColor
+        
+        self.titleTextField.textColor = .white
+        self.titleTextField.backgroundColor = .black
+        
+        self.toolsView.backgroundColor = .black
+    }
+    
+    func setupIfOther(color: UIColor?) {
+        self.view.backgroundColor = color
+        self.updatesTableView.backgroundColor = color
+        self.changeColorView.backgroundColor = color
+        
+        self.changeColorButton.backgroundColor = color
+        self.changeColorButton.layer.borderColor = UIColor.white.cgColor
+        self.changeColorButton.tintColor = .white
+        self.changeColorButton.layer.shadowColor = UIColor.lightGray.cgColor
+        
+        self.addUpdateButton.backgroundColor = color
+        self.addUpdateButton.layer.borderColor = UIColor.white.cgColor
+        self.addUpdateButton.tintColor = .white
+        self.addUpdateButton.layer.shadowColor = UIColor.lightGray.cgColor
+        
+        self.saveButton.backgroundColor = color
+        self.saveButton.layer.borderColor = UIColor.white.cgColor
+        self.saveButton.tintColor = .white
+        self.saveButton.layer.shadowColor = UIColor.lightGray.cgColor
+        
+        self.trashButton.backgroundColor = color
+        self.trashButton.layer.borderColor = UIColor.white.cgColor
+        self.trashButton.tintColor = .white
+        self.trashButton.layer.shadowColor = UIColor.lightGray.cgColor
+        
+        self.titleTextField.textColor = color
+        self.titleTextField.backgroundColor = .white
+        
+        self.toolsView.backgroundColor = .white
+    }
+    
     func updateViews() {
         guard isViewLoaded else { return }
         
@@ -128,109 +190,17 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
             titleTextField.text = timeline.title
             let color = timeline.color as? UIColor
             if color == .white {
-                self.view.backgroundColor = color
-                self.updatesTableView.backgroundColor = color
-                self.changeColorView.backgroundColor = color
-                
-                self.changeColorButton.backgroundColor = color
-                self.changeColorButton.layer.borderColor = UIColor.black.cgColor
-                self.changeColorButton.tintColor = .black
-                
-                self.addUpdateButton.backgroundColor = color
-                self.addUpdateButton.layer.borderColor = UIColor.black.cgColor
-                self.addUpdateButton.tintColor = .black
-                
-                self.saveButton.backgroundColor = color
-                self.saveButton.layer.borderColor = UIColor.black.cgColor
-                self.saveButton.tintColor = .black
-                
-                self.trashButton.backgroundColor = color
-                self.trashButton.layer.borderColor = UIColor.black.cgColor
-                self.trashButton.tintColor = .black
-                
-                self.titleTextField.textColor = .white
-                self.titleTextField.backgroundColor = .black
-                
-                self.toolsView.backgroundColor = .black
+                self.setupIfWhite(color: color)
             } else {
-                self.view.backgroundColor = color
-                self.updatesTableView.backgroundColor = color
-                self.changeColorView.backgroundColor = color
-                
-                self.changeColorButton.backgroundColor = color
-                self.changeColorButton.layer.borderColor = UIColor.white.cgColor
-                self.changeColorButton.tintColor = .white
-                
-                self.addUpdateButton.backgroundColor = color
-                self.addUpdateButton.layer.borderColor = UIColor.white.cgColor
-                self.addUpdateButton.tintColor = .white
-                
-                self.saveButton.backgroundColor = color
-                self.saveButton.layer.borderColor = UIColor.white.cgColor
-                self.saveButton.tintColor = .white
-                
-                self.trashButton.backgroundColor = color
-                self.trashButton.layer.borderColor = UIColor.white.cgColor
-                self.trashButton.tintColor = .white
-                
-                self.titleTextField.textColor = color
-                self.titleTextField.backgroundColor = .white
-                
-                self.toolsView.backgroundColor = .white
+                self.setupIfOther(color: color)
             }
         } else {
             titleTextField.text = "Timeline"
             let color = self.view.backgroundColor
             if color == .white {
-                self.view.backgroundColor = color
-                self.updatesTableView.backgroundColor = color
-                self.changeColorView.backgroundColor = color
-                
-                self.changeColorButton.backgroundColor = color
-                self.changeColorButton.layer.borderColor = UIColor.black.cgColor
-                self.changeColorButton.tintColor = .black
-                
-                self.addUpdateButton.backgroundColor = color
-                self.addUpdateButton.layer.borderColor = UIColor.black.cgColor
-                self.addUpdateButton.tintColor = .black
-                
-                self.saveButton.backgroundColor = color
-                self.saveButton.layer.borderColor = UIColor.black.cgColor
-                self.saveButton.tintColor = .black
-                
-                self.trashButton.backgroundColor = color
-                self.trashButton.layer.borderColor = UIColor.black.cgColor
-                self.trashButton.tintColor = .black
-                
-                self.titleTextField.textColor = .white
-                self.titleTextField.backgroundColor = .black
-                
-                self.toolsView.backgroundColor = .black
+                setupIfWhite(color: color)
             } else {
-                self.view.backgroundColor = color
-                self.updatesTableView.backgroundColor = color
-                self.changeColorView.backgroundColor = color
-                
-                self.changeColorButton.backgroundColor = color
-                self.changeColorButton.layer.borderColor = UIColor.white.cgColor
-                self.changeColorButton.tintColor = .white
-                
-                self.addUpdateButton.backgroundColor = color
-                self.addUpdateButton.layer.borderColor = UIColor.white.cgColor
-                self.addUpdateButton.tintColor = .white
-                
-                self.saveButton.backgroundColor = color
-                self.saveButton.layer.borderColor = UIColor.white.cgColor
-                self.saveButton.tintColor = .white
-                
-                self.trashButton.backgroundColor = color
-                self.trashButton.layer.borderColor = UIColor.white.cgColor
-                self.trashButton.tintColor = .white
-                
-                self.titleTextField.textColor = color
-                self.titleTextField.backgroundColor = .white
-                
-                self.toolsView.backgroundColor = .white
+                setupIfOther(color: color)
             }
         }
         updatesTableView.reloadData()
@@ -279,6 +249,14 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
                     NSAttributedString.Key.foregroundColor : UIColor.white
                 ])
                 alertController.setValue(saveTimelineAlertString, forKey: "attributedTitle")
+            } else if self.view.backgroundColor == .white {
+                alertController.view.tintColor = .black
+                
+                let saveTimelineAlertString = NSAttributedString(string: string, attributes: [
+                    NSAttributedString.Key.font : UIFont.systemFont(ofSize: size),
+                    NSAttributedString.Key.foregroundColor : self.view.backgroundColor!
+                ])
+                alertController.setValue(saveTimelineAlertString, forKey: "attributedTitle")
             } else {
                 alertController.view.tintColor = self.view.backgroundColor
                 
@@ -301,7 +279,8 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
                 
                 do {
                     try moc.save()
-                    self.timelineDeletedAlert()
+                    self.archivesVC?.archivesTableView.reloadData()
+                    self.dismiss(animated: true, completion: nil)
                 } catch {
                     print("Error Deleting Timeline: \(error)")
                     return
@@ -315,23 +294,6 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         deleteTimelineAlert.view.layer.cornerRadius = 10.0
         
         self.present(deleteTimelineAlert, animated: true, completion: nil)
-    }
-    
-    func timelineDeletedAlert() {
-        let alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
-            DispatchQueue.main.async {
-                self.archivesVC?.archivesTableView.reloadData()
-            }
-            self.dismiss(animated: true, completion: nil)
-        }))
-        
-        
-        self.setupAlertColor(alertController: alertController, string: "Timeline Deleted!", size: CGFloat(integerLiteral: 22))
-        
-        alertController.view.layer.cornerRadius = 10.0
-        
-        self.present(alertController, animated: true, completion: nil)
     }
     
     //Misc

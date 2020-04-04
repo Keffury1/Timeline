@@ -139,8 +139,6 @@ extension ArchivesViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.backgroundColor = .clear
         
-        cell.layer.shouldRasterize = true
-        
         return cell
     }
     
