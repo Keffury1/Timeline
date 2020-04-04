@@ -371,6 +371,7 @@ class AddUpdateViewController: UIViewController {
         UIView.animate(withDuration: 1.0, animations: {
             if self.dateView.alpha == 0 {
                 self.dateView.alpha = 1
+                self.dateView.layoutIfNeeded()
                 self.enterDateButton.isEnabled = true
             } else {
                 self.dateView.alpha = 0

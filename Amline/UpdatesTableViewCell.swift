@@ -10,6 +10,7 @@ import UIKit
 
 class UpdatesTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var stackViewView: UIView!
     @IBOutlet weak var topStripe: UIView!
     @IBOutlet weak var ImageView: UIImageView!
     @IBOutlet weak var updateLabel: UILabel!

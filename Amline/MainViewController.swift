@@ -21,7 +21,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         }
     }
     
-    var isZoomed: Bool = false
+    var isZoomed: Bool = true
     
     //MARK: - Outlets
     
@@ -416,9 +416,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if isZoomed {
-            return 700
+            return 625
         } else {
-            return 150
+            return 250
         }
     }
     
@@ -442,11 +442,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             cell.ImageView.layer.masksToBounds = false
             cell.ImageView.clipsToBounds = true
             cell.ImageView.contentMode = .scaleAspectFill
-            if self.isZoomed {
-                cell.ImageView.layer.cornerRadius = 30
-            } else {
-                cell.ImageView.layer.cornerRadius = 15
-            }
             
             let color = timeline.color as? UIColor
             
@@ -454,10 +449,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.topStripe.backgroundColor = .black
                 cell.bottomStripe.backgroundColor = .black
                 cell.contentView.backgroundColor = .white
+                cell.stackViewView.backgroundColor = .white
             } else {
                 cell.topStripe.backgroundColor = .white
                 cell.bottomStripe.backgroundColor = .white
                 cell.contentView.backgroundColor = color
+                cell.stackViewView.backgroundColor = color
             }
             
             let totalRows = tableView.numberOfRows(inSection: indexPath.section)
@@ -479,8 +476,15 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let timeString = timeFormatter.string(from: time!)
         
         DispatchQueue.main.async {
-            cell.dateLabel.text = dateString
-            cell.timeLabel.text = timeString
+            if self.isZoomed {
+                cell.ImageView.layer.cornerRadius = 30
+                cell.dateLabel.text = dateString
+                cell.timeLabel.text = timeString
+            } else {
+                cell.ImageView.layer.cornerRadius = 15
+                cell.dateLabel.text = ""
+                cell.timeLabel.text = ""
+            }
             
             if cell.ImageView.image == nil {
                 if self.view.backgroundColor == .white {
