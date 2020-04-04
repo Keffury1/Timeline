@@ -277,14 +277,8 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
                 let moc = CoreDataStack.shared.mainContext
                 moc.delete(timeline)
                 
-                do {
-                    try moc.save()
-                    self.archivesVC?.archivesTableView.reloadData()
-                    self.dismiss(animated: true, completion: nil)
-                } catch {
-                    print("Error Deleting Timeline: \(error)")
-                    return
-                }
+                self.archivesVC?.archivesTableView.reloadData()
+                self.dismiss(animated: true, completion: nil)
             }
         }))
         deleteTimelineAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -390,7 +384,11 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     }
     
     @IBAction func trashButtonTapped(_ sender: Any) {
-        deleteTimelineAlert()
+        if timeline == nil {
+            return
+        } else {
+            deleteTimelineAlert()
+        }
     }
     
     //MARK: - Navigation

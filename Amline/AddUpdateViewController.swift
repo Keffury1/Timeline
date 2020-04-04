@@ -32,7 +32,6 @@ class AddUpdateViewController: UIViewController {
     //Views
     @IBOutlet weak var updateView: UIView!
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var datePickerView: UIView!
     
     //Labels
     @IBOutlet weak var titleLabel: UILabel!
@@ -42,7 +41,6 @@ class AddUpdateViewController: UIViewController {
     //Buttons
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
-    @IBOutlet weak var enterDateButton: UIButton!
     
     //TextFields/Views
     @IBOutlet weak var titleTextField: UITextField!
@@ -51,7 +49,6 @@ class AddUpdateViewController: UIViewController {
     
     
     //Misc
-    @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet var dateTapRecognizer: UITapGestureRecognizer!
     @IBOutlet var imageTapRecognizer: UITapGestureRecognizer!
     
@@ -93,13 +90,6 @@ class AddUpdateViewController: UIViewController {
             dateTextField.textColor = .black
             updateTextView.textColor = .black
             imageView.backgroundColor = .black
-            
-            enterDateButton.backgroundColor = .black
-            
-            datePickerView.backgroundColor = color
-            
-            datePicker.setValue(UIColor.black, forKeyPath: "textColor")
-            datePicker.setValue(false, forKeyPath: "highlightsToday")
         } else {
             updateView.backgroundColor = color
             
@@ -115,13 +105,6 @@ class AddUpdateViewController: UIViewController {
             dateTextField.textColor = color
             updateTextView.textColor = color
             imageView.backgroundColor = color
-            
-            enterDateButton.backgroundColor = color
-            
-            datePickerView.backgroundColor = color
-            
-            datePicker.setValue(UIColor.black, forKeyPath: "textColor")
-            datePicker.setValue(false, forKeyPath: "highlightsToday")
         }
         
         view.backgroundColor = color
@@ -137,9 +120,6 @@ class AddUpdateViewController: UIViewController {
         dateLabel.textColor = .white
         dateTextField.backgroundColor = .white
         dateTextField.layer.cornerRadius = 10.0
-        
-        datePickerView.layer.cornerRadius = 10.0
-        enterDateButton.layer.cornerRadius = 5.0
         
         updateLabel.textColor = .white
         updateTextView.backgroundColor = .white
@@ -367,20 +347,6 @@ class AddUpdateViewController: UIViewController {
     }
     
     //Pickers
-    func presentDatePicker() {
-        UIView.animate(withDuration: 0.5, animations: {
-            self.datePickerView.alpha = 1
-        })
-        enterDateButton.isEnabled = true
-    }
-    
-    func removeDatePicker() {
-        UIView.animate(withDuration: 0.5, animations: {
-            self.datePickerView.alpha = 0
-        })
-        enterDateButton.isEnabled = false
-    }
-    
     private func presentImagePickerController() {
         
         guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
@@ -491,14 +457,12 @@ class AddUpdateViewController: UIViewController {
     }
     
     @IBAction func dateTextFieldTapped(_ sender: UITapGestureRecognizer) {
-        if dateTapRecognizer.state == .ended {
-            datePicker.alpha = 1
-            enterDateButton.isEnabled = true
-        }
+
     }
     
+    //Change this to Whatever it ends up being.
     @IBAction func enterDateTapped(_ sender: Any) {
-        let date = datePicker.date
+        let date = Date()
         
         if let update = update {
             update.date = date
@@ -507,7 +471,6 @@ class AddUpdateViewController: UIViewController {
         dateFormatter.dateStyle = DateFormatter.Style.long
         dateFormatter.timeStyle = .short
         dateTextField.text = dateFormatter.string(from: date)
-        removeDatePicker()
     }
     
     @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {

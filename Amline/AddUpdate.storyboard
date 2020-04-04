@@ -117,45 +117,6 @@
                                     <constraint firstAttribute="width" constant="250" id="leT-BS-uOF"/>
                                 </constraints>
                             </view>
-                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TRI-b5-eOb">
-                                <rect key="frame" x="67" y="295" width="280" height="150"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="FkO-lq-Dcz">
-                                        <rect key="frame" x="0.0" y="0.0" width="280" height="130"/>
-                                        <subviews>
-                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" translatesAutoresizingMaskIntoConstraints="NO" id="xrx-xc-KdX">
-                                                <rect key="frame" x="10" y="0.0" width="260" height="100"/>
-                                            </datePicker>
-                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cqW-u0-S6R">
-                                                <rect key="frame" x="110" y="100" width="60" height="30"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="NeC-gt-jrI"/>
-                                                    <constraint firstAttribute="width" constant="60" id="NzL-Es-h6H"/>
-                                                </constraints>
-                                                <state key="normal" title="Enter">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="enterDateTapped:" destination="LJP-OM-743" eventType="touchUpInside" id="wbB-jm-IFu"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="xrx-xc-KdX" secondAttribute="trailing" constant="10" id="MUA-mf-DH1"/>
-                                            <constraint firstItem="xrx-xc-KdX" firstAttribute="leading" secondItem="FkO-lq-Dcz" secondAttribute="leading" constant="10" id="YxN-NA-sFS"/>
-                                        </constraints>
-                                    </stackView>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="FkO-lq-Dcz" secondAttribute="trailing" id="4cb-XR-T1Y"/>
-                                    <constraint firstAttribute="bottom" secondItem="FkO-lq-Dcz" secondAttribute="bottom" constant="20" id="KQ0-Hu-Rq7"/>
-                                    <constraint firstAttribute="width" constant="280" id="Mw4-mg-Rds"/>
-                                    <constraint firstItem="FkO-lq-Dcz" firstAttribute="leading" secondItem="TRI-b5-eOb" secondAttribute="leading" id="Pvd-My-sB3"/>
-                                    <constraint firstItem="FkO-lq-Dcz" firstAttribute="top" secondItem="TRI-b5-eOb" secondAttribute="top" id="Y74-Uf-Vvy"/>
-                                    <constraint firstAttribute="height" constant="150" id="cOE-Pa-VMN"/>
-                                </constraints>
-                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="CNU-xy-RzK">
                                 <rect key="frame" x="132" y="665.5" width="150" height="45"/>
                                 <subviews>
@@ -193,20 +154,15 @@
                             <constraint firstItem="CNU-xy-RzK" firstAttribute="centerX" secondItem="WgC-AZ-GAw" secondAttribute="centerX" id="89b-ux-xwX"/>
                             <constraint firstItem="CNU-xy-RzK" firstAttribute="top" secondItem="5lw-Zd-E1Q" secondAttribute="bottom" constant="50" id="P11-z7-Qiq"/>
                             <constraint firstItem="5lw-Zd-E1Q" firstAttribute="centerX" secondItem="WgC-AZ-GAw" secondAttribute="centerX" id="PjK-eQ-UUs"/>
-                            <constraint firstItem="TRI-b5-eOb" firstAttribute="centerX" secondItem="WgC-AZ-GAw" secondAttribute="centerX" id="QVU-BK-6k6"/>
-                            <constraint firstItem="TRI-b5-eOb" firstAttribute="top" secondItem="dT8-Zl-TRA" secondAttribute="top" id="WW6-T4-T7q"/>
                             <constraint firstItem="5lw-Zd-E1Q" firstAttribute="centerY" secondItem="WgC-AZ-GAw" secondAttribute="centerY" constant="-50" id="tAf-v0-7Vi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="WgC-AZ-GAw"/>
                     </view>
                     <connections>
                         <outlet property="dateLabel" destination="uRT-e9-zyh" id="0Qt-Ht-Et5"/>
-                        <outlet property="datePicker" destination="xrx-xc-KdX" id="XEp-c6-uUW"/>
-                        <outlet property="datePickerView" destination="TRI-b5-eOb" id="lLG-oZ-Od3"/>
                         <outlet property="dateTapRecognizer" destination="rOr-j4-VRe" id="fVU-Qs-ARZ"/>
                         <outlet property="dateTextField" destination="It2-Jj-LAZ" id="vrN-8e-uOb"/>
                         <outlet property="deleteButton" destination="frB-eU-N7g" id="cF2-N2-Jsh"/>
-                        <outlet property="enterDateButton" destination="cqW-u0-S6R" id="cmi-Lq-00b"/>
                         <outlet property="imageTapRecognizer" destination="g8V-dW-8Pm" id="liO-kV-4cE"/>
                         <outlet property="imageView" destination="I4Q-ln-Wfe" id="1wF-4t-x22"/>
                         <outlet property="saveButton" destination="ZFZ-oq-g32" id="KZG-rf-0u1"/>
@@ -229,7 +185,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="171.01449275362319" y="150"/>
+            <point key="canvasLocation" x="169.56521739130437" y="150"/>
         </scene>
     </scenes>
     <resources>
