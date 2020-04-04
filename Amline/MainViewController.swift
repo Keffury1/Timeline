@@ -21,6 +21,8 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         }
     }
     
+    var isZoomed: Bool = false
+    
     //MARK: - Outlets
     
     //Views
@@ -112,6 +114,11 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         changeColorButton.addShadow()
         
         titleTextField.layer.cornerRadius = 10.0
+        
+        let doubleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.zoom))
+        doubleTap.cancelsTouchesInView = false
+        doubleTap.numberOfTouchesRequired = 2
+        view.addGestureRecognizer(doubleTap)
     }
     
     func setupTableVeiw() {
@@ -309,6 +316,16 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         }
     }
     
+    @objc func zoom() {
+        if isZoomed {
+            isZoomed = false
+            updatesTableView.reloadData()
+        } else {
+            isZoomed = true
+            updatesTableView.reloadData()
+        }
+    }
+    
     //MARK: - Actions
     
     @IBAction func changeColorButtonTapped(_ sender: Any) {
@@ -416,6 +433,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return timeline?.updates.count ?? 0
     }
@@ -436,7 +454,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             cell.ImageView.layer.masksToBounds = false
             cell.ImageView.clipsToBounds = true
             cell.ImageView.contentMode = .scaleAspectFill
-            cell.ImageView.layer.cornerRadius = 75.0
+            if self.isZoomed {
+                cell.ImageView.layer.cornerRadius = 75.0
+            } else {
+                cell.ImageView.layer.cornerRadius = 37.5
+            }
             
             let color = timeline.color as? UIColor
             

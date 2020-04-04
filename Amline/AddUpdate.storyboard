@@ -73,7 +73,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ndv-Pp-Jen">
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ndv-Pp-Jen">
                                                         <rect key="frame" x="0.0" y="37.5" width="200" height="100"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
@@ -117,6 +117,50 @@
                                     <constraint firstAttribute="width" constant="250" id="leT-BS-uOF"/>
                                 </constraints>
                             </view>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O2g-Wf-sMR">
+                                <rect key="frame" x="72" y="327.5" width="270" height="220"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="N2O-z5-ifl">
+                                        <rect key="frame" x="0.0" y="0.0" width="270" height="220"/>
+                                        <subviews>
+                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="qNv-dG-Qak">
+                                                <rect key="frame" x="0.0" y="0.0" width="270" height="92.5"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" red="0.26500909410000001" green="0.15741982330000001" blue="0.32745082489999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </datePicker>
+                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="yWc-Zd-ppr">
+                                                <rect key="frame" x="0.0" y="92.5" width="270" height="92.5"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </datePicker>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GuQ-wD-2UB">
+                                                <rect key="frame" x="0.0" y="185" width="270" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="0rh-Ag-m5a"/>
+                                                </constraints>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" image="square.and.arrow.down" catalog="system"/>
+                                                <connections>
+                                                    <action selector="enterDateTapped:" destination="LJP-OM-743" eventType="touchUpInside" id="V11-ON-j5n"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="GuQ-wD-2UB" firstAttribute="centerX" secondItem="N2O-z5-ifl" secondAttribute="centerX" id="DCV-Yh-7uL"/>
+                                            <constraint firstItem="yWc-Zd-ppr" firstAttribute="centerX" secondItem="N2O-z5-ifl" secondAttribute="centerX" id="NWL-6J-UHL"/>
+                                            <constraint firstItem="yWc-Zd-ppr" firstAttribute="height" secondItem="qNv-dG-Qak" secondAttribute="height" id="mPh-Pp-7op"/>
+                                            <constraint firstItem="qNv-dG-Qak" firstAttribute="centerX" secondItem="N2O-z5-ifl" secondAttribute="centerX" id="o7e-QQ-MMd"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="N2O-z5-ifl" firstAttribute="leading" secondItem="O2g-Wf-sMR" secondAttribute="leading" id="CR8-NU-Gz1"/>
+                                    <constraint firstItem="N2O-z5-ifl" firstAttribute="top" secondItem="O2g-Wf-sMR" secondAttribute="top" id="Fbn-mb-37U"/>
+                                    <constraint firstAttribute="bottom" secondItem="N2O-z5-ifl" secondAttribute="bottom" id="cSf-Uf-Jwg"/>
+                                    <constraint firstAttribute="trailing" secondItem="N2O-z5-ifl" secondAttribute="trailing" id="lIf-jD-vib"/>
+                                    <constraint firstAttribute="height" constant="220" id="x0b-gi-b3h"/>
+                                </constraints>
+                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="CNU-xy-RzK">
                                 <rect key="frame" x="132" y="665.5" width="150" height="45"/>
                                 <subviews>
@@ -151,21 +195,29 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="O2g-Wf-sMR" firstAttribute="trailing" secondItem="5lw-Zd-E1Q" secondAttribute="trailing" constant="10" id="2Ef-5O-bit"/>
+                            <constraint firstItem="O2g-Wf-sMR" firstAttribute="centerX" secondItem="WgC-AZ-GAw" secondAttribute="centerX" id="3nh-EA-tgK"/>
                             <constraint firstItem="CNU-xy-RzK" firstAttribute="centerX" secondItem="WgC-AZ-GAw" secondAttribute="centerX" id="89b-ux-xwX"/>
                             <constraint firstItem="CNU-xy-RzK" firstAttribute="top" secondItem="5lw-Zd-E1Q" secondAttribute="bottom" constant="50" id="P11-z7-Qiq"/>
                             <constraint firstItem="5lw-Zd-E1Q" firstAttribute="centerX" secondItem="WgC-AZ-GAw" secondAttribute="centerX" id="PjK-eQ-UUs"/>
+                            <constraint firstItem="O2g-Wf-sMR" firstAttribute="bottom" secondItem="ndv-Pp-Jen" secondAttribute="bottom" constant="20" id="UqY-6z-skb"/>
+                            <constraint firstItem="O2g-Wf-sMR" firstAttribute="leading" secondItem="5lw-Zd-E1Q" secondAttribute="leading" constant="-10" id="Uzl-rD-yig"/>
                             <constraint firstItem="5lw-Zd-E1Q" firstAttribute="centerY" secondItem="WgC-AZ-GAw" secondAttribute="centerY" constant="-50" id="tAf-v0-7Vi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="WgC-AZ-GAw"/>
                     </view>
                     <connections>
                         <outlet property="dateLabel" destination="uRT-e9-zyh" id="0Qt-Ht-Et5"/>
+                        <outlet property="datePicker" destination="qNv-dG-Qak" id="0fK-6M-7db"/>
                         <outlet property="dateTapRecognizer" destination="rOr-j4-VRe" id="fVU-Qs-ARZ"/>
                         <outlet property="dateTextField" destination="It2-Jj-LAZ" id="vrN-8e-uOb"/>
+                        <outlet property="dateView" destination="O2g-Wf-sMR" id="vvE-6g-9QF"/>
                         <outlet property="deleteButton" destination="frB-eU-N7g" id="cF2-N2-Jsh"/>
+                        <outlet property="enterDateButton" destination="GuQ-wD-2UB" id="O66-9M-nB3"/>
                         <outlet property="imageTapRecognizer" destination="g8V-dW-8Pm" id="liO-kV-4cE"/>
                         <outlet property="imageView" destination="I4Q-ln-Wfe" id="1wF-4t-x22"/>
                         <outlet property="saveButton" destination="ZFZ-oq-g32" id="KZG-rf-0u1"/>
+                        <outlet property="timePicker" destination="yWc-Zd-ppr" id="KYx-b3-3YR"/>
                         <outlet property="titleLabel" destination="nmm-2W-2gV" id="bep-fT-McX"/>
                         <outlet property="titleTextField" destination="S1K-Hk-jhO" id="KVe-qr-zKE"/>
                         <outlet property="updateLabel" destination="leg-ah-Jxk" id="MA3-6D-hWg"/>

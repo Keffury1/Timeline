@@ -32,6 +32,7 @@ class AddUpdateViewController: UIViewController {
     //Views
     @IBOutlet weak var updateView: UIView!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var dateView: UIView!
     
     //Labels
     @IBOutlet weak var titleLabel: UILabel!
@@ -41,6 +42,7 @@ class AddUpdateViewController: UIViewController {
     //Buttons
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var enterDateButton: UIButton!
     
     //TextFields/Views
     @IBOutlet weak var titleTextField: UITextField!
@@ -51,6 +53,8 @@ class AddUpdateViewController: UIViewController {
     //Misc
     @IBOutlet var dateTapRecognizer: UITapGestureRecognizer!
     @IBOutlet var imageTapRecognizer: UITapGestureRecognizer!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var timePicker: UIDatePicker!
     
     //MARK: - Views
     
@@ -90,6 +94,19 @@ class AddUpdateViewController: UIViewController {
             dateTextField.textColor = .black
             updateTextView.textColor = .black
             imageView.backgroundColor = .black
+            dateView.backgroundColor = .black
+            
+            datePicker.setValue(UIColor.white, forKeyPath: "textColor")
+            datePicker.setValue(false, forKeyPath: "highlightsToday")
+            datePicker.subviews[0].subviews[1].isHidden = true
+            datePicker.subviews[0].subviews[2].isHidden = true
+            
+            timePicker.setValue(UIColor.white, forKeyPath: "textColor")
+            timePicker.setValue(false, forKeyPath: "highlightsToday")
+            timePicker.subviews[0].subviews[1].isHidden = true
+            timePicker.subviews[0].subviews[2].isHidden = true
+            
+            enterDateButton.tintColor = .white
         } else {
             updateView.backgroundColor = color
             
@@ -105,6 +122,19 @@ class AddUpdateViewController: UIViewController {
             dateTextField.textColor = color
             updateTextView.textColor = color
             imageView.backgroundColor = color
+            dateView.backgroundColor = color
+            
+            datePicker.setValue(UIColor.white, forKeyPath: "textColor")
+            datePicker.setValue(false, forKeyPath: "highlightsToday")
+            datePicker.subviews[0].subviews[1].isHidden = true
+            datePicker.subviews[0].subviews[2].isHidden = true
+            
+            timePicker.setValue(UIColor.white, forKeyPath: "textColor")
+            timePicker.setValue(false, forKeyPath: "highlightsToday")
+            timePicker.subviews[0].subviews[1].isHidden = true
+            timePicker.subviews[0].subviews[2].isHidden = true
+            
+            enterDateButton.tintColor = .white
         }
         
         view.backgroundColor = color
@@ -142,6 +172,8 @@ class AddUpdateViewController: UIViewController {
         deleteButton.layer.borderWidth = 2.0
         deleteButton.layer.cornerRadius = 10.0
         deleteButton.addShadow()
+        
+        dateView.layer.cornerRadius = 10.0
     }
     
     func updateViews() {
@@ -365,6 +397,18 @@ class AddUpdateViewController: UIViewController {
         }
     }
     
+    private func checkDatePicker() {
+        UIView.animate(withDuration: 1.0, animations: {
+            if self.dateView.alpha == 0 {
+                self.dateView.alpha = 1
+                self.enterDateButton.isEnabled = true
+            } else {
+                self.dateView.alpha = 0
+                self.enterDateButton.isEnabled = false
+            }
+        })
+    }
+    
     //Misc
     func camera() {
         if UIImagePickerController.isSourceTypeAvailable(.camera){
@@ -373,6 +417,24 @@ class AddUpdateViewController: UIViewController {
             myPickerController.sourceType = .camera
             self.present(myPickerController, animated: true, completion: nil)
         }
+    }
+    
+    func combineDateAndTime(date: Date, time: Date) -> Date {
+
+        let calendar = NSCalendar.current
+
+        let dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
+        let timeComponents = calendar.dateComponents([.hour, .minute, .second], from: time)
+
+        var components = DateComponents()
+        components.year = dateComponents.year
+        components.month = dateComponents.month
+        components.day = dateComponents.day
+        components.hour = timeComponents.hour
+        components.minute = timeComponents.minute
+        components.second = timeComponents.second
+
+        return calendar.date(from: components)!
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -456,20 +518,24 @@ class AddUpdateViewController: UIViewController {
     }
     
     @IBAction func dateTextFieldTapped(_ sender: UITapGestureRecognizer) {
-
+        checkDatePicker()
     }
-    
-    //Change this to Whatever it ends up being.
+
     @IBAction func enterDateTapped(_ sender: Any) {
-        let date = Date()
+        let date = datePicker.date
+        let time = timePicker.date
+        
+        let realDate = combineDateAndTime(date: date, time: time)
         
         if let update = update {
-            update.date = date
+            update.date = realDate
         }
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.long
         dateFormatter.timeStyle = .short
         dateTextField.text = dateFormatter.string(from: date)
+        
+        checkDatePicker()
     }
     
     @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
