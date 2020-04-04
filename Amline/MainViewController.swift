@@ -453,6 +453,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             let totalRows = tableView.numberOfRows(inSection: indexPath.section)
             if indexPath.row == totalRows - 1 {
                 cell.bottomStripe.alpha = 0
+            } else {
+                cell.bottomStripe.alpha = 1
             }
         }
         

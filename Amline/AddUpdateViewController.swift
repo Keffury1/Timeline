@@ -438,14 +438,13 @@ class AddUpdateViewController: UIViewController {
                         mainVC.timeline?.addToUpdates(update)
                     }
                 }
-                
-                mainVC.updatesTableView.reloadData()
             }
         }
         
         do {
             let moc = CoreDataStack.shared.mainContext
             try moc.save()
+            mainVC.updatesTableView.reloadData()
             self.dismiss(animated: true, completion: nil)
         } catch {
             print("Error saving managed object context: \(error)")
