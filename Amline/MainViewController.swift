@@ -42,7 +42,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     @IBOutlet weak var whiteButton: UIButton!
     @IBOutlet weak var blackButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var trashButton: UIButton!
+    @IBOutlet weak var editCellButton: UIButton!
     
     //Misc
     @IBOutlet weak var titleTextField: UITextField!
@@ -105,9 +105,9 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         saveButton.layer.borderWidth = 2.0
         saveButton.addShadow()
         
-        trashButton.layer.cornerRadius = 10.0
-        trashButton.layer.borderWidth = 2.0
-        trashButton.addShadow()
+        editCellButton.layer.cornerRadius = 10.0
+        editCellButton.layer.borderWidth = 2.0
+        editCellButton.addShadow()
         
         changeColorButton.layer.cornerRadius = 10.0
         changeColorButton.layer.borderWidth = 2.0
@@ -148,10 +148,10 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         self.saveButton.tintColor = .black
         self.saveButton.layer.shadowColor = UIColor.white.cgColor
         
-        self.trashButton.backgroundColor = color
-        self.trashButton.layer.borderColor = UIColor.black.cgColor
-        self.trashButton.tintColor = .black
-        self.trashButton.layer.shadowColor = UIColor.white.cgColor
+        self.editCellButton.backgroundColor = color
+        self.editCellButton.layer.borderColor = UIColor.black.cgColor
+        self.editCellButton.tintColor = .black
+        self.editCellButton.layer.shadowColor = UIColor.white.cgColor
         
         self.titleTextField.textColor = .white
         self.titleTextField.backgroundColor = .black
@@ -179,10 +179,10 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         self.saveButton.tintColor = .white
         self.saveButton.layer.shadowColor = UIColor.lightGray.cgColor
         
-        self.trashButton.backgroundColor = color
-        self.trashButton.layer.borderColor = UIColor.white.cgColor
-        self.trashButton.tintColor = .white
-        self.trashButton.layer.shadowColor = UIColor.lightGray.cgColor
+        self.editCellButton.backgroundColor = color
+        self.editCellButton.layer.borderColor = UIColor.white.cgColor
+        self.editCellButton.tintColor = .white
+        self.editCellButton.layer.shadowColor = UIColor.lightGray.cgColor
         
         self.titleTextField.textColor = color
         self.titleTextField.backgroundColor = .white
@@ -274,27 +274,6 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
                 alertController.setValue(saveTimelineAlertString, forKey: "attributedTitle")
             }
         }
-    }
-    
-    func deleteTimelineAlert() {
-        let deleteTimelineAlert = UIAlertController(title: "", message: "", preferredStyle: .alert)
-        deleteTimelineAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
-            guard let timeline = self.timeline else { return }
-            DispatchQueue.main.async {
-                let moc = CoreDataStack.shared.mainContext
-                moc.delete(timeline)
-                
-                self.archivesVC?.archivesTableView.reloadData()
-                self.dismiss(animated: true, completion: nil)
-            }
-        }))
-        deleteTimelineAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        setupAlertColor(alertController: deleteTimelineAlert, string: "Delete Timeline", size: CGFloat(integerLiteral: 22))
-        
-        deleteTimelineAlert.view.layer.cornerRadius = 10.0
-        
-        self.present(deleteTimelineAlert, animated: true, completion: nil)
     }
     
     //Misc
@@ -400,12 +379,8 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
        //Upload the timeline to messages, mail, notes, etc.
     }
     
-    @IBAction func trashButtonTapped(_ sender: Any) {
-        if timeline == nil {
-            return
-        } else {
-            deleteTimelineAlert()
-        }
+    @IBAction func editCellButtonTapped(_ sender: Any) {
+        
     }
     
     //MARK: - Navigation

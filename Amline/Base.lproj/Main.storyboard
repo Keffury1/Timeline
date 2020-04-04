@@ -368,9 +368,9 @@
                                                     <constraint firstAttribute="height" constant="45" id="KV9-QZ-cgc"/>
                                                 </constraints>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" image="trash" catalog="system"/>
+                                                <state key="normal" image="timelapse" catalog="system"/>
                                                 <connections>
-                                                    <action selector="trashButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Igx-C4-lFR"/>
+                                                    <action selector="editCellButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Igx-C4-lFR"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gw5-UX-bGB">
@@ -449,6 +449,7 @@
                         <outlet property="blueButton" destination="c6J-dP-vw2" id="KxW-ib-d0R"/>
                         <outlet property="changeColorButton" destination="tWU-RE-gYa" id="2fm-aS-xSw"/>
                         <outlet property="changeColorView" destination="YQC-dV-1YT" id="Hux-7c-f3A"/>
+                        <outlet property="editCellButton" destination="7dn-gN-cX8" id="ymJ-lP-wTA"/>
                         <outlet property="greenButton" destination="eMk-7J-2vI" id="7QR-yv-N9o"/>
                         <outlet property="orangeButton" destination="JDw-t8-za1" id="5R2-ZI-g6j"/>
                         <outlet property="purpleButton" destination="lrA-2f-mlH" id="BDe-I2-FFg"/>
@@ -456,7 +457,6 @@
                         <outlet property="saveButton" destination="gw5-UX-bGB" id="Btr-bH-v6c"/>
                         <outlet property="titleTextField" destination="keg-Fa-110" id="giQ-bZ-K4f"/>
                         <outlet property="toolsView" destination="nYC-fL-n1j" id="RKF-EO-K04"/>
-                        <outlet property="trashButton" destination="7dn-gN-cX8" id="ymJ-lP-wTA"/>
                         <outlet property="updatesTableView" destination="93E-qG-VHJ" id="IZe-O5-tbC"/>
                         <outlet property="whiteButton" destination="pCT-ye-ppB" id="VSh-P5-rip"/>
                         <outlet property="yellowButton" destination="lBT-IZ-OMi" id="BSw-eu-Z4j"/>
@@ -487,6 +487,5 @@
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="timelapse" catalog="system" width="128" height="122"/>
-        <image name="trash" catalog="system" width="121" height="128"/>
     </resources>
 </document>
