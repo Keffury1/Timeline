@@ -25,6 +25,7 @@ class AddUpdateViewController: UIViewController {
             updateViews()
         }
     }
+    var timelineTitle: String?
     
     //MARK: - Outlets
     
@@ -428,7 +429,7 @@ class AddUpdateViewController: UIViewController {
     //MARK: - Actions
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        guard let mainVC = mainVC, let date = dateTextField.text, !date.isEmpty, let updateText = updateTextView.text, !updateText.isEmpty, let titleText = titleTextField.text, !titleText.isEmpty, let image = imageView.image else {
+        guard let mainVC = mainVC, let date = dateTextField.text, !date.isEmpty, let updateText = updateTextView.text, !updateText.isEmpty, let titleText = titleTextField.text, !titleText.isEmpty, let image = imageView.image, let timelineTitle = self.timelineTitle else {
             enterInformationAlert()
             return
         }
@@ -451,10 +452,22 @@ class AddUpdateViewController: UIViewController {
             if let date = dateFormatter.date(from: date) {
                 if image == UIImage(systemName: "photo") {
                     let update = Update(title: titleText, date: date, update: updateText, image: nil)
-                    mainVC.timeline?.addToUpdates(update)
+                    if mainVC.timeline == nil {
+                        let timeline = Timeline(color: self.view.backgroundColor!, title: timelineTitle)
+                        timeline.addToUpdates(update)
+                        mainVC.timeline = timeline
+                    } else {
+                        mainVC.timeline?.addToUpdates(update)
+                    }
                 } else {
                     let update = Update(title: titleText, date: date, update: updateText, image: image)
-                    mainVC.timeline?.addToUpdates(update)
+                    if mainVC.timeline == nil {
+                        let timeline = Timeline(color: self.view.backgroundColor!, title: timelineTitle)
+                        timeline.addToUpdates(update)
+                        mainVC.timeline = timeline
+                    } else {
+                        mainVC.timeline?.addToUpdates(update)
+                    }
                 }
                 
                 mainVC.updatesTableView.reloadData()

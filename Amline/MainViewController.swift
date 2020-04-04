@@ -400,6 +400,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
             if let addUpdateVC = segue.destination as? AddUpdateViewController {
                 addUpdateVC.color = self.view.backgroundColor
                 addUpdateVC.mainVC = self
+                addUpdateVC.timelineTitle = self.titleTextField.text
                 changeColorView.alpha = 0
             }
         } else if segue.identifier == "updateSegue" {
@@ -409,6 +410,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
                 var updates = Array(timeline.updates) as? [Update]
                 updates?.sort(by: { $0.date! > $1.date! })
                 addUpdateVC.update = updates?[indexPath.row]
+                addUpdateVC.timelineTitle = self.titleTextField.text
                 changeColorView.alpha = 0
             }
         }
