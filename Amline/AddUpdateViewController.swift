@@ -259,35 +259,6 @@ class AddUpdateViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    func deleteEntryAlert() {
-        let alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
-        
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        alertController.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
-            guard let update = self.update else { return }
-            self.mainVC?.timeline?.removeFromUpdates(update)
-            DispatchQueue.main.async {
-                let moc = CoreDataStack.shared.mainContext
-                do {
-                    try moc.save()
-                    self.dismiss(animated: true, completion: nil)
-                } catch {
-                    print("Error Deleting Entry : \(error)")
-                    return
-                }
-            }
-            self.mainVC?.updatesTableView.reloadData()
-        }))
-        
-        
-        self.setupAlertColor(alertController: alertController, string: "Delete Entry", size: CGFloat(integerLiteral: 22))
-        
-        alertController.view.layer.cornerRadius = 10.0
-        
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
     func addImageAlert() {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
@@ -373,8 +344,7 @@ class AddUpdateViewController: UIViewController {
             }
         }
         alertController.view.layer.cornerRadius = 10.0
-        let height: NSLayoutConstraint = NSLayoutConstraint(item: alertController.view!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 300.0)
-        alertController.view.addConstraint(height)
+        
         self.present(alertController, animated: true, completion: nil)
     }
     
@@ -514,7 +484,21 @@ class AddUpdateViewController: UIViewController {
     }
     
     @IBAction func deleteButtonTapped(_ sender: Any) {
-        deleteEntryAlert()
+        guard let update = self.update else { return }
+        
+        self.mainVC?.timeline?.removeFromUpdates(update)
+        self.mainVC?.updatesTableView.reloadData()
+        
+        DispatchQueue.main.async {
+            let moc = CoreDataStack.shared.mainContext
+            do {
+                try moc.save()
+                self.dismiss(animated: true, completion: nil)
+            } catch {
+                print("Error Deleting Entry : \(error)")
+                return
+            }
+        }
     }
     
     @IBAction func dateTextFieldTapped(_ sender: UITapGestureRecognizer) {

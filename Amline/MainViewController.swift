@@ -122,6 +122,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         updatesTableView.dataSource = self
         
         updatesTableView.showsVerticalScrollIndicator = false
+        updatesTableView.zoomScale = 0
     }
     
     func setupIfWhite(color: UIColor?) {
@@ -413,6 +414,14 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if isZoomed {
+            return 700
+        } else {
+            return 150
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return timeline?.updates.count ?? 0
     }
@@ -433,7 +442,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             cell.ImageView.layer.masksToBounds = false
             cell.ImageView.clipsToBounds = true
             cell.ImageView.contentMode = .scaleAspectFill
-            cell.ImageView.layer.cornerRadius = 50
+            if self.isZoomed {
+                cell.ImageView.layer.cornerRadius = 30
+            } else {
+                cell.ImageView.layer.cornerRadius = 15
+            }
             
             let color = timeline.color as? UIColor
             
