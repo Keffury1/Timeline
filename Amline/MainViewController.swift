@@ -435,34 +435,27 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         let update = updates[indexPath.row]
         
-        DispatchQueue.main.async {
-            cell.updateLabel.text = update.title
-            cell.ImageView.image = update.image as? UIImage
-            
-            cell.ImageView.layer.masksToBounds = false
-            cell.ImageView.clipsToBounds = true
-            cell.ImageView.contentMode = .scaleAspectFill
-            
-            let color = timeline.color as? UIColor
-            
-            if color == .white {
-                cell.topStripe.backgroundColor = .black
-                cell.bottomStripe.backgroundColor = .black
-                cell.contentView.backgroundColor = .white
-                cell.stackViewView.backgroundColor = .white
-            } else {
-                cell.topStripe.backgroundColor = .white
-                cell.bottomStripe.backgroundColor = .white
-                cell.contentView.backgroundColor = color
-                cell.stackViewView.backgroundColor = color
-            }
-            
-            let totalRows = tableView.numberOfRows(inSection: indexPath.section)
-            if indexPath.row == totalRows - 1 {
-                cell.bottomStripe.alpha = 0
-            } else {
-                cell.bottomStripe.alpha = 1
-            }
+        cell.updateLabel.text = update.title
+        
+        let color = timeline.color as? UIColor
+        
+        if color == .white {
+            cell.topStripe.backgroundColor = .black
+            cell.bottomStripe.backgroundColor = .black
+            cell.contentView.backgroundColor = .white
+            cell.stackViewView.backgroundColor = .white
+        } else {
+            cell.topStripe.backgroundColor = .white
+            cell.bottomStripe.backgroundColor = .white
+            cell.contentView.backgroundColor = color
+            cell.stackViewView.backgroundColor = color
+        }
+        
+        let totalRows = tableView.numberOfRows(inSection: indexPath.section)
+        if indexPath.row == totalRows - 1 {
+            cell.bottomStripe.alpha = 0
+        } else {
+            cell.bottomStripe.alpha = 1
         }
         
         let dateFormatter = DateFormatter()
@@ -475,39 +468,41 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let time = update.date
         let timeString = timeFormatter.string(from: time!)
         
-        DispatchQueue.main.async {
-            if self.isZoomed {
-                cell.ImageView.layer.cornerRadius = 30
-                cell.dateLabel.text = dateString
-                cell.timeLabel.text = timeString
-            } else {
-                cell.ImageView.layer.cornerRadius = 15
-                cell.dateLabel.text = ""
-                cell.timeLabel.text = ""
-            }
-            
-            if cell.ImageView.image == nil {
-                if self.view.backgroundColor == .white {
-                    cell.backgroundColor = .black
-                    cell.updateLabel.textColor = .white
-                    cell.dateLabel.textColor = .white
-                    cell.timeLabel.textColor = .white
-                    cell.ImageView.backgroundColor = .black
-                } else {
-                    cell.backgroundColor = .white
-                    cell.updateLabel.textColor = self.view.backgroundColor
-                    cell.dateLabel.textColor = self.view.backgroundColor
-                    cell.timeLabel.textColor = self.view.backgroundColor
-                    cell.ImageView.backgroundColor = .white
-                }
-            } else {
+        if self.isZoomed {
+            cell.ImageView.layer.cornerRadius = 30
+            cell.dateLabel.text = dateString
+            cell.timeLabel.text = timeString
+        } else {
+            cell.ImageView.layer.cornerRadius = 15
+            cell.dateLabel.text = ""
+            cell.timeLabel.text = ""
+        }
+        
+        cell.ImageView.image = update.image as? UIImage
+        
+        cell.ImageView.layer.masksToBounds = false
+        cell.ImageView.clipsToBounds = true
+        cell.ImageView.contentMode = .scaleAspectFill
+        
+        if cell.ImageView.image == nil {
+            if self.view.backgroundColor == .white {
+                cell.backgroundColor = .black
                 cell.updateLabel.textColor = .white
                 cell.dateLabel.textColor = .white
                 cell.timeLabel.textColor = .white
+                cell.ImageView.backgroundColor = .black
+            } else {
+                cell.backgroundColor = .white
+                cell.updateLabel.textColor = self.view.backgroundColor
+                cell.dateLabel.textColor = self.view.backgroundColor
+                cell.timeLabel.textColor = self.view.backgroundColor
+                cell.ImageView.backgroundColor = .white
             }
-            
+        } else {
+            cell.updateLabel.textColor = .white
+            cell.dateLabel.textColor = .white
+            cell.timeLabel.textColor = .white
         }
-        
         return cell
     }
 }
