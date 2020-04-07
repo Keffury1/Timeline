@@ -29,6 +29,22 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     @IBOutlet weak var updatesTableView: UITableView!
     @IBOutlet weak var changeColorView: UIView!
     @IBOutlet weak var toolsView: UIView!
+    @IBOutlet weak var cellStyleView: UIView!
+    
+    @IBOutlet weak var allThreeCell: UIView!
+    @IBOutlet weak var allThreeTitle: UILabel!
+    @IBOutlet weak var allThreeDate: UILabel!
+    @IBOutlet weak var allThreeTime: UILabel!
+    
+    @IBOutlet weak var titleDateCell: UIView!
+    @IBOutlet weak var titleDateTitle: UILabel!
+    @IBOutlet weak var titleDateDate: UILabel!
+    
+    @IBOutlet weak var titleCell: UIView!
+    @IBOutlet weak var titleCellTitle: UILabel!
+    
+    @IBOutlet weak var imageCell: UIView!
+    @IBOutlet weak var imageCellImageView: UIImageView!
     
     //Buttons
     @IBOutlet weak var changeColorButton: UIButton!
