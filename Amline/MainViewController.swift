@@ -63,6 +63,11 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     //Misc
     @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet var allThreeTapRecognizer: UITapGestureRecognizer!
+    @IBOutlet var titleDateTapRecognizer: UITapGestureRecognizer!
+    @IBOutlet var titleTapRecognizer: UITapGestureRecognizer!
+    @IBOutlet var imageTapRecognizer: UITapGestureRecognizer!
+    @IBOutlet weak var cellStyleLabel: UILabel!
     
     //MARK: - Views
     
@@ -131,6 +136,16 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         changeColorButton.addShadow()
         
         titleTextField.layer.cornerRadius = 10.0
+        
+        cellStyleView.layer.cornerRadius = 20.0
+        allThreeCell.layer.cornerRadius = 10.0
+        allThreeCell.addShadow()
+        titleDateCell.layer.cornerRadius = 10.0
+        titleDateCell.addShadow()
+        titleCell.layer.cornerRadius = 10.0
+        titleCell.addShadow()
+        imageCell.layer.cornerRadius = 10.0
+        imageCell.addShadow()
     }
     
     func setupTableVeiw() {
@@ -172,6 +187,12 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         self.titleTextField.backgroundColor = .black
         
         self.toolsView.backgroundColor = .black
+        
+        self.cellStyleView.backgroundColor = .white
+        self.cellStyleLabel.textColor = .black
+        self.allThreeCell.backgroundColor = .black
+        self.titleDateCell.backgroundColor = .black
+        self.titleCell.backgroundColor = .black
     }
     
     func setupIfOther(color: UIColor?) {
@@ -205,6 +226,12 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         self.titleTextField.backgroundColor = .white
         
         self.toolsView.backgroundColor = .white
+        
+        self.cellStyleView.backgroundColor = .white
+        self.cellStyleLabel.textColor = color
+        self.allThreeCell.backgroundColor = color
+        self.titleDateCell.backgroundColor = color
+        self.titleCell.backgroundColor = color
     }
     
     func updateViews() {
@@ -322,6 +349,23 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         }
     }
     
+    func editCellOn() {
+        cellStyleView.alpha = 1
+        allThreeTapRecognizer.isEnabled = true
+        titleDateTapRecognizer.isEnabled = true
+        titleTapRecognizer.isEnabled = true
+        imageTapRecognizer.isEnabled = true
+    }
+    
+    func editCellOff() {
+        cellStyleView.alpha = 0
+        allThreeTapRecognizer.isEnabled = false
+        titleDateTapRecognizer.isEnabled = false
+        titleTapRecognizer.isEnabled = false
+        imageTapRecognizer.isEnabled = false
+        updatesTableView.reloadData()
+    }
+    
     //MARK: - Actions
     
     @IBAction func changeColorButtonTapped(_ sender: Any) {
@@ -396,12 +440,48 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
        //Upload the timeline to messages, mail, notes, etc.
     }
     
-    @IBAction func editCellButtonTapped(_ sender: Any) {
-        //Present cell options
-    }
-    
     @IBAction func zoomButtonTapped(_ sender: Any) {
         zoom()
+    }
+    
+    @IBAction func editCellButtonTapped(_ sender: Any) {
+        if cellStyleView.alpha == 0 {
+            editCellOn()
+        } else {
+            editCellOff()
+        }
+    }
+    
+    @IBAction func allThreeTapped(_ sender: Any) {
+        UserDefaults.standard.set(true, forKey: "1")
+        UserDefaults.standard.set(false, forKey: "2")
+        UserDefaults.standard.set(false, forKey: "3")
+        UserDefaults.standard.set(false, forKey: "4")
+        editCellOff()
+    }
+    
+    @IBAction func titleDateTapped(_ sender: Any) {
+        UserDefaults.standard.set(false, forKey: "1")
+        UserDefaults.standard.set(true, forKey: "2")
+        UserDefaults.standard.set(false, forKey: "3")
+        UserDefaults.standard.set(false, forKey: "4")
+        editCellOff()
+    }
+    
+    @IBAction func titleTapped(_ sender: Any) {
+        UserDefaults.standard.set(false, forKey: "1")
+        UserDefaults.standard.set(false, forKey: "2")
+        UserDefaults.standard.set(true, forKey: "3")
+        UserDefaults.standard.set(false, forKey: "4")
+       editCellOff()
+    }
+    
+    @IBAction func imageViewTapped(_ sender: Any) {
+        UserDefaults.standard.set(false, forKey: "1")
+        UserDefaults.standard.set(false, forKey: "2")
+        UserDefaults.standard.set(false, forKey: "3")
+        UserDefaults.standard.set(true, forKey: "4")
+       editCellOff()
     }
     
     //MARK: - Navigation
@@ -451,8 +531,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         let update = updates[indexPath.row]
         
-        cell.updateLabel.text = update.title
-        
         let color = timeline.color as? UIColor
         
         if color == .white {
@@ -486,12 +564,30 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         if self.isZoomed {
             cell.ImageView.layer.cornerRadius = 30
-            cell.dateLabel.text = dateString
-            cell.timeLabel.text = timeString
         } else {
             cell.ImageView.layer.cornerRadius = 15
+        }
+        
+        if UserDefaults.standard.bool(forKey: "1") == true {
+            cell.updateLabel.text = update.title
+            cell.dateLabel.text = dateString
+            cell.timeLabel.text = timeString
+        } else if UserDefaults.standard.bool(forKey: "2") == true {
+            cell.updateLabel.text = update.title
+            cell.dateLabel.text = dateString
+            cell.timeLabel.text = ""
+        } else if UserDefaults.standard.bool(forKey: "3") == true {
+            cell.updateLabel.text = update.title
             cell.dateLabel.text = ""
             cell.timeLabel.text = ""
+        } else if UserDefaults.standard.bool(forKey: "4") == true {
+            cell.updateLabel.text = ""
+            cell.dateLabel.text = ""
+            cell.timeLabel.text = ""
+        } else {
+            cell.updateLabel.text = update.title
+            cell.dateLabel.text = dateString
+            cell.timeLabel.text = timeString
         }
         
         cell.ImageView.image = update.image as? UIImage
@@ -519,6 +615,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             cell.dateLabel.textColor = .white
             cell.timeLabel.textColor = .white
         }
+        
         return cell
     }
 }
