@@ -81,6 +81,8 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         
         titleTextField.delegate = self
         titleTextField.autocorrectionType = .no
+        
+        titleTextField.text = timeline?.title ?? "Timeline"
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -185,6 +187,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         
         self.titleTextField.textColor = .white
         self.titleTextField.backgroundColor = .black
+        self.titleTextField.tintColor = .black
         
         self.toolsView.backgroundColor = .black
         
@@ -224,6 +227,7 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         
         self.titleTextField.textColor = color
         self.titleTextField.backgroundColor = .white
+        self.titleTextField.tintColor = color
         
         self.toolsView.backgroundColor = .white
         
@@ -238,7 +242,6 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         guard isViewLoaded else { return }
         
         if let timeline = timeline {
-            titleTextField.text = timeline.title
             let color = timeline.color as? UIColor
             if color == .white {
                 self.setupIfWhite(color: color)
@@ -246,7 +249,6 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
                 self.setupIfOther(color: color)
             }
         } else {
-            titleTextField.text = "Timeline"
             let color = self.view.backgroundColor
             if color == .white {
                 setupIfWhite(color: color)
@@ -436,10 +438,6 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         updatesTableView.reloadData()
     }
     
-    @IBAction func saveButtonTapped(_ sender: Any) {
-       //Upload the timeline to messages, mail, notes, etc.
-    }
-    
     @IBAction func zoomButtonTapped(_ sender: Any) {
         zoom()
     }
@@ -482,6 +480,10 @@ class MainViewController: UIViewController, NSFetchedResultsControllerDelegate {
         UserDefaults.standard.set(false, forKey: "3")
         UserDefaults.standard.set(true, forKey: "4")
        editCellOff()
+    }
+    
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        //Upload the timeline to messages, mail, notes, etc.
     }
     
     //MARK: - Navigation
