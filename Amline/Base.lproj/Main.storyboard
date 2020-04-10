@@ -185,23 +185,23 @@
                                                                         <constraint firstAttribute="width" secondItem="AWG-V7-Ken" secondAttribute="height" multiplier="4:3.5" id="srQ-IV-5Jv"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="a1g-fa-aR9">
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="a1g-fa-aR9">
                                                                     <rect key="frame" x="5" y="0.0" width="142" height="133"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Update Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="udc-iJ-hyV">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="142" height="44.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="142" height="71.5"/>
                                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="35"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date Label" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="IoS-O4-lpq">
-                                                                            <rect key="frame" x="0.0" y="44.5" width="142" height="44"/>
+                                                                            <rect key="frame" x="0.0" y="71.5" width="142" height="41"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="Dqa-bm-5c5">
-                                                                            <rect key="frame" x="0.0" y="88.5" width="142" height="44.5"/>
+                                                                            <rect key="frame" x="0.0" y="112.5" width="142" height="20.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
